@@ -1,0 +1,53 @@
+.nav {
+    background-color: white;
+    font-size: 28px;
+    height: 80px;
+    font-weight: 600;
+}
+
+.ul {
+    display: flex;
+    list-style: none;
+    justify-content: space-around;
+    position: relative;
+    flex-wrap: wrap;
+    margin-top: 0;
+}
+
+.li {
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor:pointer;
+    position: relative;
+}
+
+.li:hover {
+    scale: 1.1;
+}
+.subButtonsLi {
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor:pointer;
+    position: relative;
+    border-bottom: 1px solid black;
+}
+
+.subButtonsContainer {
+    position: absolute;
+    top:80px;
+    left: -35px;
+    z-index: 9;
+    list-style: none;
+}
+
+.link{
+    text-decoration: none;
+    padding: 20px;
+    min-width: 150px;
+}
+
+.icon {
+    margin-left: 5px;
+}
