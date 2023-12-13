@@ -12,6 +12,7 @@ import Test from './pages/User/Test/Test';
 import Vocabulary from './pages/User/Vocabulary/Vocabulary';
 import AI from './pages/User/AI/AI';
 import Profile from './pages/User/Profile/Profile';
+import VocabularyRevise from './pages/User/VocabularyRevise/VocabularyRevise';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -24,6 +25,7 @@ root.render(
           <Route path='/podcast' element={<Podcast/>}/>
           <Route path='/test' element={<Test/>}/>
           <Route path='/vocabulary' element={<Vocabulary/>}/>
+          <Route path='/revise' element={<VocabularyRevise/>}/>
           <Route path='/ai' element={<AI/>}/>
           <Route path='/profile' element={<Profile/>}/>
         </Route>

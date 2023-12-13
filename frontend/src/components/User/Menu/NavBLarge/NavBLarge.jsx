@@ -11,31 +11,59 @@ export function NavBLarge() {
   const [isShown, setIsShown] = useState(false);
   const location = useLocation();
 
-  function setIsSwhownTrue(e) {
-    e.stopPropagation();
+  const setIsShownTrue = () => {
     setIsShown(true);
-  }
+  };
 
-  function setIsSwhownFalse(e) {
-    e.stopPropagation();
+  const setIsShownFalse = () => {
     setIsShown(false);
-  }
+  };
+    //e.stopPropagation();
+
 
   return (
     <nav className={s.nav}>
-      <ul className={s.ul}>
-        <li className={s.li}>
+      <ul className={s.ul} >
+        <li 
+          className={s.li}
+          onMouseEnter={setIsShownTrue}
+          onMouseLeave={setIsShownFalse}
+        >
           <NavLink
             to="/vocabulary"
             className={s.link}
             isActive={() => location.pathname === "/vocabulary"}
-            style={{ color: location.pathname === "/vocabulary" ? "#F27066" : "#28356B" }}
+            style={{ color: (location.pathname === "/vocabulary" || location.pathname === "/revise") ? "#F27066" : "#28356B" }}
           >
             Vocabulaire
             <span className={s.icon}>
               <BsCardText/>
             </span>
           </NavLink>
+          {isShown &&
+            <ul className={s.subUl}>
+              <li className={s.subLi}>
+                <NavLink
+                  to="/vocabulary"
+                  className={s.subLink}
+                  isActive={() => location.pathname === "/vocabulary"}
+                  style={{ color: location.pathname === "/vocabulary" ? "#F27066" : "#28356B" }}
+                >
+                  Apprendre
+                </NavLink>
+              </li>
+              <li className={s.subLi}>
+                <NavLink
+                  to="/revise"
+                  className={s.subLink}
+                  isActive={() => location.pathname === "/revise"}
+                  style={{ color: location.pathname === "/revise" ? "#F27066" : "#28356B" }}
+                >
+                  Réviser
+                </NavLink>
+              </li>
+            </ul>
+          }
         </li>
         <li className={s.li}>
           <NavLink

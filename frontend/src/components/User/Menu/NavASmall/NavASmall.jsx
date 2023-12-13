@@ -1,12 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { AiOutlineCloseCircle, AiOutlineMenu, AiOutlineHome } from "react-icons/ai"
-import { RiCake3Line } from "react-icons/ri";
 import { NavLink, useLocation} from "react-router-dom"
-import { AiOutlineShoppingCart } from "react-icons/ai";
 import s from "./style.module.css"
-import { CiPizza } from "react-icons/ci";
-import { GiHotMeal, GiPizzaSlice } from "react-icons/gi";
-import { TbMessageCircle } from "react-icons/tb";
 /*import { useSelector } from "react-redux";*/
 import logo from "../../../../assets/logo.png"
 import { GoCommentDiscussion } from "react-icons/go";
@@ -17,7 +12,7 @@ import { BsPerson } from "react-icons/bs";
 import { MdLogout } from "react-icons/md";
 
 export function NavASmall() {
-    const [isShown, setIsShown] = useState(false)
+    const [isVocOptionsShown, setIsVocOptionsShown] = useState(false)
     const [isMenuShown, setIsMenuShown] = useState(false)
     const menuRef = useRef(null);
     const location = useLocation();
@@ -54,7 +49,7 @@ export function NavASmall() {
                             <AiOutlineCloseCircle 
                                 className={s.closeIcon} 
                                 size={25}
-                                onClick={()=> {setIsMenuShown(false); setIsShown(false);}}
+                                onClick={()=> {setIsMenuShown(false); }}
                             />
                         </div>
                         <ul className={s.ul}>
@@ -82,6 +77,19 @@ export function NavASmall() {
                                         className={s.logo}
                                     /> 
                                     Vocabulaire
+                                </NavLink>
+                            </li>
+                            <li className={s.li}>
+                                <NavLink 
+                                    to="/revise" 
+                                    className={s.link}
+                                    isActive={() => location.pathname === "/revise"}
+                                    style={{ color: location.pathname === "/revise" ? "#F27066" : "#28356B" }}
+                                >
+                                    <BsCardText 
+                                        className={s.logo}
+                                    /> 
+                                    Reviser
                                 </NavLink>
                             </li>
                             <li className={s.li}>
