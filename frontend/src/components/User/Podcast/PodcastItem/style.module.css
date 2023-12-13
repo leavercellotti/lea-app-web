@@ -1,0 +1,40 @@
+.container {
+    background-color: #F7F7F9;
+    width: 40%;
+}
+
+.top {
+    display: flex;
+}
+
+.heart {
+    padding:5px;
+}
+
+.right {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.listened {
+    background-color: #6D8CBF;
+    color:white;
+    padding: 5px;
+}
+
+.level {
+    background-color: #F27066;
+    color:white;
+    padding: 5px;
+}
+
+.inside {
+    padding: 10px;
+}
+
+@media screen and (max-width:600px) {
+    .container {
+        width: 90%;
+    }
+}

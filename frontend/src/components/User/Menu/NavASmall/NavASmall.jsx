@@ -35,7 +35,7 @@ export function NavASmall() {
 
             <AiOutlineMenu  
                 className={s.menuIcon} 
-                size={25}
+                size={40}
                 onClick={(event)=> {event.stopPropagation(); setIsMenuShown(true)}}
             />
             
@@ -55,19 +55,6 @@ export function NavASmall() {
                         <ul className={s.ul}>
                             <li className={s.li}>
                                 <NavLink 
-                                    to="/" 
-                                    className={s.link}
-                                    isActive={() => location.pathname === "/"}
-                                    style={{ color: location.pathname === "/" ? "#F27066" : "#28356B" }}
-                                >
-                                    <AiOutlineHome 
-                                        className={s.logo}
-                                    /> 
-                                    Accueil
-                                </NavLink>
-                            </li>
-                            <li className={s.li}>
-                                <NavLink 
                                     to="/vocabulary" 
                                     className={s.link}
                                     isActive={() => location.pathname === "/vocabulary"}
@@ -76,7 +63,7 @@ export function NavASmall() {
                                     <BsCardText 
                                         className={s.logo}
                                     /> 
-                                    Vocabulaire
+                                    Apprendre
                                 </NavLink>
                             </li>
                             <li className={s.li}>

@@ -2,7 +2,11 @@ import React from 'react'
 
 function VocabularyRevise() {
   return (
-    <div>VocabularyRevise</div>
+    <div>
+      <h1>
+        Vocabulaire
+      </h1>
+    </div>
   )
 }
 

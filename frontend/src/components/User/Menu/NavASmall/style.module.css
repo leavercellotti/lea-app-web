@@ -8,11 +8,6 @@
     z-index: 1;
 }
 
-.pizzaIcon {
-    text-decoration: none;
-    color: #28356B;
-}
-
 .menu {
     position: absolute;
     top:0;
@@ -50,8 +45,11 @@
 }
 
 
-.expandIcon {
-    vertical-align: bottom;
+.menuIcon {
+    position:relative;
+    top:25px;
+    right: 20px;
+    color: #28356B;
 }
 
 .logo {

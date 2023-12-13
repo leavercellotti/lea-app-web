@@ -2,7 +2,11 @@ import React from 'react'
 
 function AI() {
   return (
-    <div>AI</div>
+    <div>
+      <h1>
+        Pratique
+      </h1>
+    </div>
   )
 }
 

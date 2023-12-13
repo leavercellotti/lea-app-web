@@ -1,3 +1,78 @@
+header {
+  font-family: 'Nunito', sans-serif;
+}
 .body {
   background-color: #9BB5D8;
+  padding: 30px 20px;
+  font-family: 'Lato', sans-serif;
+}
+
+h1,h2 {
+  text-align: center;
+  color: #28356B;
+  margin-bottom: 20px;
+  font-family: 'Nunito', sans-serif;;
+}
+
+.btn {
+  color:white;
+  background-color: #AF2B26;
+  border-radius: 15px;
+  padding:5px 15px;
+  border: 1px solid #AF2B26;
+  cursor: pointer;
+  font-family: 'Lato', sans-serif;
+  font-size:18px;
+}
+
+.btn:hover {
+  background-color: #93221e;
+}
+
+.btnSpace {
+  margin: 5px 15px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.box {
+  background-color: #F7F7F9;
+  width: 50%;
+  padding: 20px 10px;
+}
+
+.option {
+  color:white;
+  background-color: #F27066;
+  padding:10px 10px;
+  border: 1px solid #F27066;
+  cursor: pointer;
+  font-family: 'Lato', sans-serif;
+  text-align: center;
+  margin: 5px 15px;
+  min-width: 60px;
+}
+
+.option:hover {
+  background-color: #d85d54;
+}
+
+.options {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 30px 0px;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 600px) {
+  .box {
+    width: 100%;
+  }
+  .option {
+    margin: 5px;
+  }
 }
