@@ -1,6 +1,18 @@
 .container {
     background-color: #F7F7F9;
     width: 40%;
+    margin: 10px 0;
+}
+
+.centerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.img {
+    width: 90%;
 }
 
 .top {
@@ -32,6 +44,7 @@
 .inside {
     padding: 10px;
 }
+
 
 @media screen and (max-width:600px) {
     .container {

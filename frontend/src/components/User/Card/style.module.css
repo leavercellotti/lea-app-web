@@ -1,0 +1,40 @@
+/* style.module.css */
+
+.container {
+    position: relative;
+    background-color: white;
+    border-radius: 10px;
+    width: 240px;
+    height: 350px;
+    margin-bottom: 20px;
+    }
+
+.centeredContent {
+    text-align: center;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+
+}
+
+.icon {
+    width: 45px;
+}
+
+.soundIcon {
+    color: #28356B;
+    cursor:pointer;
+}
+
+.soundIcon:hover {
+    color: #F27066;
+}
+
+.icon2 {
+    width: 45px;
+    position:absolute;
+    right: 0;
+    bottom: 0;
+}

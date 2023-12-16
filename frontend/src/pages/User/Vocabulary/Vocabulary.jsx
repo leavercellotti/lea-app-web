@@ -9,7 +9,7 @@ function Vocabulary() {
         Vocabulaire
       </h1>
       <div className='container'>
-        {/* <NumberWords/> */}
+        <NumberWords/> 
       </div>
     </div>
   )

@@ -96,7 +96,7 @@ export function NavBLarge() {
             to="/test"
             className={s.link}
             isActive={() => location.pathname === "/test"}
-            style={{ color: location.pathname === "/test" ? "#F27066" : "#28356B" }}
+            style={{ color: location.pathname === "/test" ? "#F27066" : "#9BB5D8" }}
           >
             Test
             <span className={s.icon}>

@@ -1,0 +1,33 @@
+.top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.inner {
+    width: 90%;
+}
+
+.textBox {
+    padding: 20px;
+    border: 2px solid #28356B;
+    margin-top: 20px;
+}
+
+.translationBox {
+    padding:20px;
+    border:2px solid #F27066;
+    margin-top: 20px;
+}
+
+.imgContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.img {
+    width: 90%;
+}

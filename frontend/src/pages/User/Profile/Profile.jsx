@@ -1,4 +1,5 @@
 import React from 'react'
+import ProfileUser from '../../../components/User/ProfileUser/ProfileUser'
 
 function Profile() {
   return (
@@ -6,6 +7,9 @@ function Profile() {
       <h1>
         Mon espace
       </h1>
+      <div className='container'>
+        <ProfileUser/>
+      </div>
     </div>
   )
 }

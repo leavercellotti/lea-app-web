@@ -9,9 +9,6 @@ const AudioPlayer = ({ audioSrc, audioTitle }) => {
                 <source src={audioSrc} type="audio/mp3" />
                 Votre navigateur ne supporte pas l'élément audio.
             </audio>
-            <a href={audioSrc} download className={s.downloadLink}>
-                Télécharger l'audio
-            </a>
         </div>
     );
 }

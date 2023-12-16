@@ -1,0 +1,79 @@
+.container {
+    background-color: #F7F7F9;
+    width: 70%;
+    padding: 30px;
+}
+
+.top {
+    display: flex;
+    justify-content: flex-end;
+    height: 40px;
+}
+
+.chat {
+    display: flex;
+    flex-direction: column;
+}
+
+.assistant {
+    color:#28356B;
+    display: flex;
+    justify-content: flex-start;
+    margin: 5px;
+}
+
+.assistantBox { 
+    max-width: 80%;
+    background-color: #f0f2fa;
+    border: 1px solid #28356B;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.user {
+    color:#28356B;
+    display: flex;
+    justify-content: flex-end;
+    margin: 5px;
+}
+
+.userBox { 
+    max-width: 80%;
+    background-color: #fef4f3;
+    border: 1px solid #F27066;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+/* .person {
+    font-weight: 700;
+    margin-bottom: -10px;
+} */
+
+.icon {
+    margin-right: 5px;
+}
+
+.writeContainer {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.sendIcon {
+    cursor: pointer;
+    color : #28356B;
+}
+
+.largeInput {
+    padding: 10px; /* Ajoutez un peu de marge intérieure pour un meilleur aspect */
+    width: 80%; /* Définissez la largeur selon vos besoins */
+    /* 70 */
+    height: 20px;
+  } 
+
+  @media screen and (max-width: 600px) {
+    .container {
+        width: 90%;
+    }
+  }

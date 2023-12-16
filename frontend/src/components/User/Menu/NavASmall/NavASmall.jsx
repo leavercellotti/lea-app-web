@@ -63,21 +63,31 @@ export function NavASmall() {
                                     <BsCardText 
                                         className={s.logo}
                                     /> 
-                                    Apprendre
+                                    Vocabulaire
                                 </NavLink>
-                            </li>
-                            <li className={s.li}>
-                                <NavLink 
-                                    to="/revise" 
-                                    className={s.link}
-                                    isActive={() => location.pathname === "/revise"}
-                                    style={{ color: location.pathname === "/revise" ? "#F27066" : "#28356B" }}
-                                >
-                                    <BsCardText 
-                                        className={s.logo}
-                                    /> 
-                                    Reviser
-                                </NavLink>
+                            
+                                <ul>
+                                <li className={s.li}>
+                                    <NavLink 
+                                        to="/vocabulary" 
+                                        className={s.link}
+                                        isActive={() => location.pathname === "/vocabulary"}
+                                        style={{ color: location.pathname === "/vocabulary" ? "#F27066" : "#28356B" }}
+                                    >
+                                        Apprendre
+                                    </NavLink>
+                                </li>
+                                <li className={s.li}>
+                                    <NavLink 
+                                        to="/revise" 
+                                        className={s.link}
+                                        isActive={() => location.pathname === "/revise"}
+                                        style={{ color: location.pathname === "/revise" ? "#F27066" : "#28356B" }}
+                                    >
+                                        Reviser
+                                    </NavLink>
+                                </li>
+                                </ul>
                             </li>
                             <li className={s.li}>
                                 <NavLink 
@@ -110,7 +120,7 @@ export function NavASmall() {
                                     to="/test" 
                                     className={s.link}
                                     isActive={() => location.pathname === "/test"}
-                                    style={{ color: location.pathname === "/test" ? "#F27066" : "#28356B" }}
+                                    style={{ color: location.pathname === "/test" ? "#F27066" : "#9BB5D8" }}
                                 >
                                     <MdOutlineSchool 
                                         className={s.logo}
@@ -123,7 +133,7 @@ export function NavASmall() {
                                     to="/profile" 
                                     className={s.link}
                                     isActive={() => location.pathname === "/profile"}
-                                    style={{ color: location.pathname === "/profile" ? "#F27066" : "#28356B" }}
+                                    style={{ color: location.pathname === "/profile" ? "#F27066" : "#9BB5D8" }}
                                 >
                                     <BsPerson
                                         className={s.logo}
@@ -136,7 +146,7 @@ export function NavASmall() {
                                     to="/login" 
                                     className={s.link}
                                     isActive={() => location.pathname === "/login"}
-                                    style={{ color: location.pathname === "/login" ? "#F27066" : "#28356B" }}
+                                    style={{ color: location.pathname === "/login" ? "#F27066" : "#9BB5D8" }}
                                 >
                                     <MdLogout 
                                         className={s.logo}

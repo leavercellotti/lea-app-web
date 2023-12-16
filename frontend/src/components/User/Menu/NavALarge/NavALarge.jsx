@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { CiPizza } from "react-icons/ci";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import s from "./style.module.css";
 import { BsPerson } from "react-icons/bs";
@@ -40,7 +39,7 @@ export function NavALarge() {
               to="/profile"
               className={s.link}
               isActive={() => location.pathname === "/profile"}
-              style={{ color: location.pathname === "/profile" ? "#F27066" : "#28356B" }}
+              style={{ color: location.pathname === "/profile" ? "#F27066" : "#9BB5D8" }}
             >
               Mon espace
               <span className={s.icon}>
@@ -53,7 +52,7 @@ export function NavALarge() {
               to="/login"
               className={s.link}
               isActive={() => location.pathname === "/login"}
-              style={{ color: location.pathname === "/login" ? "#F27066" : "#28356B" }}
+              style={{ color: location.pathname === "/login" ? "#F27066" : "#9BB5D8" }}
             >
               Logout
               <span className={s.icon}>

@@ -1,0 +1,11 @@
+/* style.module.css */
+
+.audioPlayerContainer {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.audioElement {
+    width: 100%;
+}
+
