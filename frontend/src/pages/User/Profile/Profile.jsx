@@ -8,7 +8,7 @@ function Profile() {
         Mon espace
       </h1>
       <div className='container'>
-        <ProfileUser/>
+        <ProfileUser email="pol@hotmail.com" level="Intermédiaire B1" subscription="Gratuit"/>
       </div>
     </div>
   )

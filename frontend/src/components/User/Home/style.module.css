@@ -1,0 +1,79 @@
+.top {
+    display: flex;
+}
+
+.empty {
+    width: 33%;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 33%;
+}
+
+.progressContainer {
+    width: 33%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.progressBox {
+    width: 70%;
+    background-color: #F7F7F9;
+    border: 2px solid #6D8CBF;
+    padding: 15px;
+}
+
+.pink {
+    font-weight: 700;
+    color: #F27066;
+    margin-right: 3px;
+}
+
+.boxesContainer {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 15px;
+}
+
+.box {
+    background-color: #F7F7F9;
+    padding: 10px;
+    text-align: center;
+    width: 25%;
+}
+
+.img {
+    max-width: 100%;
+}
+
+@media screen and (max-width:600px) {
+    .title {
+        width: 100%;
+    }
+    .progressContainer {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: center;
+    }
+    .top {
+        flex-direction: column;
+        justify-content: center;
+    }
+    .empty{
+        width: 0;
+    }
+
+    .boxesContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .box {
+        width: 90%;
+        margin-bottom: 10px;
+    }
+}

@@ -3,20 +3,24 @@ import s from "./style.module.css"
 
 function ProfileUser({email, level, subscription}) {
   return (
-    <div className={s.container}> 
-      <div>
-        <button className='btn'>Se déconnecter</button>
+    <div className='box'>
+      <div className='right'>
+      <button className='btn'>Se déconnecter</button>
       </div>
-      <div className='box'>
-          <p>
-            Email: {email}
-          </p>
-          <p>
-            Niveau : {level}
-          </p>
-          <p>
-            Abonnement:{subscription}
-          </p>
+      <div className={s.innerContainer}>
+        <div className={s.inner}>
+            <p>
+              <b>Email</b> : {email}
+            </p>
+            <p>
+            <b>Niveau</b> : {level}
+            </p>
+            <p>
+            <b>Abonnement</b> : {subscription} 
+              <button className="btn" style={{marginLeft:"15px"}}>Modifier</button>
+              <div className={s.pink}>Plus que 3 jours !</div>
+            </p>
+        </div>
       </div>
     </div>
   )

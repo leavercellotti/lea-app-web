@@ -3,6 +3,7 @@ import AudioPlayer from '../../../components/User/Podcast/AudioPlayer/AudioPlaye
 import PodcastItem from '../../../components/User/Podcast/PodcastItem/PodcastItem'
 import PodcastList from '../../../components/User/Podcast/PodcastList/PodcastList'
 import PodcastOpened from '../../../components/User/Podcast/PodcastOpened/PodcastOpened'
+import PodcastOptions from '../../../components/User/Podcast/PodcastOptions/PodcastOptions'
 
 function Podcast() {
   return (
@@ -11,6 +12,7 @@ function Podcast() {
         Podcast
       </h1>
       <div className='container'>
+        <PodcastOptions/>
         <PodcastList/>
         <PodcastOpened 
           title="Daily Gratitude : how feeling grateful for what you already have can help you achieve much more"

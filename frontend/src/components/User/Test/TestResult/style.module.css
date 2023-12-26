@@ -1,0 +1,15 @@
+.resultContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.result {
+    color:white;
+    background-color: #6D8CBF;
+    padding:10px 10px;
+    border: 1px solid #6D8CBF;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    margin: 5px 15px;
+    width: 120px;
+  }

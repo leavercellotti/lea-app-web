@@ -1,11 +1,9 @@
 import React from 'react'
-
+import HomeComponent from "../../../components/User/Home/Home"
 function Home() {
   return (
     <div>
-      <h1>
-        Home
-      </h1>
+      <HomeComponent/>
     </div>
   )
 }

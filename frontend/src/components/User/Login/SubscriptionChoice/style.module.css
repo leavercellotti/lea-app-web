@@ -1,0 +1,40 @@
+.boxesContainer {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 15px;
+}
+
+.box {
+    padding: 10px;
+    text-align: center;
+    width: 25%;
+    color: white;
+    background-color: #6D8CBF;
+    cursor: pointer;
+}
+
+.months {
+    background-color: #9BB5D8;
+    padding: 10px;
+}
+
+.price {
+    background-color: #F7F7F9;
+    color: #28356B;
+    padding: 10px;
+}
+
+.btnContainer {
+    margin-top: 15px;
+}
+
+@media screen and (max-width:600px) {
+    .boxesContainer {
+        flex-direction: column;
+    }
+
+    .box {
+        width: 90%;
+        margin-bottom: 10px;
+    }
+}

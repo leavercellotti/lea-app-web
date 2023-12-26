@@ -1,0 +1,31 @@
+.innerContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.inner {
+    width: 90%;
+    text-align: left;
+}
+
+.pwContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.eyeContainer {
+    background-color: white;
+    width: 30px;
+    padding: 2px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid black;
+    align-items: center;
+}
+
+.btnValidateContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}

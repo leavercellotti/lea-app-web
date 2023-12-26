@@ -4,12 +4,6 @@
     padding: 30px;
 }
 
-.top {
-    display: flex;
-    justify-content: flex-end;
-    height: 40px;
-}
-
 .chat {
     display: flex;
     flex-direction: column;

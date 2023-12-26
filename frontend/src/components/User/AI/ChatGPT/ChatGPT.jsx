@@ -8,8 +8,8 @@ import icon from '../../../../assets/icon.png'
 const ChatGPT = () => {
   return (
     <div className={s.container}>
-      <div className={s.top}>
-        <img src={icon} alt=""/>
+      <div className="right">
+        <img src={icon} alt="" className='favicon'/>
       </div>
       <div className={s.chat}>
         <div className={s.assistant}>

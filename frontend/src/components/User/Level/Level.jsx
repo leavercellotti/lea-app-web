@@ -2,7 +2,7 @@ import React from 'react'
 
 function Level() {
   return (
-    <div className='box'>
+    <div className='box' style={{margin:"20px 0"}}>
         <h2>Quel est votre niveau ?</h2>
         <div className='options'>
         <div className='option'>Débutant</div>

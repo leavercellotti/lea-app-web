@@ -5,6 +5,7 @@ header {
   background-color: #9BB5D8;
   padding: 30px 20px;
   font-family: 'Lato', sans-serif;
+  color: #28356B;
 }
 
 h1,h2 {
@@ -109,6 +110,15 @@ h1,h2 {
   justify-content: center;
   margin: 20px 0px;
   flex-wrap: wrap;
+}
+
+.right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.favicon {
+  width: 45px;
 }
 
 @media screen and (max-width: 600px) {

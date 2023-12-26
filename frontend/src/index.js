@@ -13,6 +13,7 @@ import Vocabulary from './pages/User/Vocabulary/Vocabulary';
 import AI from './pages/User/AI/AI';
 import Profile from './pages/User/Profile/Profile';
 import VocabularyRevise from './pages/User/VocabularyRevise/VocabularyRevise';
+import Login from './pages/User/Login/Login';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -28,6 +29,7 @@ root.render(
           <Route path='/revise' element={<VocabularyRevise/>}/>
           <Route path='/ai' element={<AI/>}/>
           <Route path='/profile' element={<Profile/>}/>
+          <Route path='/login' element={<Login/>}/>
         </Route>
         
       </Routes>

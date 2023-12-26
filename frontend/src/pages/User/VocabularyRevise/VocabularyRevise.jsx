@@ -1,6 +1,6 @@
 import React from 'react'
-import Card from '../../../components/User/Card/Card'
-import DoYouKnow from '../../../components/User/DoYouKnow/DoYouKnow'
+import ReviseBox from '../../../components/User/Vocabulary/ReviseBox/ReviseBox'
+import { FaBrain } from "react-icons/fa6";
 
 function VocabularyRevise() {
   return (
@@ -8,9 +8,11 @@ function VocabularyRevise() {
       <h1>
         Réviser
       </h1>
+      <h2 className='h2'>
+        Il est temps de réviser ! <FaBrain />
+      </h2>
       <div className='container'>
-        <Card text="Apple" showIcon={true}/>
-        <DoYouKnow/>
+        <ReviseBox/>
       </div>
     </div>
   )

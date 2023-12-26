@@ -1,0 +1,21 @@
+
+.inner {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.soundIcon {
+    cursor: pointer;
+}
+
+.red {
+    color: red;
+}
+
+.orange {
+    color:#E18813;
+}
+
+.green {
+    color: green;
+}

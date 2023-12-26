@@ -1,0 +1,18 @@
+.innerContainer {
+    display: flex;
+    justify-content: center;
+}
+.inner {
+    width: 60%;
+    text-align: left;
+}
+
+.pink {
+    color: #F27066;
+}
+
+@media screen and (max-width:900px) {
+    .inner {
+        width: 85%;
+    }
+}
