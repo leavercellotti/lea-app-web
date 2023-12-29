@@ -1,0 +1,36 @@
+.tr {
+    margin: auto;
+}
+
+.tr:nth-child(even) {
+    background-color: #faf9f9a9;
+}
+
+.tr:nth-child(odd) {
+    background-color: white;
+}
+
+.tr:hover {
+    background-color: #f4c2be;
+}
+
+.td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    max-width: 120px;
+    word-wrap: break-word;
+    text-align: center;
+    vertical-align: top;
+}
+
+
+
+@media screen and (max-width: 600px) {
+    .td {
+        display: block;
+        max-width: 280px;
+        box-sizing: border-box;
+        border: 1px solid;
+        text-align: center;
+      }
+}

@@ -6,7 +6,7 @@ const AudioPlayer = ({ audioSrc, audioTitle }) => {
         <div className={s.audioPlayerContainer}>
             <h2 className={s.audioTitle}>{audioTitle}</h2>
             <audio controls className={s.audioElement}>
-                <source src={audioSrc} type="audio/mp3" />
+                <source src={audioSrc} type="audio/mp4" />
                 Votre navigateur ne supporte pas l'élément audio.
             </audio>
         </div>

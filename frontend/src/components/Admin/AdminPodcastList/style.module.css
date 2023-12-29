@@ -1,0 +1,16 @@
+.th {
+    border: 1px solid #ddd;
+    padding: 1px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #6D8CBF;
+}
+
+/* Ajoutez ces styles à votre fichier CSS */
+@media (max-width: 600px) {
+    .th {
+        display: none;
+      }
+  }
+  

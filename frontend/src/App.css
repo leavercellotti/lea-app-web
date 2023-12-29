@@ -30,6 +30,10 @@ h1,h2 {
   background-color: #93221e;
 }
 
+.noUnderline {
+  text-decoration: none;
+}
+
 .btnSpace {
   margin: 5px 15px;
 }
@@ -71,6 +75,11 @@ h1,h2 {
   margin: 5px 15px;
   min-width: 60px;
 }
+
+.option.selected {
+  background-color: #ab4a43;
+}
+
 
 .option:hover {
   background-color: #d85d54;
@@ -120,7 +129,9 @@ h1,h2 {
 .favicon {
   width: 45px;
 }
-
+.tdBefore {
+  font-weight: 600;
+}
 @media screen and (max-width: 600px) {
   .box {
     width: 100%;

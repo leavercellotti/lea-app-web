@@ -14,6 +14,8 @@ import AI from './pages/User/AI/AI';
 import Profile from './pages/User/Profile/Profile';
 import VocabularyRevise from './pages/User/VocabularyRevise/VocabularyRevise';
 import Login from './pages/User/Login/Login';
+import Podcasts from './pages/User/Podcasts/Podcasts';
+import AdminPodcasts from './pages/Admin/AdminPodcasts/AdminPodcasts';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -23,13 +25,15 @@ root.render(
         <Route path='/' element={<App/>}>
           
           <Route path='/' element={<Home/>}/>
-          <Route path='/podcast' element={<Podcast/>}/>
+          <Route path='/podcasts' element={<Podcasts/>}/>
+          <Route path='/podcast/:_id' element={<Podcast/>}/>
           <Route path='/test' element={<Test/>}/>
           <Route path='/vocabulary' element={<Vocabulary/>}/>
           <Route path='/revise' element={<VocabularyRevise/>}/>
           <Route path='/ai' element={<AI/>}/>
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/login' element={<Login/>}/>
+          <Route path='/admin-podcasts' element={<AdminPodcasts/>}/>
         </Route>
         
       </Routes>

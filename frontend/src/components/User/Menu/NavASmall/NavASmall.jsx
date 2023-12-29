@@ -91,10 +91,10 @@ export function NavASmall() {
                             </li>
                             <li className={s.li}>
                                 <NavLink 
-                                    to="/podcast" 
+                                    to="/podcasts" 
                                     className={s.link}
-                                    isActive={() => location.pathname === "/podcast"}
-                                    style={{ color: location.pathname === "/podcast" ? "#F27066" : "#28356B" }}
+                                    isActive={() => location.pathname === "/podcasts"}
+                                    style={{ color: location.pathname === "/podcasts" ? "#F27066" : "#28356B" }}
                                 >
                                     <MdHearing 
                                         className={s.logo}

@@ -1,39 +1,58 @@
-import React from 'react'
-import s from "./style.module.css"
+import React from 'react';
+import s from "./style.module.css";
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
-import image from "../../../../assets/image.png"
 import AudioPlayer from '../AudioPlayer/AudioPlayer';
+import DownloadButton from '../DownloadButton/DownloadButton';
+import { useNavigate } from 'react-router-dom';
 
-function PodcastOpened({title, imgSrc, isLiked, text, translation}) {
-  return (
-    <div className='container light paddingTopBottom maxWidth'>
-        <div className={s.top}>
-            <button className='btn' style={{marginLeft:"20px"}}>Retour</button>
-            <FaHeart size={30}  style={{marginRight:"20px"}}/>
-        </div>
-        <div className={s.inner}>
-            <h2>{title}</h2>
-            <div className={s.imgContainer}>
-                <img src={image} className={s.img} alt=""/>
-            </div>
-            <AudioPlayer audioSrc="https://drive.google.com/uc?id=1Nh5jofb7cWbX7W0h43OD1-Wd-8ZeMYoZ" />
-            <div className='options'>
-                <button className='btn btnSpace'>Télécharger le PDF</button>
-                <button className='btn btnSpace'>Télécharger l'audio</button>
-                <button className='btn btnSpace'>Télécharger tout</button>
-                {/* <a href={audioSrc} download className={s.downloadLink}>
-                Télécharger l'audio </a>*/}
-            </div>
-            <div className={s.textBox}>
-                {text}
-            </div>
-            <div className={s.translationBox}>
-                {text}
-            </div>
-        </div>
-    </div>
-  )
+function getDriveFileId(link) {
+  // Vérifier si link est défini avant d'essayer de faire correspondre l'expression régulière
+  if (link && typeof link === 'string') {
+    const fileIdMatch = link.match(/\/file\/d\/(.+?)\/(?:view|\?usp=sharing|$)/);
+    if (fileIdMatch) {
+      return fileIdMatch[1];
+    }
+  }
+  return null;
 }
 
-export default PodcastOpened
+function constructDriveAudioLink(fileId) {//on modifie le lien partagé de google drive pour qu'il ait le bon format
+  return `https://drive.google.com/uc?id=${fileId}`;
+}
+
+function PodcastOpened({ title, image, link, isLiked, transcription, translation }) {
+  const fileId = getDriveFileId(link);
+  const imageId = getDriveFileId(image)
+  const navigate = useNavigate()
+  return (
+    <div className='container light paddingTopBottom maxWidth'>
+      <div className={s.top}>
+        <button className='btn' style={{ marginLeft: "20px" }} onClick={() => navigate('/podcasts')}>Retour</button>
+        <FaHeart size={30} style={{ marginRight: "20px" }} />
+      </div>
+      <div className={s.inner}>
+        <h2>{title}</h2>
+        <div className={s.imgContainer}>
+          <img src={imageId ? constructDriveAudioLink(imageId) :''} className={s.img} alt="" />
+        </div>
+        <AudioPlayer audioSrc={fileId ? constructDriveAudioLink(fileId) : ''} />
+        <div className='options'>
+          <DownloadButton title={title} link={link} transcription={transcription} translation={translation} downloadItems="pdf" btnText="Télécharger le PDF"/>
+          <DownloadButton title={title} link={link} transcription={transcription} translation={translation} downloadItems="audio" btnText="Télécharger l'audio"/>
+          <DownloadButton title={title} link={link} transcription={transcription} translation={translation} downloadItems="all" btnText="Télécharger tout"/>
+        </div>
+        <div 
+            className={s.textBox} 
+            dangerouslySetInnerHTML={{ __html: transcription }} 
+        />
+        <div 
+            className={s.translationBox} 
+            dangerouslySetInnerHTML={{ __html: translation }} 
+        />
+      </div>
+    </div>
+  );
+}
+
+export default PodcastOpened;
