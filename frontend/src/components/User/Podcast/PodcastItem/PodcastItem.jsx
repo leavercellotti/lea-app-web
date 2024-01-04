@@ -22,7 +22,7 @@ function constructDriveAudioLink(fileId) {//on modifie le lien partagé de googl
 }
 
 
-function PodcastItem({_id, isLiked, isListened, level, link, title,transcription, translation, image}) {
+function PodcastItem({_id, isLiked, isListened, level, link, title,transcription, translation, image, selectedLevel}) {
   const navigate = useNavigate();
   const fileId = getDriveFileId(link);
   const levelText = (level === 1) ? 'Débutant' : (level === 2) ? 'Intermédiaire' : 'Avancé';
@@ -49,7 +49,7 @@ function PodcastItem({_id, isLiked, isListened, level, link, title,transcription
                 <DownloadButton title={title} link={link} transcription={transcription} translation={translation} downloadItems="all" btnText="Télécharger"/>
                 <button 
                   className='btn btnSpace'
-                  onClick={() => navigate(`/podcast/${_id}`)}
+                  onClick={() => navigate(`/podcast/${_id}/${selectedLevel}`)}
                 >
                   Ecouter
                 </button>

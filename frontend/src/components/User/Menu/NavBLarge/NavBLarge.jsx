@@ -67,10 +67,10 @@ export function NavBLarge() {
         </li>
         <li className={s.li}>
           <NavLink
-            to="/podcasts"
+            to="/podcastOptions"
             className={s.link}
-            isActive={() => location.pathname === "/podcasts"}
-            style={{ color: location.pathname === "/podcasts" ? "#F27066" : "#28356B" }}
+            isActive={() => location.pathname.startsWith("/podcast")}
+            style={{ color: location.pathname.startsWith("/podcast") ? "#F27066" : "#28356B" }}
           >
             Podcast
             <span className={s.icon}>

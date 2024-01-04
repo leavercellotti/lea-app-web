@@ -5,12 +5,13 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-function PodcastList({ podcastList }) {
+function PodcastList({ podcastList, selectedLevel }) {
   
 
   return (
     <div className={s.container}>
-      {podcastList.map((podcast) => (
+      
+      {podcastList?.map((podcast) => (
         <PodcastItem
           key={podcast._id}
           _id={podcast._id}
@@ -22,6 +23,7 @@ function PodcastList({ podcastList }) {
           image={podcast.image}
           transcription={podcast.transcription}
           translation={podcast.translation}
+          selectedLevel={selectedLevel}
         />
       ))}
     </div>

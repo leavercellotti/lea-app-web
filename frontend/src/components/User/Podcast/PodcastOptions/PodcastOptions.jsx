@@ -1,8 +1,17 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function PodcastOptions({setOption}) {
-  const [selectedOption, setSelectedOption] = useState(3); // 0 Débutant, 1 Inter, 2 tout, 3 favoris
+  const [selectedOption, setSelectedOption] = useState(4); // 1 Débutant, 2 Inter, 4 tout, 5 favoris
+  const navigate = useNavigate()
+  function onClickHandler() {
+    if(selectedOption < 3) {
+      navigate(`/podcasts/${selectedOption}`)
+    }
+    else {
+      navigate('/podcasts/')
+    }
+  }
 
   return (
     <div className='box' style={{marginBottom:"20px"}}>
@@ -21,14 +30,14 @@ function PodcastOptions({setOption}) {
               Intermédiaire
             </div>
             <div 
-              className={`option ${selectedOption === 3 ? 'selected' : ''}`}
-              onClick={()=> setSelectedOption(3)}
+              className={`option ${selectedOption === 4 ? 'selected' : ''}`}
+              onClick={()=> setSelectedOption(4)}
             >
               Tout
             </div>
             <div 
-              className={`option ${selectedOption === 4 ? 'selected' : ''}`}
-              onClick={()=> setSelectedOption(4)}
+              className={`option ${selectedOption === 5 ? 'selected' : ''}`}
+              onClick={()=> setSelectedOption(5)}
             >
               Favoris
             </div>
@@ -37,7 +46,7 @@ function PodcastOptions({setOption}) {
             <Link to="/test" className='btn btnSpace noUnderline'>Faire le test</Link>
             <button 
               className='btn btnSpace'
-              onClick={()=>setOption(selectedOption)}
+              onClick={onClickHandler}
             >
               Valider
             </button>

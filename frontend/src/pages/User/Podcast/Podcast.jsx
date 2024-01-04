@@ -10,7 +10,6 @@ import { useParams } from 'react-router-dom'
 function Podcast() {
   const [podcast, setPodcast] = useState(null);
   const {_id} = useParams()
-  console.log('id',_id)
   
   useEffect(() => {
     const fetchData = async () => {

@@ -25,12 +25,22 @@
 
 
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 820px) {
     .td {
         display: block;
-        max-width: 280px;
+        max-width: 100%;
+        /* max-width: 280px; */
         box-sizing: border-box;
         border: 1px solid;
         text-align: center;
       }
+      .tr {
+        width: 90%;
+      }
+}
+
+@media screen and (max-width: 600px) {
+    .td {
+        max-width: 280px; 
+    }
 }

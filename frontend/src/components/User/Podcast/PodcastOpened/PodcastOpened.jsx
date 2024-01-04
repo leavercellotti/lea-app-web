@@ -4,7 +4,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import AudioPlayer from '../AudioPlayer/AudioPlayer';
 import DownloadButton from '../DownloadButton/DownloadButton';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function getDriveFileId(link) {
   // Vérifier si link est défini avant d'essayer de faire correspondre l'expression régulière
@@ -25,10 +25,21 @@ function PodcastOpened({ title, image, link, isLiked, transcription, translation
   const fileId = getDriveFileId(link);
   const imageId = getDriveFileId(image)
   const navigate = useNavigate()
+  const {selectedLevel} =useParams()
+  console.log("sel", selectedLevel)
+
+  function onClickReturn() {
+    if(selectedLevel < 3) {
+      navigate(`/podcasts/${selectedLevel}`)
+    }
+    else {
+      navigate(`/podcasts`)
+    }
+  }
   return (
     <div className='container light paddingTopBottom maxWidth'>
       <div className={s.top}>
-        <button className='btn' style={{ marginLeft: "20px" }} onClick={() => navigate('/podcasts')}>Retour</button>
+        <button className='btn' style={{ marginLeft: "20px" }} onClick={onClickReturn}>Retour</button>
         <FaHeart size={30} style={{ marginRight: "20px" }} />
       </div>
       <div className={s.inner}>

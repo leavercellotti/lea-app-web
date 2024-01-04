@@ -2,9 +2,11 @@ import React from 'react'
 import s from "./style.module.css"
 import podcastImage from "../../../assets/podcast.png"
 import vocabularyImage from "../../../assets/vocabulary.png"
+import { useNavigate } from 'react-router-dom';
 
 import chatImage from "../../../assets/chat.png"
 function Home() {
+    const navigate = useNavigate()
   return (
     <div>
         <div className={s.top}>
@@ -44,19 +46,34 @@ function Home() {
                 <h2 className='h2'>Vocabulaire</h2>
                 <img className={s.img} src={vocabularyImage} alt=""/>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
-                <button className='btn'>Apprendre</button>
+                <button 
+                    className='btn'
+                    onClick={() => navigate('/vocabulary')}
+                >
+                        Apprendre
+                </button>
             </div>
             <div className={s.box}>
                 <h2 className='h2'>Podcast</h2>
                 <img className={s.img} src={podcastImage} alt=""/>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
-                <button className='btn'>Écouter</button>
+                <button 
+                    className='btn'
+                    onClick={() => navigate('/podcastOptions')}
+                >
+                    Écouter
+                </button>
             </div>
             <div className={s.box}>
                 <h2 className='h2'>Pratique</h2>
                 <img className={s.img} src={chatImage} alt=""/>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
-                <button className='btn'>Pratiquer</button>
+                <button 
+                    className='btn'
+                    onClick={() => navigate('/ai')}
+                >
+                    Pratiquer
+                </button>
             </div>
         </div>
     </div>

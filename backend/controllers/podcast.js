@@ -18,7 +18,12 @@ exports.getById = (req, res) => {
     Object.findOne({_id: req.params._id}).orFail()
     .then(object => res.status(200).json(object))
     .catch(error => res.status(400).json({error}))
+}
 
+exports.getByLevel = (req, res) => {
+  Object.find({level: req.params.level}).orFail()
+  .then(object => res.status(200).json(object))
+  .catch(error => res.status(400).json({error}))
 }
 
 exports.delete = (req, res) => {

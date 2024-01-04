@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import AdminPodcastList from '../../../components/Admin/AdminPodcastList/AdminPodcastList'
+import AdminPodcastList from '../../../components/Admin/Podcast/List/List'
 import { PodcastAPI } from '../../../api/podcast-api';
 
 function AdminPodcasts() {
@@ -23,7 +23,7 @@ function AdminPodcasts() {
         Admin Podcast
       </h1>
       <div className='container'>
-        <AdminPodcastList podcastList={podcastList}/>
+      <AdminPodcastList podcastList={podcastList} setPodcastList={setPodcastList}/>
       </div>
     </div>
   )
