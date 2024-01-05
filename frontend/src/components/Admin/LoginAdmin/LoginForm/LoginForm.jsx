@@ -2,8 +2,8 @@ import { useRef, useState } from "react"
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import s from "./style.module.css";
 import { useDispatch } from "react-redux";
-// import { setConnect, setToken } from "../../../store/admin-slice";
-// import { UserAPI } from "../../../api/user-api";
+import { setConnect, setToken } from "../../../../store/admin-slice"
+import { AdminAPI } from "../../../../api/admin-api";
 
 
 export function LoginForm() {
@@ -15,35 +15,35 @@ export function LoginForm() {
     const [passwordShown, setPasswordShown] = useState(false)
     
 
-    // async function connectUserHandler(userData) {
-    //     const response = await UserAPI.connect(userData)
-    //                         .then(function(response) { 
-    //                             return response
-    //                           })
-    //     if(response) {
-    //         //userCtx.setEmail(userData.email)
-    //         const token= response.data.token
-    //         dispatch(setToken({token:token}))
-    //         dispatch(setConnect())
-    //         /*userCtx.setToken(response.data.token)
-    //         const dataUserToStore = {
-    //             ...userData,
-    //             token: token,
-    //         };
-    //         getADayNotInDB(token,userData.email,date)
-    //         localStorage.setItem('token-info', JSON.stringify(dataUserToStore));
-    //         navigate("/")*/
-    //     }
-    //     else {
-    //         alert("Données incorrectes")
-    //     }
-    //   }
+    async function connectHandler(data) {
+        console.log(data)
+        const response = await AdminAPI.connect(data)
+                            .then(function(response) { 
+                                return response
+                              })
+        if(response) {
+            //adminCtx.setEmail(adminData.email)
+            const token= response.data.token
+            dispatch(setToken({token:token}))
+            dispatch(setConnect())
+            /*adminCtx.setToken(response.data.token)
+            const dataToStore = {
+                ...data,
+                token: token,
+            };
+            getADayNotInDB(token,data.email,date)
+            navigate("/")*/
+        }
+        else {
+            alert("Données incorrectes")
+        }
+      }
 
     function submitHandler(e) {
         e.preventDefault()
         const enteredEmail = emailInputRef.current.value.toLowerCase()
         const enteredPassword = passwordInputRef.current.value
-        // connectUserHandler({login:enteredEmail, password:enteredPassword})
+        connectHandler({login:enteredEmail, password:enteredPassword})
     }
 
     const [errorMessage, setErrorMessage] = useState('')

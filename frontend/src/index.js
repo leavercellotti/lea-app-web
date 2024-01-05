@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import {BrowserRouter, Routes, Route} from "react-router-dom"
-/*import {Provider} from "react-redux"
-import {store} from "./store"*/
+import {Provider} from "react-redux"
+import {store} from "./store"
 /*import { PageNotFound } from './pages/PageNotFound/PageNotFound'*/
 import Home from './pages/User/Home/Home';
 import Podcast from './pages/User/Podcast/Podcast';
@@ -21,7 +21,7 @@ import AdminLogin from './pages/Admin/AdminLogin/AdminLogin';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  /*<Provider store={store}>*/
+  <Provider store={store}>
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<App/>}>
@@ -43,6 +43,6 @@ root.render(
         
       </Routes>
     </BrowserRouter>
-  /*</Provider>*/
+  </Provider>
 );
 /*<Route path='*' element={<PageNotFound/>} />*/

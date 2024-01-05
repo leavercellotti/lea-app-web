@@ -1,0 +1,67 @@
+.nav {
+    background-color: white;
+    font-size: 24px;
+    height: 70px;
+    font-weight: 600;
+}
+
+.ul {
+    display: flex;
+    list-style: none;
+    justify-content: space-around;
+    position: relative;
+    flex-wrap: wrap;
+    margin-top: 0;
+}
+
+.logoContainer {
+    width: 40%;
+}
+.centralItems {
+    display: flex;
+    justify-content: space-evenly;
+    width: 50%;
+}
+.li {
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor:pointer;
+    position: relative;
+}
+
+.li:hover {
+    scale: 1.1;
+}
+.subButtonsLi {
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor:pointer;
+    position: relative;
+    border-bottom: 1px solid black;
+}
+
+.subButtonsContainer {
+    position: absolute;
+    top:80px;
+    left: -35px;
+    z-index: 9;
+    list-style: none;
+}
+
+.link {
+    text-decoration: none;
+    padding: 20px;
+    min-width: 150px;
+}
+
+.logo {
+    max-width: 70px;
+} 
+
+.icon {
+    margin-left: 5px;
+    padding-top: 30px;
+    margin-top: 10px;
+}

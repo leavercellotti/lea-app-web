@@ -2,11 +2,10 @@ import React from 'react'
 import s from "./style.module.css"
 import { Logout } from '../Logout/Logout'
 import { LoginForm } from '../LoginForm/LoginForm'
-// import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const Login = () => {
-    // const isConnect = useSelector(store => store.ADMIN.isConnect)
-    const isConnect = true
+    const isConnect = useSelector(store => store.ADMIN.isConnect)
   return (
     <div className={s.container}>
             {isConnect ?

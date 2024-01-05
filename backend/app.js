@@ -4,6 +4,7 @@ const app = express()
 const mongoose = require('mongoose')
 const testRoutes = require('./routes/test')
 const podcastRoutes = require('./routes/podcast')
+const adminRoutes = require('./routes/admin')
 
 require('dotenv').config();
 
@@ -30,5 +31,6 @@ app.use((req, res, next) => {
 
 app.use('/api/test', testRoutes)
 app.use('/api/podcast', podcastRoutes)
+app.use('/api/admin', adminRoutes)
 
 module.exports = app
