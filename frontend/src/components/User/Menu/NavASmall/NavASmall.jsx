@@ -16,6 +16,11 @@ export function NavASmall() {
     const [isMenuShown, setIsMenuShown] = useState(false)
     const menuRef = useRef(null);
     const location = useLocation();
+    function logoutHandler() {
+        localStorage.removeItem('user-info')
+        localStorage.removeItem('token')
+        window.location.reload(false);
+    }
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -91,7 +96,7 @@ export function NavASmall() {
                             </li>
                             <li className={s.li}>
                                 <NavLink 
-                                    to="/podcastOptions" 
+                                    to="/podcasts" 
                                     className={s.link}
                                     isActive={() => location.pathname.startsWith("/podcast")}
                                     style={{ color: location.pathname.startsWith("/podcast") ? "#F27066" : "#28356B" }}
@@ -141,18 +146,15 @@ export function NavASmall() {
                                     Mon espace
                                 </NavLink>
                             </li>
-                            <li className={s.li}>
-                                <NavLink 
-                                    to="/login" 
-                                    className={s.link}
-                                    isActive={() => location.pathname === "/login"}
-                                    style={{ color: location.pathname === "/login" ? "#F27066" : "#9BB5D8" }}
-                                >
+                            <li 
+                                className={s.li}
+                                onClick={logoutHandler} 
+                                style={{color: "#9BB5D8"}}
+                            >
                                     <MdLogout 
                                         className={s.logo}
                                     /> 
                                     Logout
-                                </NavLink>
                             </li>
                         </ul>
                     </div> 

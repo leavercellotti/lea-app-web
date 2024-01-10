@@ -1,13 +1,8 @@
 import React from 'react'; // Assurez-vous d'ajuster le chemin selon votre structure de fichiers
 import s from "./style.module.css";
 import PodcastItem from '../PodcastItem/PodcastItem';
-import { useNavigate } from 'react-router-dom';
-
-
 
 function PodcastList({ podcastList, selectedLevel }) {
-  
-
   return (
     <div className={s.container}>
       

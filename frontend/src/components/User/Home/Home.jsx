@@ -59,7 +59,7 @@ function Home() {
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
                 <button 
                     className='btn'
-                    onClick={() => navigate('/podcastOptions')}
+                    onClick={() => navigate('/podcasts')}
                 >
                     Écouter
                 </button>

@@ -5,6 +5,7 @@ import { FaHeart } from "react-icons/fa";
 import AudioPlayer from '../AudioPlayer/AudioPlayer';
 import DownloadButton from '../DownloadButton/DownloadButton';
 import { useNavigate, useParams } from 'react-router-dom';
+import Like from '../Like/Like';
 
 function getDriveFileId(link) {
   // Vérifier si link est défini avant d'essayer de faire correspondre l'expression régulière
@@ -21,7 +22,8 @@ function constructDriveAudioLink(fileId) {//on modifie le lien partagé de googl
   return `https://drive.google.com/uc?id=${fileId}`;
 }
 
-function PodcastOpened({ title, image, link, isLiked, transcription, translation }) {
+function PodcastOpened({_id, title, image, link, isLiked, transcription, translation }) {
+  console.log("id",_id)
   const fileId = getDriveFileId(link);
   const imageId = getDriveFileId(image)
   const navigate = useNavigate()
@@ -40,14 +42,15 @@ function PodcastOpened({ title, image, link, isLiked, transcription, translation
     <div className='container light paddingTopBottom maxWidth'>
       <div className={s.top}>
         <button className='btn' style={{ marginLeft: "20px" }} onClick={onClickReturn}>Retour</button>
-        <FaHeart size={30} style={{ marginRight: "20px" }} />
+        <Like _id={_id} size={30} style={{ marginRight: "20px" }}/>
+        {/* <FaHeart size={30} style={{ marginRight: "20px" }} /> */}
       </div>
       <div className={s.inner}>
         <h2>{title}</h2>
         <div className={s.imgContainer}>
           <img src={imageId ? constructDriveAudioLink(imageId) :''} className={s.img} alt="" />
         </div>
-        <AudioPlayer audioSrc={fileId ? constructDriveAudioLink(fileId) : ''} />
+        <AudioPlayer _id={_id} audioSrc={fileId ? constructDriveAudioLink(fileId) : ''} />
         <div className='options'>
           <DownloadButton title={title} link={link} transcription={transcription} translation={translation} downloadItems="pdf" btnText="Télécharger le PDF"/>
           <DownloadButton title={title} link={link} transcription={transcription} translation={translation} downloadItems="audio" btnText="Télécharger l'audio"/>

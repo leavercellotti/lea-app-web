@@ -67,7 +67,7 @@ export function NavBLarge() {
         </li>
         <li className={s.li}>
           <NavLink
-            to="/podcastOptions"
+            to="/podcasts"
             className={s.link}
             isActive={() => location.pathname.startsWith("/podcast")}
             style={{ color: location.pathname.startsWith("/podcast") ? "#F27066" : "#28356B" }}

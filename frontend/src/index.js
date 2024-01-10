@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+// import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 import {Provider} from "react-redux"
 import {store} from "./store"
-/*import { PageNotFound } from './pages/PageNotFound/PageNotFound'*/
 import Home from './pages/User/Home/Home';
 import Podcast from './pages/User/Podcast/Podcast';
+import PageNotFound from './pages/PageNotFound/PageNotFound';
 import Test from './pages/User/Test/Test'; 
 import Vocabulary from './pages/User/Vocabulary/Vocabulary';
 import AI from './pages/User/AI/AI';
@@ -25,7 +26,6 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<App/>}>
-          
           <Route path='/' element={<Home/>}/>
           <Route path='/podcastOptions' element={<PodcastOptionsPage/>}/>
           <Route path='/podcasts' element={<Podcasts/>}/>
@@ -40,7 +40,7 @@ root.render(
           <Route path='/admin-podcasts' element={<AdminPodcasts/>}/>
           <Route path='/admin-login' element={<AdminLogin/>}/>
         </Route>
-        
+        <Route path='*' element={<PageNotFound/>} />
       </Routes>
     </BrowserRouter>
   </Provider>

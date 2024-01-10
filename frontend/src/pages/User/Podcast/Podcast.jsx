@@ -31,6 +31,7 @@ function Podcast() {
       <div className='container'>
         {podcast ? (
             <PodcastOpened
+              _id={_id}
               title={podcast.title}
               image={podcast.image}
               link={podcast.link}

@@ -22,7 +22,7 @@ const ChatGPT = () => {
           {/* <p className={s.person}>
             <PiStudent size={22} className={s.icon}/>
           </p> */}
-          <div className={s.userBox}>I do crossfit hhhhhhhh hhhhhhhhhhhhhh hhhhhhhhhhh hhhhhhhhhhhhhh hhhhhh hhhhhhhhh hhhhhhhhhhhhh hhhhhhhhhhhh hhhhhhhhhhhhh hhhhhh</div>
+          <div className={s.userBox}>I do crossfit and I play tennis hhhhhhhh hhhhhhhhhhhhhh hhhhhhhhhhh hhhhhhhhhhhhhh hhhhhh hhhhhhhhh hhhhhhhhhhhhh hhhhhhhhhhhh hhhhhhhhhhhhh hhhhhh</div>
         </div>
       </div>
       <div className={s.writeContainer}>

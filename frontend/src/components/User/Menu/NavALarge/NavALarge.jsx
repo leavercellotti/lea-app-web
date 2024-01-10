@@ -21,6 +21,12 @@ export function NavALarge() {
     setIsShown(false);
   }
 
+  function logoutHandler() {
+    localStorage.removeItem('user-info')
+    localStorage.removeItem('token')
+    window.location.reload(false);
+  }
+
   return (
     <nav className={s.nav}>
       <ul className={s.ul}>
@@ -47,18 +53,15 @@ export function NavALarge() {
               </span>
             </NavLink>
           </li>
-          <li className={s.li}>
-            <NavLink
-              to="/login"
-              className={s.link}
-              isActive={() => location.pathname === "/login"}
-              style={{ color: location.pathname === "/login" ? "#F27066" : "#9BB5D8" }}
-            >
+          <li 
+            style={{color: "#9BB5D8"}} 
+            onClick={logoutHandler} 
+            className={s.li}
+          >
               Logout
               <span className={s.icon}>
                 <MdLogout/> 
               </span>
-            </NavLink>
           </li>
         </div>
       </ul>

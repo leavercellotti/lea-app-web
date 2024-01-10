@@ -3,8 +3,7 @@ import s from "./style.module.css"
 import EmailPw from '../EmailPw/EmailPw'
 import SubscriptionChoice from '../SubscriptionChoice/SubscriptionChoice'
 
-function LoginBox
-() {
+function LoginBox({connectHandler, addHandler}) {
     const [login, setLogin] = useState(true)//true login false signup
   return (
     <div className={`box ${s.container}`}>
@@ -21,7 +20,11 @@ function LoginBox
             </div>
         </div>
         <h3>{login ? 'Se connecter' : "S'inscrire"}</h3>
-        <EmailPw/>
+        <EmailPw 
+            login={login} 
+            connectHandler={connectHandler} 
+            addHandler={addHandler}
+        />
     </div>
   )
 }
