@@ -3,7 +3,6 @@ const Object = require('../models/User')
 const jwt = require('jsonwebtoken');
 const JWT_SECRET_USER = process.env.JWT_SECRET_USER;
 exports.signup = (req, res, next) => {
-  console.log(req.body)
     bcrypt.hash(req.body.password, 10)
       .then(hash => {
         const user = new Object({
@@ -14,7 +13,6 @@ exports.signup = (req, res, next) => {
           // subscription:"",
           // level:null
         });
-        console.log('user', user)
         user.save()
           .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
           .catch(error => res.status(400).json({ error }));
@@ -26,19 +24,14 @@ exports.signup = (req, res, next) => {
 exports.login = (req, res, next) => {
     Object.findOne({ email: req.body.email })
     .then(user => {
-      console.log(req.body.email)
         if (!user) {
-          console.log("not user")
             return res.status(401).json({ error: 'Utilisateur non trouvé !' });
         }
-        console.log("compare",req.body.password, user.password, bcrypt.compare(req.body.password, user.password))
         bcrypt.compare(req.body.password, user.password)
             .then(valid => {
                 if (!valid) {
-                  console.log("bcrypt not valid")
-                    return res.status(401).json({ error: 'Mot de passe incorrect !' });
+                  return res.status(401).json({ error: 'Mot de passe incorrect !' });
                 }
-                console.log("bcrypt valid")
                 res.status(200).json({
                     userId: user._id,
                     token: jwt.sign(
@@ -57,7 +50,6 @@ exports.login = (req, res, next) => {
 
 exports.get = (req, res, next) => {
     const filter= req.params //email
-    console.log("user get", filter)
     Object.findOne(filter)
         .then(day => res.status(200).json(day))
         .catch(error => res.status(400).json({error}))
@@ -67,7 +59,6 @@ exports.updateLikedPodcasts = async (req, res) => {
   const userId = req.body.userId
   const podcastId = req.body.podcastId
   const liked = req.body.liked
-  console.log("p id", podcastId)
 
   try {
     const user = await Object.findById(userId);
@@ -81,7 +72,6 @@ exports.updateLikedPodcasts = async (req, res) => {
     } else {
       // Remove the podcast from the liked array
       const index = user.podcastsLikedArray.indexOf(podcastId);
-      console.log("index", index, user.podcastsLikedArray)
       if (index !== -1) {
         user.podcastsLikedArray.splice(index, 1);
       }
@@ -100,17 +90,14 @@ exports.updateLikedPodcasts = async (req, res) => {
 exports.updateListenedPodcasts = async (req, res) => {
   const userId = req.body.userId
   const podcastId = req.body.podcastId
-  console.log("p id", podcastId, userId)
 
   try {
     const user = await Object.findById(userId);
     if (!user) {
       return res.status(404).json({ error: 'User not found.' });
     }
-    console.log("user ok")
     // Update the liked podcasts array
     if (!user.podcastsListenedArray.includes(podcastId)) {
-      console.log("not include")
       user.podcastsListenedArray.push(podcastId); // Assuming you have a podcastId in the request params
       // Save the updated user object
       await user.save();
@@ -123,7 +110,6 @@ exports.updateListenedPodcasts = async (req, res) => {
 };
 
 exports.getAll = (req, res) => {
-  console.log("getall ..")
     Object.find()
     .then(objects => {
       return(res.status(200).json(objects))

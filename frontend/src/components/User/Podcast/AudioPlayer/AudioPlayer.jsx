@@ -53,10 +53,7 @@ const AudioPlayer = ({ audioSrc, audioTitle, _id }) => {
         <source src={audioSrc} type="audio/mp4" />
         Votre navigateur ne supporte pas l'élément audio.
       </audio>
-      {isAudioPlayed && !isAudioCompleted && (
-        <p>L'audio est en cours de lecture.</p>
-      )}
-      {isAudioCompleted && <p>L'audio a été écouté complètement.</p>}
+      {/* {isAudioCompleted && <p>L'audio a été écouté complètement.</p>} */}
     </div>
   );
 };

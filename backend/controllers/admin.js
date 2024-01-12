@@ -8,7 +8,7 @@ const ADMINPASSWORD=process.env.ADMINPASSWORD
 const JWT_SECRET = process.env.JWT_SECRET;
 
 exports.login = (req, res) => {
-    console.log(req)
+    // console.log("login", req.body)
     bcrypt.hash(ADMINLOGIN, 10)
       .then(hash => {
         bcrypt.compare(req.body.login, hash)

@@ -1,13 +1,7 @@
 const Object = require('../models/Podcast')
 
 exports.getAll = (req, res) => {
-  console.log("getall ..");
-
-  // Ajoutez une condition pour filtrer par niveau si le paramètre 'level' est fourni dans la requête
-  const levelFilter = req.query.level ? { level: req.query.level } : {};
-  console.log("Level Filter:", levelFilter);
-
-  Object.find(levelFilter)
+  Object.find()
     .then(objects => {
       return res.status(200).json(objects);
     })
@@ -41,6 +35,7 @@ exports.create = (req, res) => {
   };
 
   exports.update = (req, res) => {
+    console.log('update')
     const { _id } = req.params;
     const updateData = { ...req.body };
   

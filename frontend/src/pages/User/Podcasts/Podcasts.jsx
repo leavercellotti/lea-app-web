@@ -9,26 +9,21 @@ import { useSelector } from 'react-redux';
 function Podcasts() {
   const podcastsLikedArray = useSelector(store => store.USER.podcastsLikedArray);
   const podcastsListenedArray = useSelector(store => store.USER.podcastsListenedArray);
-  
+  const token = useSelector((store) => store.USER.token)
+
   const [podcastList, setPodcastList] = useState([]);
   const [allPodcastList, setAllPodcastList] = useState([]);
   const [podcastListenedList, setPodcastListenedList] = useState([]);
   const [podcastLikedList, setPodcastLikedList] = useState([]);
   const [podcastLikedAndListenedList, setPodcastLikedAndListenedList] = useState([]);
-  
-  // useEffect(() => {
-  //   const likedList = podcastList?.filter(podcast => podcastsLikedArray.includes(podcast._id));
-  //   setPodcastLikedList(likedList)
-  //   console.log(likedList)
-  // },[podcastList, podcastsLikedArray])
   const navigate = useNavigate()
   const [level, setLevel] = useState()
-  console.log("level",level)
   useEffect(() => {
     const getAllPodcasts = async () => {
       try {
-        const allPodcasts = await PodcastAPI.getAll();
+        const allPodcasts = await PodcastAPI.getAll(token);
         setPodcastList(allPodcasts);
+        console.log('all', allPodcastList)
         setAllPodcastList(allPodcasts)
         const likedList = allPodcasts.filter(podcast => podcastsLikedArray.includes(podcast._id));
         setPodcastLikedList(likedList)
@@ -36,8 +31,6 @@ function Podcasts() {
         setPodcastListenedList(listenedList)
         const likedAndListenedList = listenedList.filter(podcast => podcastsLikedArray.includes(podcast._id));
         setPodcastLikedAndListenedList(likedAndListenedList)
-      console.log("liked", likedList, podcastLikedList)
-        console.log('list',podcastList)
       } catch (error) {
         console.error("Error fetching podcasts:", error);
       }
@@ -45,9 +38,8 @@ function Podcasts() {
 
     const getPodcastsByLevel = async () => {
       try {
-        const allPodcasts = await PodcastAPI.getByLevel(level);
+        const allPodcasts = await PodcastAPI.getByLevel(level, token);
         setPodcastList(allPodcasts);
-        console.log('list',podcastList)
         setAllPodcastList(allPodcasts)
         const likedList = allPodcasts.filter(podcast => podcastsLikedArray.includes(podcast._id));
         setPodcastLikedList(likedList)
@@ -55,8 +47,6 @@ function Podcasts() {
         setPodcastListenedList(listenedList)
         const likedAndListenedList = listenedList.filter(podcast => podcastsLikedArray.includes(podcast._id));
         setPodcastLikedAndListenedList(likedAndListenedList)
-      console.log("liked", likedList, podcastLikedList)
-        console.log('list',podcastList)
       } catch (error) {
         console.error("Error fetching podcasts:", error);
       }

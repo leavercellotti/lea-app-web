@@ -2,13 +2,11 @@ import { useRef, useState } from "react"
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import s from "./style.module.css";
 import { useDispatch } from "react-redux";
-import { setConnect, setToken } from "../../../../store/admin-slice"
+import { setTokenAdmin } from "../../../../store/admin-slice"
 import { AdminAPI } from "../../../../api/admin-api";
 
 
-export function LoginForm() {
-    const correctLogin = process.env.REACT_APP_ADMINLOGIN;
-    const correctPassword = process.env.REACT_APP_ADMINPASSWORD
+export function LoginForm({setAdminToken}) {
     const dispatch = useDispatch()
     const emailInputRef = useRef()
     const passwordInputRef = useRef()
@@ -22,17 +20,18 @@ export function LoginForm() {
                                 return response
                               })
         if(response) {
-            //adminCtx.setEmail(adminData.email)
+            console.log("setAdminToken", setAdminToken)
+            if(setAdminToken){
+                console.log('yo')
+                setAdminToken(response.data.token)
+                localStorage.setItem('admin-token', JSON.stringify(response.data.token));
+            }
+            console.log(response.data)
+            
             const token= response.data.token
-            dispatch(setToken({token:token}))
-            dispatch(setConnect())
-            /*adminCtx.setToken(response.data.token)
-            const dataToStore = {
-                ...data,
-                token: token,
-            };
-            getADayNotInDB(token,data.email,date)
-            navigate("/")*/
+            console.log(response, token)
+            dispatch(setTokenAdmin({token:token}))
+            
         }
         else {
             alert("Données incorrectes")

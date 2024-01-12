@@ -32,37 +32,30 @@ function Filter({ podcastList, podcastLikedList, podcastListenedList, podcastLik
       };
     function likedHandler() {
         if(isListenedSelected && isLikedSelected){
-            console.log(1)
             setPodcastList(podcastListenedList)
         }
         else if(isListenedSelected && !isLikedSelected){
-            console.log(2)
             setPodcastList(podcastLikedAndListenedList)
         }
         else if(!isListenedSelected && isLikedSelected){
             setPodcastList(allPodcastList)
         }
         else {
-            console.log('else', podcastList, podcastListenedList)
             setPodcastList(podcastLikedList)
         }
         setIsLikedSelected(!isLikedSelected)
     }
     function listenedHandler() {
         if(isListenedSelected && isLikedSelected){
-            console.log(1)
             setPodcastList(podcastLikedList)
         }
         else if(isListenedSelected && !isLikedSelected){
-            console.log(2)
             setPodcastList(allPodcastList)
         }
         else if(!isListenedSelected && isLikedSelected){
-            console.log(3)
             setPodcastList(podcastLikedAndListenedList)
         }
         else {
-            console.log('else', podcastList, podcastListenedList)
             setPodcastList(podcastListenedList)
         }
         setIsListenedSelected(!isListenedSelected)

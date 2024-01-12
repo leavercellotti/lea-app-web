@@ -26,7 +26,7 @@ function PodcastItem({_id, isListened, level, link, title,transcription, transla
   const navigate = useNavigate();
   const fileId = getDriveFileId(link);
   const levelText = (level === 1) ? 'Débutant' : (level === 2) ? 'Intermédiaire' : 'Avancé';
-  const imageId = getDriveFileId(image)
+  // const imageId = getDriveFileId(image)
   
   const podcastsListenedArray = useSelector(store => store.USER.podcastsListenedArray)
   
@@ -37,7 +37,8 @@ function PodcastItem({_id, isListened, level, link, title,transcription, transla
             <Like _id={_id} size={20}/>
           </div>
           <div className={s.right}>
-            <VideoTime audioSrc={fileId ? constructDriveAudioLink(fileId) : ''}/>
+            {/* <VideoTime audioSrc={fileId ? constructDriveAudioLink(fileId) : ''}/> */}
+            <VideoTime audioSrc={link}/>
             {podcastsListenedArray && podcastsListenedArray.includes(_id) && 
             <div className={s.listened}>Ecouté</div>}
             <div className={s.level}>{levelText}</div>
@@ -46,7 +47,8 @@ function PodcastItem({_id, isListened, level, link, title,transcription, transla
         <div className={s.inside}>
             <h2>{title}</h2>
             <div className={s.centerContainer}>
-                <img className={s.img} alt="" src={imageId ? constructDriveAudioLink(imageId) :''}/>
+                {/* <img className={s.img} alt="" src={imageId ? constructDriveAudioLink(imageId) :''}/> */}
+                <img className={s.img} alt="" src={image}/>
             </div>
             <div className='options'>
                 <DownloadButton title={title} link={link} transcription={transcription} translation={translation} downloadItems="all" btnText="Télécharger"/>

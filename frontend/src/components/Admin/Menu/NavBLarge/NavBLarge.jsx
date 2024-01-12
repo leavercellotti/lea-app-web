@@ -30,47 +30,23 @@ export function NavBLarge() {
           onMouseLeave={setIsShownFalse}
         >
           <NavLink
-            to="/vocabulary"
+            to="/jgieojoergj0replj-vocabulary"
             className={s.link}
-            isActive={() => location.pathname === "/vocabulary"}
-            style={{ color: (location.pathname === "/vocabulary" || location.pathname === "/revise") ? "#F27066" : "#28356B" }}
+            isActive={() => location.pathname === "/jgieojoergj0replj-vocabulary"}
+            style={{ color: (location.pathname === "/jgieojoergj0replj-vocabulary" || location.pathname === "/revise") ? "#F27066" : "#28356B" }}
           >
             Vocabulaire
             <span className={s.icon}>
               <BsCardText/>
             </span>
           </NavLink>
-          {isShown &&
-            <ul className={s.subUl}>
-              <li className={s.subLi}>
-                <NavLink
-                  to="/vocabulary"
-                  className={s.subLink}
-                  isActive={() => location.pathname === "/vocabulary"}
-                  style={{ color: location.pathname === "/vocabulary" ? "#F27066" : "#28356B" }}
-                >
-                  Apprendre
-                </NavLink>
-              </li>
-              <li className={s.subLi}>
-                <NavLink
-                  to="/revise"
-                  className={s.subLink}
-                  isActive={() => location.pathname === "/revise"}
-                  style={{ color: location.pathname === "/revise" ? "#F27066" : "#28356B" }}
-                >
-                  Réviser
-                </NavLink>
-              </li>
-            </ul>
-          }
         </li>
         <li className={s.li}>
           <NavLink
-            to="/admin-podcasts"
+            to="/jgieojoergj0replj-podcasts"
             className={s.link}
-            isActive={() => location.pathname === "/admin-podcasts"}
-            style={{ color: location.pathname === "/admin-podcasts" ? "#F27066" : "#28356B" }}
+            isActive={() => location.pathname === "/jgieojoergj0replj-podcasts"}
+            style={{ color: location.pathname === "/jgieojoergj0replj-podcasts" ? "#F27066" : "#28356B" }}
           >
             Podcast
             <span className={s.icon}>
@@ -80,10 +56,10 @@ export function NavBLarge() {
         </li>
         <li className={s.li}>
           <NavLink
-            to="/ai"
+            to="/jgieojoergj0replj-ai"
             className={s.link}
-            isActive={() => location.pathname === "/ai"}
-            style={{ color: location.pathname === "/ai" ? "#F27066" : "#28356B" }}
+            isActive={() => location.pathname === "/jgieojoergj0replj-ai"}
+            style={{ color: location.pathname === "/jgieojoergj0replj-ai" ? "#F27066" : "#28356B" }}
           >
             Pratique
             <span className={s.icon}>
@@ -93,10 +69,10 @@ export function NavBLarge() {
         </li>
         <li className={s.li}>
           <NavLink
-            to="/test"
+            to="/jgieojoergj0replj-test"
             className={s.link}
-            isActive={() => location.pathname === "/test"}
-            style={{ color: location.pathname === "/test" ? "#F27066" : "#9BB5D8" }}
+            isActive={() => location.pathname === "/jgieojoergj0replj-test"}
+            style={{ color: location.pathname === "/jgieojoergj0replj-test" ? "#F27066" : "#9BB5D8" }}
           >
             Test
             <span className={s.icon}>

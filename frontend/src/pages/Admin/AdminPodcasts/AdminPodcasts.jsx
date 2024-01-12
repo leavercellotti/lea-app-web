@@ -2,19 +2,16 @@ import React, { useEffect, useState } from 'react'
 import AdminPodcastList from '../../../components/Admin/Podcast/List/List'
 import { PodcastAPI } from '../../../api/podcast-api';
 import { useSelector } from 'react-redux';
-import { setConnect, setToken } from '../../../store/admin-slice'
-import AdminNotConnect from '../../../components/Admin/AdminNotConnect/AdminNotConnect';
 
 function AdminPodcasts() {
-  const isConnect = useSelector(store => store.ADMIN.isConnect)
   const [podcastList, setPodcastList] = useState([])
+  const adminToken = useSelector((store) => store.ADMIN.token)
   
   useEffect(() => {
     const getAllPodcasts = async () => {
       try {
-        const allPodcasts = await PodcastAPI.getAll();
+        const allPodcasts = await PodcastAPI.getAll(adminToken);
         setPodcastList(allPodcasts);
-        console.log('list',podcastList)
       } catch (error) {
         console.error("Error fetching podcasts:", error);
       }
@@ -22,7 +19,6 @@ function AdminPodcasts() {
 
     getAllPodcasts();
   }, []);
-  if(isConnect) {
     return (
       <div>
         <h1>
@@ -34,14 +30,5 @@ function AdminPodcasts() {
       </div>
     )
   }
-  else {
-    return(
-      <div>
-        <AdminNotConnect/>
-      </div>
-    )
-  }
-
-}
 
 export default AdminPodcasts

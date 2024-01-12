@@ -4,11 +4,11 @@ import { Logout } from '../Logout/Logout'
 import { LoginForm } from '../LoginForm/LoginForm'
 import { useSelector } from 'react-redux'
 
-const Login = () => {
-    const isConnect = useSelector(store => store.ADMIN.isConnect)
+const Login = ({setAdminToken}) => {
+    const tokenAdmin = useSelector(store => store.ADMIN.token)
   return (
     <div className={s.container}>
-            {isConnect ?
+            {tokenAdmin ?
                 (<div>
                     <h1  className={`${s.title} ${s.fadeInDown}`}>Logout</h1>
                     <Logout />
@@ -18,7 +18,7 @@ const Login = () => {
                 (<>
                     <h1  className={`${s.title} ${s.fadeInDown}`}>Admin Login</h1>
                     <div>
-                        <LoginForm />
+                        <LoginForm setAdminToken={setAdminToken} />
                     </div>
                 </>
                 )

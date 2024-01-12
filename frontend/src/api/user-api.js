@@ -1,10 +1,9 @@
 import axios from "axios"
-const BASE_URL = "http://localhost:3000/api/user"// "https://wodbooking.onrender.com/api/auth"
+const BASE_URL ="http://localhost:3000/api/user"//"https://lea-english.onrender.com/api/user" 
 
 
 export class UserAPI{
     static async create(user) {
-        console.log("user create",user)
         return (
             await axios.post(`${BASE_URL}/signup`, user)
             .catch(function(error) {

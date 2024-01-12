@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import s from "./style.module.css"
 import { PodcastAPI } from '../../../../api/podcast-api';
+import { useSelector } from 'react-redux';
 function AddForm({list, setList, setShowForm}) {
+  const adminToken = useSelector(store => store.ADMIN.token)
     const [title, setTitle] = useState("");
     const [link, setLink] = useState("");
     const [transcription, setTranscription] = useState("");
@@ -12,7 +14,7 @@ function AddForm({list, setList, setShowForm}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         var newItem = {title, link, transcription, translation, image, level};
-        PodcastAPI.create(newItem)
+        PodcastAPI.create(newItem, adminToken)
         .then((id) => {
             const newList = [...list, { _id:id, ...newItem }];
             setList(newList);

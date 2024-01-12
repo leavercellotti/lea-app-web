@@ -23,8 +23,8 @@ export function NavALarge() {
     setIsShown(false);
   }
   function logoutHandler() {
-    dispatch(setNotConnect());
-    //window.location.reload(false);
+    localStorage.removeItem('admin-token')
+    window.location.reload(false);
   }
 
   return (
@@ -33,7 +33,7 @@ export function NavALarge() {
         <div className={s.logoContainer}>
           <li className={s.li}>
             <NavLink 
-              to="/"
+              to="/jgieojoergj0replj"
             >
               <img src={logo} alt="Léa English" className={s.logo} />
             </NavLink>
@@ -42,11 +42,11 @@ export function NavALarge() {
         <div className={s.centralItems}>
           <li className={s.li}>
             <NavLink
-              to="/admin-login"
+              to="/jgieojoergj0replj"
               onClick={logoutHandler}
               className={s.link}
-              isActive={() => location.pathname === "/admin-login"}
-              style={{ color: location.pathname === "/admin-login" ? "#F27066" : "#9BB5D8" }}
+              isActive={() => location.pathname === "/jgieojoergj0replj"}
+              style={{ color: location.pathname === "/jgieojoergj0replj" ? "#F27066" : "#9BB5D8" }}
             >
               Logout
               <span className={s.icon}>

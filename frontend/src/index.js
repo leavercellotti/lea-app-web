@@ -17,8 +17,10 @@ import VocabularyRevise from './pages/User/VocabularyRevise/VocabularyRevise';
 import Login from './pages/User/Login/Login';
 import Podcasts from './pages/User/Podcasts/Podcasts';
 import AdminPodcasts from './pages/Admin/AdminPodcasts/AdminPodcasts';
-import PodcastOptionsPage from './pages/User/PodcastOptionsPage/PodcastOptionsPage';
 import AdminLogin from './pages/Admin/AdminLogin/AdminLogin';
+import AdminVocabulary from './pages/Admin/AdminVocabulary/AdminVocabulary';
+import AdminAI from './pages/Admin/AdminAI/AdminAI';
+import AdminTest from './pages/Admin/AdminTest/AdminTest';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -27,7 +29,6 @@ root.render(
       <Routes>
         <Route path='/' element={<App/>}>
           <Route path='/' element={<Home/>}/>
-          <Route path='/podcastOptions' element={<PodcastOptionsPage/>}/>
           <Route path='/podcasts' element={<Podcasts/>}/>
           <Route path='/podcasts/:level' element={<Podcasts/>}/>
           <Route path='/podcast/:_id/:selectedLevel' element={<Podcast/>}/>
@@ -37,8 +38,11 @@ root.render(
           <Route path='/ai' element={<AI/>}/>
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/login' element={<Login/>}/>
-          <Route path='/admin-podcasts' element={<AdminPodcasts/>}/>
-          <Route path='/admin-login' element={<AdminLogin/>}/>
+          <Route path='/jgieojoergj0replj-podcasts' element={<AdminPodcasts/>}/>
+          <Route path='/jgieojoergj0replj' element={<AdminLogin/>}/>
+          <Route path='/jgieojoergj0replj-vocabulary' element={<AdminVocabulary/>}/>
+          <Route path='/jgieojoergj0replj-ai' element={<AdminAI/>}/>
+          <Route path='/jgieojoergj0replj-test' element={<AdminTest/>}/>
         </Route>
         <Route path='*' element={<PageNotFound/>} />
       </Routes>

@@ -1,12 +1,9 @@
 import { BsBoxArrowRight } from "react-icons/bs"
 import s from "./style.module.css"
 import { useDispatch } from "react-redux";
-import { setNotConnect } from "../../../../store/admin-slice";
-
 export function Logout() {
-    const dispatch = useDispatch()
     function logoutHandler() {
-        dispatch(setNotConnect());
+        localStorage.removeItem('admin-token')
         window.location.reload(false);
     }
 

@@ -33,13 +33,13 @@ export function NavASmall() {
     }, []);
 
     function logoutHandler() {
-        dispatch(setNotConnect());
-        //window.location.reload(false);
-      }
+        localStorage.removeItem('admin-token')
+        window.location.reload(false);
+    }
 
     return(
         <nav className={s.nav}>
-            <NavLink to="/"><img src={logo} alt="Léa English" className={s.logo} /></NavLink>
+            <NavLink to="/jgieojoergj0replj"><img src={logo} alt="Léa English" className={s.logo} /></NavLink>
 
             <AiOutlineMenu  
                 className={s.menuIcon} 
@@ -63,46 +63,24 @@ export function NavASmall() {
                         <ul className={s.ul}>
                             <li className={s.li}>
                                 <NavLink 
-                                    to="/vocabulary" 
+                                    to="/jgieojoergj0replj-vocabulary" 
                                     className={s.link}
-                                    isActive={() => location.pathname === "/vocabulary"}
-                                    style={{ color: location.pathname === "/vocabulary" ? "#F27066" : "#28356B" }}
+                                    isActive={() => location.pathname === "/jgieojoergj0replj-vocabulary"}
+                                    style={{ color: location.pathname === "/jgieojoergj0replj-vocabulary" ? "#F27066" : "#28356B" }}
                                 >
                                     <BsCardText 
                                         className={s.logo}
                                     /> 
                                     Vocabulaire
                                 </NavLink>
-                            
-                                <ul>
-                                <li className={s.li}>
-                                    <NavLink 
-                                        to="/vocabulary" 
-                                        className={s.link}
-                                        isActive={() => location.pathname === "/vocabulary"}
-                                        style={{ color: location.pathname === "/vocabulary" ? "#F27066" : "#28356B" }}
-                                    >
-                                        Apprendre
-                                    </NavLink>
-                                </li>
-                                <li className={s.li}>
-                                    <NavLink 
-                                        to="/revise" 
-                                        className={s.link}
-                                        isActive={() => location.pathname === "/revise"}
-                                        style={{ color: location.pathname === "/revise" ? "#F27066" : "#28356B" }}
-                                    >
-                                        Reviser
-                                    </NavLink>
-                                </li>
-                                </ul>
+                        
                             </li>
                             <li className={s.li}>
                                 <NavLink 
-                                    to="/admin-podcasts" 
+                                    to="/jgieojoergj0replj-podcasts" 
                                     className={s.link}
-                                    isActive={() => location.pathname === "/admin-podcasts"}
-                                    style={{ color: location.pathname === "/admin-podcasts" ? "#F27066" : "#28356B" }}
+                                    isActive={() => location.pathname === "/jgieojoergj0replj-podcasts"}
+                                    style={{ color: location.pathname === "/jgieojoergj0replj-podcasts" ? "#F27066" : "#28356B" }}
                                 >
                                     <MdHearing 
                                         className={s.logo}
@@ -112,10 +90,10 @@ export function NavASmall() {
                             </li>
                             <li className={s.li}>
                                 <NavLink 
-                                    to="/ai" 
+                                    to="/jgieojoergj0replj-ai" 
                                     className={s.link}
-                                    isActive={() => location.pathname === "/ai"}
-                                    style={{ color: location.pathname === "/ai" ? "#F27066" : "#28356B" }}
+                                    isActive={() => location.pathname === "/jgieojoergj0replj-ai"}
+                                    style={{ color: location.pathname === "/jgieojoergj0replj-ai" ? "#F27066" : "#28356B" }}
                                 >
                                     <GoCommentDiscussion 
                                         className={s.logo}
@@ -125,10 +103,10 @@ export function NavASmall() {
                             </li>
                             <li className={s.li}>
                                 <NavLink 
-                                    to="/test" 
+                                    to="/jgieojoergj0replj-test" 
                                     className={s.link}
-                                    isActive={() => location.pathname === "/test"}
-                                    style={{ color: location.pathname === "/test" ? "#F27066" : "#9BB5D8" }}
+                                    isActive={() => location.pathname === "/jgieojoergj0replj-test"}
+                                    style={{ color: location.pathname === "/jgieojoergj0replj-test" ? "#F27066" : "#9BB5D8" }}
                                 >
                                     <MdOutlineSchool 
                                         className={s.logo}
@@ -136,26 +114,14 @@ export function NavASmall() {
                                     Test
                                 </NavLink>
                             </li>
+                            
                             <li className={s.li}>
                                 <NavLink 
-                                    to="/profile" 
-                                    className={s.link}
-                                    isActive={() => location.pathname === "/profile"}
-                                    style={{ color: location.pathname === "/profile" ? "#F27066" : "#9BB5D8" }}
-                                >
-                                    <BsPerson
-                                        className={s.logo}
-                                    /> 
-                                    Mon espace
-                                </NavLink>
-                            </li>
-                            <li className={s.li}>
-                                <NavLink 
-                                    to="/admin-login" 
+                                    to="/jgieojoergj0replj" 
                                     onClick={logoutHandler}
                                     className={s.link}
-                                    isActive={() => location.pathname === "/admin-login"}
-                                    style={{ color: location.pathname === "/admin-login" ? "#F27066" : "#9BB5D8" }}
+                                    isActive={() => location.pathname === "/jgieojoergj0replj"}
+                                    style={{ color: location.pathname === "/jgieojoergj0replj" ? "#F27066" : "#9BB5D8" }}
                                 >
                                     <MdLogout 
                                         className={s.logo}

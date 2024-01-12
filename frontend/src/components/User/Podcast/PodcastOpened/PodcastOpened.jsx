@@ -23,12 +23,10 @@ function constructDriveAudioLink(fileId) {//on modifie le lien partagé de googl
 }
 
 function PodcastOpened({_id, title, image, link, isLiked, transcription, translation }) {
-  console.log("id",_id)
   const fileId = getDriveFileId(link);
   const imageId = getDriveFileId(image)
   const navigate = useNavigate()
   const {selectedLevel} =useParams()
-  console.log("sel", selectedLevel)
 
   function onClickReturn() {
     if(selectedLevel < 3) {
@@ -48,9 +46,11 @@ function PodcastOpened({_id, title, image, link, isLiked, transcription, transla
       <div className={s.inner}>
         <h2>{title}</h2>
         <div className={s.imgContainer}>
-          <img src={imageId ? constructDriveAudioLink(imageId) :''} className={s.img} alt="" />
+          {/* <img src={imageId ? constructDriveAudioLink(imageId) :''} className={s.img} alt="" /> */}
+          <img src={image} className={s.img} alt="" />
         </div>
-        <AudioPlayer _id={_id} audioSrc={fileId ? constructDriveAudioLink(fileId) : ''} />
+        {/* <AudioPlayer _id={_id} audioSrc={fileId ? constructDriveAudioLink(fileId) : ''} /> */}
+        <AudioPlayer _id={_id} audioSrc={link} />
         <div className='options'>
           <DownloadButton title={title} link={link} transcription={transcription} translation={translation} downloadItems="pdf" btnText="Télécharger le PDF"/>
           <DownloadButton title={title} link={link} transcription={transcription} translation={translation} downloadItems="audio" btnText="Télécharger l'audio"/>

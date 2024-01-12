@@ -1,26 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import AudioPlayer from '../../../components/User/Podcast/AudioPlayer/AudioPlayer'
-import PodcastItem from '../../../components/User/Podcast/PodcastItem/PodcastItem'
-import PodcastList from '../../../components/User/Podcast/PodcastList/PodcastList'
 import PodcastOpened from '../../../components/User/Podcast/PodcastOpened/PodcastOpened'
-import PodcastOptions from '../../../components/User/Podcast/PodcastOptions/PodcastOptions'
 import { PodcastAPI } from '../../../api/podcast-api'
 import { useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
 function Podcast() {
   const [podcast, setPodcast] = useState(null);
   const {_id} = useParams()
+  const token = useSelector((store) => store.USER.token)
+
   
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const selectedPodcast = await PodcastAPI.getById(_id);
+        const selectedPodcast = await PodcastAPI.getById(_id, token);
         setPodcast(selectedPodcast);
       } catch (error) {
         console.error("Error fetching podcasts:", error);
       }
     };
-
     fetchData();
   }, []);
   return (

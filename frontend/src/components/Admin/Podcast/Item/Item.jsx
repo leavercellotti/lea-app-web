@@ -3,10 +3,11 @@ import { Tr, Td } from 'react-super-responsive-table';
 import s from "./style.module.css"
 import { PodcastAPI } from '../../../../api/podcast-api';
 import AdminPodcastModifyItem from '../ModifyItem/ModifyItem';
+import { useSelector } from 'react-redux';
 
 function Item({ podcast, podcastList, setPodcastList }) {
   const { _id, link, title, transcription, translation, image, level } = podcast;
-
+  const adminToken = useSelector(store => store.ADMIN.token)
   const [showOverlay, setShowOverlay] = useState(false)
   const [modifyItem, setmodifyItem] = useState('')
 
@@ -20,7 +21,7 @@ function Item({ podcast, podcastList, setPodcastList }) {
   function onDeleteHandler() {
     const confirmed = window.confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')
     if(confirmed){
-      PodcastAPI.delete(_id)
+      PodcastAPI.delete(_id, adminToken)
       const newFoodList = podcastList.filter(podcastItem => podcastItem !== podcast)
       setPodcastList(newFoodList)
     }
