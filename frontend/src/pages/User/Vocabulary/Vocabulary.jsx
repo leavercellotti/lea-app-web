@@ -7,22 +7,27 @@ import Sentences from '../../../components/User/Vocabulary/Sentences/Sentences'
 import { useSelector } from 'react-redux'
 import { CardAPI } from '../../../api/card-api'
 import CardViewer from '../../../components/User/Vocabulary/CardViewer/CardViewer'
+import { useNavigate } from 'react-router-dom'
 
 function Vocabulary() {
   const [cardArray, setCardArray] = useState()
   const [revise, setRevise] = useState(false)
   const token = useSelector((store) => store.USER.token)
-  const level ="A1"
   const userId = useSelector(store => store.USER._id)
+  const level = useSelector(store => store.USER.level)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const getNewCards = async () => {
-      try {
-        const selectedCard = await CardAPI.getRandom(level, token, userId);
-        console.log("sele", selectedCard)
-        setCardArray(selectedCard);
-      } catch (error) {
-        console.error("Error fetching podcasts:", error);
+      if(level && level !== ""){
+        try {
+          const selectedCard = await CardAPI.getRandom(level, token, userId);
+          console.log("sele", selectedCard)
+          setCardArray(selectedCard);
+        } catch (error) {
+          console.error("Error fetching new cards:", error);
+          navigate('/login')
+        }
       }
     };
     const getRevisedCards = async () => {
@@ -46,6 +51,7 @@ function Vocabulary() {
           ...selectedCard2,...selectedCard4, ...selectedCard5,...selectedCard6]);
       } catch (error) {
         console.error("Error fetching podcasts:", error);
+        navigate('/login')
       }
     };
     if(revise) {
@@ -54,16 +60,20 @@ function Vocabulary() {
     else {
       getNewCards()
     }
-  }, [revise]);
+  }, [revise, level]);
+
   return (
     <div>
       <h1>
         Vocabulaire
       </h1>
       <div className='container'>
-        {/* <Level/>
-        <NumberWords/>  */}
-        <CardViewer cardArray={cardArray} setRevise={setRevise} revise={revise}/>
+        {level && level !== ""?
+        (<CardViewer cardArray={cardArray} setRevise={setRevise} revise={revise}/>)
+        :
+        (<Level/>)
+        }
+        {/* <CardViewer cardArray={cardArray} setRevise={setRevise} revise={revise}/> */}
         {/* <Card text="Apple" showIcon={true} sentence1="I like to eat apples for a healthy snack." />
         <Sentences sentence1="I like to eat apples for a healthy snack." sentence2="I found a shiny red apple in the grocery store."/>
         <DoYouKnow/> */}

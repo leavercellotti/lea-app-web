@@ -5,11 +5,13 @@ import s from "./style.module.css";  // Importe le module de style
 import DoYouKnow from '../DoYouKnow/DoYouKnow';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowCircleDown } from "react-icons/fa";
+import WhatToDo from '../WhatToDo/WhatToDo';
 
 const CardViewer = ({ cardArray, setRevise, revise }) => {
   const [recto, setRecto] = useState(true);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
+  const [end, setEnd] = useState(false)
   const navigate = useNavigate()
 
   const handleNextCard = () => {
@@ -21,7 +23,13 @@ const CardViewer = ({ cardArray, setRevise, revise }) => {
       if(currentCardIndex === cardArray.length - 1){
         console.log("revise true")
         console.log(cardArray)
-        setRevise(true)
+        if(revise) {
+          setEnd(true)
+          setRevise(false)
+        }
+        else {
+          setRevise(true)
+        }
         setCurrentCardIndex(0)
       }
       setIsVisible(true);
@@ -42,6 +50,12 @@ const CardViewer = ({ cardArray, setRevise, revise }) => {
       behavior: 'smooth',
     });
   };
+
+  if(end || cardArray?.length===0) {
+    return(
+      <WhatToDo/>
+    )
+  }
   return (
     <div className={s.container}>
       {cardArray && cardArray.length > 0 && (
@@ -72,9 +86,14 @@ const CardViewer = ({ cardArray, setRevise, revise }) => {
                 <>
                   <Sentences sentenceArray={cardArray[currentCardIndex].sentenceArray} />
                   {revise?
-                    (<button className='btn' onClick={handleNextCard}>Suivant</button>)
+                    (<button className='btn' onClick={handleNextCard}>
+                      Suivant
+                      </button>)
                     :
-                    (<DoYouKnow cardId={cardArray[currentCardIndex]._id} handleNextCard={handleNextCard} />)
+                    (<DoYouKnow 
+                      cardId={cardArray[currentCardIndex]._id} 
+                      handleNextCard={handleNextCard} />
+                    )
                   }
                 </>
               )}

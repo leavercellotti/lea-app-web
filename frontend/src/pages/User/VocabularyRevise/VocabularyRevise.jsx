@@ -3,12 +3,14 @@ import ReviseBox from '../../../components/User/Vocabulary/ReviseBox/ReviseBox'
 import { FaBrain } from "react-icons/fa6";
 import { CardAPI } from '../../../api/card-api';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function VocabularyRevise() {
   // getViewedCards
   const [cardArray, setCardArray] = useState()
   const token = useSelector((store) => store.USER.token)
   const userId = useSelector(store => store.USER._id)
+  const navigate = useNavigate()
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -17,6 +19,7 @@ function VocabularyRevise() {
         setCardArray(allViewedCard);
       } catch (error) {
         console.error("Error fetching podcasts:", error);
+        navigate('/login')
       }
     };
     fetchData();

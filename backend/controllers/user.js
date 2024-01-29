@@ -42,7 +42,8 @@ exports.login = (req, res, next) => {
                     ),
                     podcastsLikedArray:user.podcastsLikedArray,
                     podcastsListenedArray:user.podcastsListenedArray,
-                    nbLearnedCards:user.nbLearnedCards
+                    nbLearnedCards:user.nbLearnedCards,
+                    level: user.level
                 });
             })
             .catch(error => res.status(500).json({ error }));
@@ -178,6 +179,29 @@ cron.schedule('14 15 * * *', async () => {//'*/20 * * * *' - toutes les 20min, '
   }
 });
 
+//LEVEL
+
+exports.updateLevel = async (req, res) => {
+  const userId = req.body.userId
+  const level = req.body.level
+
+  try {
+    const user = await Object.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found.' });
+    }
+    // Update the liked podcasts array
+    user.level=level; // Assuming you have a podcastId in the request params
+    // Save the updated user object
+    await user.save();
+    res.status(200).json({ message: 'User level updated successfully.' });
+  } catch (error) {
+    console.error('Error updating listened podcasts:', error);
+    res.status(500).json({ error });
+  }
+};
+
+// EXTRA FUNCTIONS
 
 exports.getAll = (req, res) => {
     Object.find()

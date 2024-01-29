@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import PodcastOpened from '../../../components/User/Podcast/PodcastOpened/PodcastOpened'
 import { PodcastAPI } from '../../../api/podcast-api'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 
 function Podcast() {
   const [podcast, setPodcast] = useState(null);
   const {_id} = useParams()
   const token = useSelector((store) => store.USER.token)
+  const navigate = useNavigate()
 
   
   useEffect(() => {
@@ -17,6 +18,7 @@ function Podcast() {
         setPodcast(selectedPodcast);
       } catch (error) {
         console.error("Error fetching podcasts:", error);
+        navigate('/login')
       }
     };
     fetchData();

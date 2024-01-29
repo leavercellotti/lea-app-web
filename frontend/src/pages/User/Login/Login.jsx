@@ -46,8 +46,10 @@ function Login({setToken}) {
             token : response.data.token,
             podcastsLikedArray : response.data.podcastsLikedArray,
             podcastsListenedArray : response.data.podcastsListenedArray,
-            nbLearnedCards: response.data.nbLearnedCards
+            nbLearnedCards: response.data.nbLearnedCards,
+            level: response.data.level
         };
+        console.log(response.data.level)
         localStorage.setItem('user-info', JSON.stringify(dataUserToStore));
         //setTimeout(logoutHandler,60*60*1000) déconnection après 1h
         navigate("/")

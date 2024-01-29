@@ -64,4 +64,14 @@ export class UserAPI{
           throw error;
         }
     }
+    static async updateLevel(userId, level) {
+        try {
+            console.log("api", userId,level)
+          const response = await axios.put(`${BASE_URL}/update-level`, { userId, level });
+          return response.data;
+        } catch (error) {
+          console.error('Error updating level:', error);
+          throw error;
+        }
+    }
 }

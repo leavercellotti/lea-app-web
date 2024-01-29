@@ -7,6 +7,7 @@ const initialState = {
   podcastsListenedArray: [],
   podcastsLikedArray: [],
   nbLearnedCards :0,
+  level:''
 };
 
 export const userSlice = createSlice({
@@ -20,6 +21,11 @@ export const userSlice = createSlice({
             currentState.podcastsLikedArray = action.payload.podcastsLikedArray
             currentState.podcastsListenedArray = action.payload.podcastsListenedArray
             currentState.nbLearnedCards = action.payload.nbLearnedCards
+            console.log(action.payload.level, currentState.level)
+            if(action.payload.level) {
+                currentState.level = action.payload.level
+            }
+            console.log(action.payload.level, currentState.level)
         },
         setEmail: (currentState, action) => {
             currentState.email = action.payload.email
@@ -54,6 +60,11 @@ export const userSlice = createSlice({
             currentState.nbLearnedCards = nbLearnedCardsNew
             localStorage.setItem('user-info', JSON.stringify(currentState))
         }, 
+        modifyLevel: (currentState, action) => {
+            console.log('y', action)
+            currentState.level = action.payload;
+            localStorage.setItem('user-info', JSON.stringify(currentState))
+        },
     }
 })
 
@@ -62,6 +73,6 @@ export const {
     setPodcastsLikedArray, addPodcastLikedArray, 
     removePodcastLikedArray, setPodcastsListenedArray,
     addPodcastListenedArray, removePodcastListenedArray,
-    addLearnedCard
+    addLearnedCard, modifyLevel
 } = userSlice.actions
 export const userReducer = userSlice.reducer

@@ -32,6 +32,7 @@ function Podcasts() {
         setPodcastLikedAndListenedList(likedAndListenedList)
       } catch (error) {
         console.error("Error fetching podcasts:", error);
+        navigate('/login')
       }
     };
 
@@ -48,6 +49,7 @@ function Podcasts() {
         setPodcastLikedAndListenedList(likedAndListenedList)
       } catch (error) {
         console.error("Error fetching podcasts:", error);
+        navigate('/login')
       }
     };
     level ? getPodcastsByLevel() : getAllPodcasts()
