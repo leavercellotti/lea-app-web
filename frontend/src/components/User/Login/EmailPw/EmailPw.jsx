@@ -19,7 +19,6 @@ function EmailPw({login, connectHandler, addHandler}) {
             email: enteredEmail,
             password: enteredPassword
         }
-        console.log("**",user)
         if(login) {
             connectHandler(user)
         }
@@ -43,7 +42,8 @@ function EmailPw({login, connectHandler, addHandler}) {
   return (
     <div className={s.innerContainer}>
             <div className={s.inner}>
-                <p>
+                <div  className={s.pwContainer}>
+                    
                     <label className={s.label} htmlFor="email">
                         <b>Adresse email: </b>
                     </label>
@@ -53,20 +53,23 @@ function EmailPw({login, connectHandler, addHandler}) {
                         name="email"
                         ref={emailInputRef}
                         autoFocus
+                        style={{width:'175px'}}
                     />
-                </p>
+                </div>
                 <div className={s.pwContainer}>
                     <label className={s.label} htmlFor="password">
                         <b>Mot de passe: </b>
                     </label>
+                    <div className={s.inputEye}>
                     <input 
                         type={isPwShown ? 'text' : 'password'}
                         id="password"
                         name="password"
                         ref={passwordInputRef}
                         onChange={(e) => validate(e.target.value)}
+                        className={s.input}
                     />
-                    <div 
+                    <span 
                         className={s.eyeContainer}
                         onClick={togglePwShown}
                     >
@@ -74,6 +77,7 @@ function EmailPw({login, connectHandler, addHandler}) {
                             (<FaEye/>):
                             (<FaEyeSlash/>)
                         }
+                    </span>
                     </div>
                 </div>
                 <div className={s.btnValidateContainer}>

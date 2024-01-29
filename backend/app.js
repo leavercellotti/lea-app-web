@@ -6,6 +6,7 @@ const testRoutes = require('./routes/test')
 const podcastRoutes = require('./routes/podcast')
 const adminRoutes = require('./routes/admin')
 const userRoutes = require('./routes/user')
+const cardRoutes = require('./routes/card')
 
 require('dotenv').config();
 
@@ -34,5 +35,6 @@ app.use('/api/test', testRoutes)
 app.use('/api/podcast', podcastRoutes)
 app.use('/api/admin', adminRoutes)
 app.use('/api/user', userRoutes)
+app.use('/api/card', cardRoutes)
 
 module.exports = app

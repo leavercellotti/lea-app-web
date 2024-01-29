@@ -1,19 +1,19 @@
 import React from 'react'
 import s from "./style.module.css"
-function Sentences({sentence1, sentence2, sentence3}) {
+function Sentences({sentenceArray}) {
   return (
     <div className={s.container}>
-        {sentence1 && 
+        {sentenceArray && sentenceArray[0] && 
         <p>
-            {sentence1}
+            {sentenceArray[0]}
         </p>}
-        {sentence2 && 
+        {sentenceArray && sentenceArray[1] && 
         <p>
-            {sentence2}
+            {sentenceArray[1]}
         </p>}
-        {sentence3 && 
+        {sentenceArray && sentenceArray[2] && 
         <p>
-            {sentence3}
+            {sentenceArray[2]}
         </p>}
     </div>
   )

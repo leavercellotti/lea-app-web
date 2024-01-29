@@ -13,8 +13,9 @@ const userSchema = mongoose.Schema({
         type:String,
         maxlength:100,
     },
-    level:{
-        type:Number,
+    level: {
+        type: String,
+        enum: ["A1", "A2", "B1", "B2", "C"],
     },
     podcastsListenedArray: [
         {
@@ -26,6 +27,25 @@ const userSchema = mongoose.Schema({
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Podcast',
+        },
+    ],
+    nbLearnedCards: {
+        type:Number,
+        default: 0,
+    },
+    viewedCards: [
+        {
+            cardId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Card',
+            },
+            timestamp: {
+                type: Date,
+                default: Date.now,
+            },
+            knowledge: {
+                type: Boolean,
+            }
         },
     ],
 },

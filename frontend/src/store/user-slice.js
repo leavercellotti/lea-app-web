@@ -5,7 +5,8 @@ const initialState = {
   email:'',
   _id:'',
   podcastsListenedArray: [],
-  podcastsLikedArray: []
+  podcastsLikedArray: [],
+  nbLearnedCards :0,
 };
 
 export const userSlice = createSlice({
@@ -18,6 +19,7 @@ export const userSlice = createSlice({
             currentState._id = action.payload._id
             currentState.podcastsLikedArray = action.payload.podcastsLikedArray
             currentState.podcastsListenedArray = action.payload.podcastsListenedArray
+            currentState.nbLearnedCards = action.payload.nbLearnedCards
         },
         setEmail: (currentState, action) => {
             currentState.email = action.payload.email
@@ -47,6 +49,11 @@ export const userSlice = createSlice({
             currentState.podcastsListenedArray =currentState.podcastsListenedArray.filter(id => id !== action.payload);
             localStorage.setItem('user-info', JSON.stringify(currentState))
         },
+        addLearnedCard: (currentState, action) => {
+            const nbLearnedCardsNew = currentState.nbLearnedCards+1;
+            currentState.nbLearnedCards = nbLearnedCardsNew
+            localStorage.setItem('user-info', JSON.stringify(currentState))
+        }, 
     }
 })
 
@@ -54,6 +61,7 @@ export const {
     setUser, setEmail, setUserId, 
     setPodcastsLikedArray, addPodcastLikedArray, 
     removePodcastLikedArray, setPodcastsListenedArray,
-    addPodcastListenedArray, removePodcastListenedArray
+    addPodcastListenedArray, removePodcastListenedArray,
+    addLearnedCard
 } = userSlice.actions
 export const userReducer = userSlice.reducer

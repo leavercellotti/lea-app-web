@@ -1,0 +1,47 @@
+.container {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+.visibleCard {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    visibility: visible;
+    transition: visibility 0.5s;
+  }
+  
+.hiddenCard {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    visibility: hidden;
+    transition: visibility 0.5s;
+}
+
+.revise {
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.buttons {
+    width: 220px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.arrowIcon {
+    color:#AF2B26;
+    cursor: pointer;
+}
+
+.arrowIcon:hover {
+    color:#93221e;
+}

@@ -2,20 +2,32 @@
 .inner {
     display: flex;
     justify-content: space-evenly;
+    width: 100%;
 }
-
+.soundIconContainer {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 .soundIcon {
     cursor: pointer;
 }
 
 .red {
     color: red;
-}
-
-.orange {
-    color:#E18813;
+    text-align: left;
+    margin-bottom: 10px;
+    display: flex;
 }
 
 .green {
     color: green;
+    text-align: left;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.word {
+    width: 80%;
 }

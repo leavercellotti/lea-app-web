@@ -9,9 +9,10 @@ import { setUser } from './store/user-slice';
 import AdminLogin from './pages/Admin/AdminLogin/AdminLogin';
 import { setTokenAdmin } from "./store/admin-slice"
 
+const ADMIN_PATH = process.env.REACT_APP_ADMIN_PATH;
+const ADMIN_PODCASTS_PATH = process.env.REACT_APP_ADMIN_PODCASTS_PATH;
 function App() {
   const currentPath = window.location.pathname;
-  console.log("Chemin de l'URL :", currentPath);
 
   const dispatch = useDispatch()
   // const adminToken2 = useSelector(store => store.ADMIN.token)
@@ -22,7 +23,6 @@ function App() {
     const data = localStorage.getItem('token')
     const parseData = JSON.parse(data)
     if(parseData) {
-      console.log("parse" ,parseData)
       setToken(parseData)
     }
     const userData = localStorage.getItem('user-info')
@@ -33,22 +33,18 @@ function App() {
     const adminData = localStorage.getItem('admin-token')
     const adminParseData = JSON.parse(adminData)
     if(adminParseData) {
-      console.log("parse" ,adminParseData)
       dispatch(setTokenAdmin({token : adminParseData}))
       setAdminToken(adminParseData)
     }
 
   }, [])
 
-  if((currentPath === "/jgieojoergj0replj" || currentPath ==="/jgieojoergj0replj-podcasts") && !adminToken) {
-    console.log("here")
+  if((currentPath === ADMIN_PATH || currentPath ===ADMIN_PODCASTS_PATH) && !adminToken) {
     return <AdminLogin setAdminToken={setAdminToken}/>
   }
-  else if (currentPath !== "/jgieojoergj0replj" && !token && !adminToken) {
-    console.log("else if")
+  else if (currentPath !== ADMIN_PATH && !token && !adminToken) {
       return <Login setToken={setToken} />;
     }
-  console.log("token", token, "amdin",adminToken)
   return (
     <div className="App">
       {adminToken &&

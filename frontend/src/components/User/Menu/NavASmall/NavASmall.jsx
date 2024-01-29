@@ -63,36 +63,13 @@ export function NavASmall() {
                                     to="/vocabulary" 
                                     className={s.link}
                                     isActive={() => location.pathname === "/vocabulary"}
-                                    style={{ color: location.pathname === "/vocabulary" ? "#F27066" : "#28356B" }}
+                                    style={{ color: location.pathname === "/vocabulary" || location.pathname === "/revise" ? "#F27066" : "#28356B" }}
                                 >
                                     <BsCardText 
                                         className={s.logo}
                                     /> 
                                     Vocabulaire
                                 </NavLink>
-                            
-                                <ul>
-                                <li className={s.li}>
-                                    <NavLink 
-                                        to="/vocabulary" 
-                                        className={s.link}
-                                        isActive={() => location.pathname === "/vocabulary"}
-                                        style={{ color: location.pathname === "/vocabulary" ? "#F27066" : "#28356B" }}
-                                    >
-                                        Apprendre
-                                    </NavLink>
-                                </li>
-                                <li className={s.li}>
-                                    <NavLink 
-                                        to="/revise" 
-                                        className={s.link}
-                                        isActive={() => location.pathname === "/revise"}
-                                        style={{ color: location.pathname === "/revise" ? "#F27066" : "#28356B" }}
-                                    >
-                                        Reviser
-                                    </NavLink>
-                                </li>
-                                </ul>
                             </li>
                             <li className={s.li}>
                                 <NavLink 

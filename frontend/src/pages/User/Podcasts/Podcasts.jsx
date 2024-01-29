@@ -23,7 +23,6 @@ function Podcasts() {
       try {
         const allPodcasts = await PodcastAPI.getAll(token);
         setPodcastList(allPodcasts);
-        console.log('all', allPodcastList)
         setAllPodcastList(allPodcasts)
         const likedList = allPodcasts.filter(podcast => podcastsLikedArray.includes(podcast._id));
         setPodcastLikedList(likedList)

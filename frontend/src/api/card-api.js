@@ -1,7 +1,31 @@
 import axios from "axios"
-const BASE_URL ="http://localhost:3000/api/podcast"  //"https://lea-english.onrender.com/api/podcast" 
+const BASE_URL ="http://localhost:3000/api/card"  //"https://lea-english.onrender.com/api/card" 
 
-export class PodcastAPI {
+export class CardAPI {
+    static async getRandom(level, token, userId) {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        const response = await axios.get(`${BASE_URL}/random/${level}/${userId}`);
+        return (
+            response.data
+        )
+    }
+    static async getViewedCards(nbDays, token, userId, knowledge) {
+        console.log("api", nbDays, token, userId)
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        const response = await axios.get(`${BASE_URL}/viewedCards/${nbDays}/${userId}/${knowledge}`);
+        return (
+            response.data
+        )
+    }
+
+    static async getAllViewedCards(token, userId) {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        const response = await axios.get(`${BASE_URL}/viewedCards/${userId}`);
+        return (
+            response.data
+        )
+    }
+    
     static async getAll(token) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         const response = await axios.get(`${BASE_URL}/all`);

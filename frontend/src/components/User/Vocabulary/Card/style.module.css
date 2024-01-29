@@ -4,23 +4,40 @@
     position: relative;
     background-color: white;
     border-radius: 10px;
-    width: 240px;
-    height: 350px;
+    width: 220px;
+    height: 320px;
+    /* height: 150px; */
     margin: 20px 0;
+    padding: 10px 20px;
+    transition: transform 0.5s; /* Ajoutez une transition pour une animation fluide */
     }
+.recto {
+    transform: perspective(1000px) rotateY(0deg); /* Position initiale pour le recto */
+}
 
+.verso {
+    transform: perspective(1000px) rotateY(180deg); /* Rotation à 180 degrés pour le verso */
+}
+
+.verso .text {
+    transform: rotateY(180deg); /* Rotation inverse pour le texte du verso */
+    /* Ajoutez d'autres styles spécifiques au verso si nécessaire */
+  }
 .centeredContent {
     text-align: center;
-    height: 250px;
+    /* height: 250px; */
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center; /* Centre horizontalement */
     align-items: center; /* Centre verticalement */
-
 }
 
 .icon {
     width: 45px;
+    position:absolute;
+    left: 0;
+    top: 0;
 }
 
 .soundIcon {

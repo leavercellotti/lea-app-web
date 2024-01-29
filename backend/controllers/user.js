@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const Object = require('../models/User')
 const jwt = require('jsonwebtoken');
 const JWT_SECRET_USER = process.env.JWT_SECRET_USER;
+const cron = require('node-cron');
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
       .then(hash => {
@@ -40,7 +41,8 @@ exports.login = (req, res, next) => {
                         { expiresIn: '24h' },
                     ),
                     podcastsLikedArray:user.podcastsLikedArray,
-                    podcastsListenedArray:user.podcastsListenedArray
+                    podcastsListenedArray:user.podcastsListenedArray,
+                    nbLearnedCards:user.nbLearnedCards
                 });
             })
             .catch(error => res.status(500).json({ error }));
@@ -69,7 +71,8 @@ exports.updateLikedPodcasts = async (req, res) => {
     // Update the liked podcasts array
     if (liked) {
       user.podcastsLikedArray.push(podcastId); // Assuming you have a podcastId in the request params
-    } else {
+    } 
+    else {
       // Remove the podcast from the liked array
       const index = user.podcastsLikedArray.indexOf(podcastId);
       if (index !== -1) {
@@ -81,11 +84,13 @@ exports.updateLikedPodcasts = async (req, res) => {
     await user.save();
 
     res.status(200).json({ message: 'User liked podcasts updated successfully.' });
-  } catch (error) {
+  } 
+  catch (error) {
     console.error('Error updating liked podcasts:', error);
     res.status(500).json({ error });
   }
 };
+
 
 exports.updateListenedPodcasts = async (req, res) => {
   const userId = req.body.userId
@@ -108,6 +113,71 @@ exports.updateListenedPodcasts = async (req, res) => {
     res.status(500).json({ error });
   }
 };
+
+//VOCABULARY
+exports.addCard = async (req, res) => {
+  const userId = req.body.userId
+  const cardId = req.body.cardId
+  const knowledge = req.body.knowledge
+
+  try {
+    const user = await Object.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found.' });
+    }
+
+    // Check if the cardId already exists in viewedCards
+    const cardExists = user.viewedCards.some((viewedCard) => viewedCard.cardId.equals(cardId));
+    // Update the liked podcasts array
+    if (!cardExists) {
+      user.viewedCards.push({cardId:cardId, knowledge: knowledge}); 
+      user.nbLearnedCards++;
+    } 
+
+    // Save the updated user object
+    await user.save();
+
+    res.status(200).json({ message: 'User liked podcasts updated successfully.' });
+  } 
+  catch (error) {
+    console.error('Error updating liked podcasts:', error);
+    res.status(500).json({ error });
+  }
+};
+
+//0 3 * * * A 3h du matin tous les jours '0 3 * * *'
+cron.schedule('14 15 * * *', async () => {//'*/20 * * * *' - toutes les 20min, '* * * * *' - toutes les min, '0 0 * * *' - every day at midnight
+  try {
+    // const twentyMinutesAgo = new Date();
+    // twentyMinutesAgo.setMinutes(twentyMinutesAgo.getMinutes() - 20);
+    const eightDaysAgo = new Date();
+    eightDaysAgo.setDate(eightDaysAgo.getDate() - 8);
+    // const oneDayAgo = new Date();
+    // oneDayAgo.setDate(oneDayAgo.getDate() - 1);
+
+    console.log('Checking for records older than:', eightDaysAgo);
+
+    // Find records older than 20 minutes
+    const usersWithRecordsToDelete = await Object.find({
+      'viewedCards.timestamp': { $lt: eightDaysAgo },
+    });
+
+    console.log('Users with records to delete:', usersWithRecordsToDelete);
+
+    // Iterate over users and remove viewedCards older than 20 minutes
+    for (const user of usersWithRecordsToDelete) {
+      user.viewedCards = user.viewedCards.filter(
+        (viewedCard) => viewedCard.timestamp >= eightDaysAgo
+      );
+      await user.save();
+    }
+
+    console.log('Records older than 20 minutes removed successfully.');
+  } catch (error) {
+    console.error('Error in cron job:', error);
+  }
+});
+
 
 exports.getAll = (req, res) => {
     Object.find()
@@ -137,6 +207,7 @@ exports.create = (req, res) => {
       .then((savedObject) => res.status(201).json(savedObject._id))
       .catch((error) => res.status(400).json({ error }));
   };
+
 
   exports.update = (req, res) => {
     const { _id } = req.params;

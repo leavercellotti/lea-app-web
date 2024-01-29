@@ -3,10 +3,13 @@ import s from "./style.module.css"
 import podcastImage from "../../../assets/podcast.png"
 import vocabularyImage from "../../../assets/vocabulary.png"
 import { useNavigate } from 'react-router-dom';
+import {useSelector} from "react-redux"
 
 import chatImage from "../../../assets/chat.png"
 function Home() {
     const navigate = useNavigate()
+    const podcastsListenedArray = useSelector(store => store.USER.podcastsListenedArray)
+    const nbLearnedCards = useSelector(store => store.USER.nbLearnedCards)
   return (
     <div>
         <div className={s.top}>
@@ -22,13 +25,13 @@ function Home() {
                     </h2>
                     <p>
                         <span className={s.pink}>
-                            125 
+                            {nbLearnedCards} 
                         </span>
                         mots appris
                     </p>
                     <p>
                         <span className={s.pink}>
-                            14 
+                            {podcastsListenedArray ? (podcastsListenedArray.length) : 0} 
                         </span>
                         podcasts écoutés
                     </p>

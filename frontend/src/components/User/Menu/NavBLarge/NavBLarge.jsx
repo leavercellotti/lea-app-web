@@ -40,30 +40,6 @@ export function NavBLarge() {
               <BsCardText/>
             </span>
           </NavLink>
-          {isShown &&
-            <ul className={s.subUl}>
-              <li className={s.subLi}>
-                <NavLink
-                  to="/vocabulary"
-                  className={s.subLink}
-                  isActive={() => location.pathname === "/vocabulary"}
-                  style={{ color: location.pathname === "/vocabulary" ? "#F27066" : "#28356B" }}
-                >
-                  Apprendre
-                </NavLink>
-              </li>
-              <li className={s.subLi}>
-                <NavLink
-                  to="/revise"
-                  className={s.subLink}
-                  isActive={() => location.pathname === "/revise"}
-                  style={{ color: location.pathname === "/revise" ? "#F27066" : "#28356B" }}
-                >
-                  Réviser
-                </NavLink>
-              </li>
-            </ul>
-          }
         </li>
         <li className={s.li}>
           <NavLink
