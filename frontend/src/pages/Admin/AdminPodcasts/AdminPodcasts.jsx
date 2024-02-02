@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import AdminPodcastList from '../../../components/Admin/Podcast/List/List'
 import { PodcastAPI } from '../../../api/podcast-api';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function AdminPodcasts() {
   const [podcastList, setPodcastList] = useState([])
   const adminToken = useSelector((store) => store.ADMIN.token)
+  const navigate = useNavigate()
   
   useEffect(() => {
     const getAllPodcasts = async () => {
@@ -14,6 +16,7 @@ function AdminPodcasts() {
         setPodcastList(allPodcasts);
       } catch (error) {
         console.error("Error fetching podcasts:", error);
+        navigate('/jgieojoergj0replj')
       }
     };
 

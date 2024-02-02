@@ -1,9 +1,8 @@
 import axios from "axios"
-const BASE_URL ="http://localhost:3000/api/card"  //"https://lea-english.onrender.com/api/card" 
+const BASE_URL ="http://localhost:3000/api/card"   //"https://lea-english.onrender.com/api/card"
 
 export class CardAPI {
     static async getRandom(level, token, userId) {
-        console.log("get random", level,token,userId)
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         const response = await axios.get(`${BASE_URL}/random/${level}/${userId}`);
         return (
@@ -11,7 +10,6 @@ export class CardAPI {
         )
     }
     static async getViewedCards(nbDays, token, userId, knowledge) {
-        console.log("api", nbDays, token, userId)
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         const response = await axios.get(`${BASE_URL}/viewedCards/${nbDays}/${userId}/${knowledge}`);
         return (

@@ -15,7 +15,6 @@ function VocabularyRevise() {
     const fetchData = async () => {
       try {
         const allViewedCard = await CardAPI.getAllViewedCards(token, userId);
-        console.log("sele", allViewedCard)
         setCardArray(allViewedCard);
       } catch (error) {
         console.error("Error fetching podcasts:", error);

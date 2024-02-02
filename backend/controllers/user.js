@@ -147,7 +147,7 @@ exports.addCard = async (req, res) => {
 };
 
 //0 3 * * * A 3h du matin tous les jours '0 3 * * *'
-cron.schedule('14 15 * * *', async () => {//'*/20 * * * *' - toutes les 20min, '* * * * *' - toutes les min, '0 0 * * *' - every day at midnight
+cron.schedule('0 12 * * *', async () => {//'*/20 * * * *' - toutes les 20min, '* * * * *' - toutes les min, '0 0 * * *' - every day at midnight
   try {
     // const twentyMinutesAgo = new Date();
     // twentyMinutesAgo.setMinutes(twentyMinutesAgo.getMinutes() - 20);

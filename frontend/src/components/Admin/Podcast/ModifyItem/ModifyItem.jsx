@@ -214,17 +214,21 @@ function ModifyItem({
             <>
               <label htmlFor="level" className="form-label">
                 <div>
-                    Lien: 
+                    Niveau: 
                 </div>
-                <textarea
-                  //type="text"
-                  className="form-control"
-                  style={{width:"300px", height:"150px", maxWidth:"90%"}}
-                  id="level"
-                  value={newLevel}
-                  onChange={(e) => {setNewLevel(e.target.value)}}
-                  required
-                />
+                <div className={s.textareaContainer}>
+                  <select
+                      className="form-control"
+                      id="level"
+                      value={newLevel}
+                      onChange={(e) => setNewLevel(e.target.value)}
+                      required
+                  >
+                    <option value={1}>1</option>
+                    <option value={2}>2</option>
+                    <option value={3}>3</option>
+                  </select>
+                </div>
               </label>
               <div>
                 <button

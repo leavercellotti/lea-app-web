@@ -19,10 +19,7 @@ const CardViewer = ({ cardArray, setRevise, revise }) => {
     setTimeout(() => {
         setRecto(true);
       setCurrentCardIndex(prevIndex => (prevIndex < cardArray.length - 1 ? prevIndex + 1 : prevIndex));
-      console.log("indec", currentCardIndex, cardArray.length)
       if(currentCardIndex === cardArray.length - 1){
-        console.log("revise true")
-        console.log(cardArray)
         if(revise) {
           setEnd(true)
           setRevise(false)

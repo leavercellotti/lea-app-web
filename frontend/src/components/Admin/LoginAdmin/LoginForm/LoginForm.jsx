@@ -4,6 +4,7 @@ import s from "./style.module.css";
 import { useDispatch } from "react-redux";
 import { setTokenAdmin } from "../../../../store/admin-slice"
 import { AdminAPI } from "../../../../api/admin-api";
+import { useNavigate } from "react-router-dom";
 
 
 export function LoginForm({setAdminToken}) {
@@ -11,6 +12,7 @@ export function LoginForm({setAdminToken}) {
     const emailInputRef = useRef()
     const passwordInputRef = useRef()
     const [passwordShown, setPasswordShown] = useState(false)
+    const navigate = useNavigate()
     
 
     async function connectHandler(data) {
@@ -31,7 +33,7 @@ export function LoginForm({setAdminToken}) {
             const token= response.data.token
             console.log(response, token)
             dispatch(setTokenAdmin({token:token}))
-            
+            navigate('/jgieojoergj0replj-vocabulary')
         }
         else {
             alert("Données incorrectes")

@@ -12,6 +12,7 @@ export function NavALarge() {
   const [isShown, setIsShown] = useState(false);
   const location = useLocation();
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   function setIsSwhownTrue(e) {
     e.stopPropagation();
@@ -24,6 +25,7 @@ export function NavALarge() {
   }
   function logoutHandler() {
     localStorage.removeItem('admin-token')
+    navigate('/jgieojoergj0replj')
     window.location.reload(false);
   }
 
