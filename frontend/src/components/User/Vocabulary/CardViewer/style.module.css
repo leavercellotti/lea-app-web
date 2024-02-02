@@ -6,7 +6,33 @@
     align-items: center;
     align-content: center;
     text-align: center;
+    min-height: 400px;
 }
+
+/* .loaderContainer {
+    height: 400px;
+    position: relative;
+    width: 100%;
+    
+}
+
+.center {
+    top:35%;
+    position: absolute;
+} */
+
+.box {
+    background-color: #F7F7F9;
+  padding: 20px 20px;
+  text-align: center;
+}
+
+/* .container {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  } */
 .visibleCard {
     width: 90%;
     display: flex;

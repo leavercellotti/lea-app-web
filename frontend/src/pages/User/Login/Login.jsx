@@ -41,7 +41,7 @@ function Login({setToken}) {
         // dispatch(setUserId(user_id));
         // dispatch(setPodcastsLikedArray(podcastsLikedArray))
         const dataUserToStore = {
-            email : userData.email,
+            email : response.data.email,
             _id : response.data.userId,
             token : response.data.token,
             podcastsLikedArray : response.data.podcastsLikedArray,
@@ -49,7 +49,7 @@ function Login({setToken}) {
             nbLearnedCards: response.data.nbLearnedCards,
             level: response.data.level
         };
-        console.log(response.data.level)
+        console.log(response.data.email)
         localStorage.setItem('user-info', JSON.stringify(dataUserToStore));
         //setTimeout(logoutHandler,60*60*1000) déconnection après 1h
         navigate("/")

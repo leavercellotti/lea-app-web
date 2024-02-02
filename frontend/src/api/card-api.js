@@ -1,5 +1,5 @@
 import axios from "axios"
-const BASE_URL ="http://localhost:3000/api/card"   //"https://lea-english.onrender.com/api/card"
+const BASE_URL ="https://lea-english.onrender.com/api/card" //"http://localhost:3000/api/card" 
 
 export class CardAPI {
     static async getRandom(level, token, userId) {

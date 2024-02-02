@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { AiOutlineCloseCircle, AiOutlineMenu, AiOutlineHome } from "react-icons/ai"
-import { NavLink, useLocation} from "react-router-dom"
+import { NavLink, useLocation, useNavigate} from "react-router-dom"
 import s from "./style.module.css"
 /*import { useSelector } from "react-redux";*/
 import logo from "../../../../assets/logo.png"
@@ -19,6 +19,7 @@ export function NavASmall() {
     const menuRef = useRef(null);
     const location = useLocation();
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -34,6 +35,7 @@ export function NavASmall() {
 
     function logoutHandler() {
         localStorage.removeItem('admin-token')
+        navigate('/jgieojoergj0replj')
         window.location.reload(false);
     }
 

@@ -6,12 +6,15 @@ import DoYouKnow from '../DoYouKnow/DoYouKnow';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowCircleDown } from "react-icons/fa";
 import WhatToDo from '../WhatToDo/WhatToDo';
+import Loader from '../../Loader/Loader';
 
 const CardViewer = ({ cardArray, setRevise, revise }) => {
   const [recto, setRecto] = useState(true);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
   const [end, setEnd] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
+  const [showRevise, setShowRevise] = useState(false)
   const navigate = useNavigate()
 
   const handleNextCard = () => {
@@ -21,16 +24,22 @@ const CardViewer = ({ cardArray, setRevise, revise }) => {
       setCurrentCardIndex(prevIndex => (prevIndex < cardArray.length - 1 ? prevIndex + 1 : prevIndex));
       if(currentCardIndex === cardArray.length - 1){
         if(revise) {
-          setEnd(true)
           setRevise(false)
+          setEnd(true)
         }
         else {
           setRevise(true)
+          setShowRevise(true)
+          // setIsLoading(true);
+
+          // setTimeout(() => {
+          //   setIsLoading(false);
+          // }, 5500);
         }
         setCurrentCardIndex(0)
-      }
-      setIsVisible(true);
-    }, 1000); // La durée doit correspondre à la durée de transition dans le CSS
+        }
+        setIsVisible(true);
+      }, 500); // La durée doit correspondre à la durée de transition dans le CSS
   };
 
 //   const handlePreviousCard = () => {
@@ -52,6 +61,26 @@ const CardViewer = ({ cardArray, setRevise, revise }) => {
     return(
       <WhatToDo/>
     )
+  }
+  if (isLoading) {
+    return (
+      <div className={s.loaderContainer}>
+        <div className={s.center}>
+          <Loader/> {/* Remplacez par le composant de loader réel */}
+        </div>
+      </div>
+    );
+  }
+  if (showRevise) {
+    return (
+      <div className={s.container}>
+        <div className={s.box}>
+          <p><b>Super !</b> Vous avez appris 5 nouveaux mots.</p>
+          <p>Révisons un peu maintenant.</p>
+          <button onClick={() => setShowRevise(false)} className='btn'>C'est parti</button>
+        </div>
+      </div>
+    );
   }
   return (
     <div className={s.container}>
