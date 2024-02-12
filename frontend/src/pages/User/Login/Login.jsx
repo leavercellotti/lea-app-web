@@ -47,9 +47,11 @@ function Login({setToken}) {
             podcastsLikedArray : response.data.podcastsLikedArray,
             podcastsListenedArray : response.data.podcastsListenedArray,
             nbLearnedCards: response.data.nbLearnedCards,
-            level: response.data.level
+            level: response.data.level,
+            subscription: response.data.subscription,
+            nbDownloadedPodcastsToday: response.data.nbDownloadedPodcastsToday,
         };
-        console.log(response.data.email)
+        console.log(response.data)
         localStorage.setItem('user-info', JSON.stringify(dataUserToStore));
         //setTimeout(logoutHandler,60*60*1000) déconnection après 1h
         navigate("/")

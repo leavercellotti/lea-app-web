@@ -31,6 +31,7 @@ function Vocabulary() {
     };
     const getRevisedCards = async () => {
       try {
+        const selectedCard0 = await CardAPI.getViewedCards(0, token, userId);
         const selectedCard1 = await CardAPI.getViewedCards(1, token, userId);
         const selectedCard3 = await CardAPI.getViewedCards(3, token, userId);
         const selectedCard7 = await CardAPI.getViewedCards(7, token, userId);
@@ -40,7 +41,7 @@ function Vocabulary() {
         const selectedCard6 = await CardAPI.getViewedCards(6, token, userId, false);
         
         setCardArray([...selectedCard1, ...selectedCard3, ...selectedCard7,
-          ...selectedCard2,...selectedCard4, ...selectedCard5,...selectedCard6]);
+          ...selectedCard2,...selectedCard4, ...selectedCard5,...selectedCard6, ...selectedCard0]);
       } catch (error) {
         console.error("Error fetching podcasts:", error);
         navigate('/login')

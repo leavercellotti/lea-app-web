@@ -3,8 +3,8 @@ import icon from '../../../../assets/icon.png';
 import { AiFillSound } from "react-icons/ai";
 import s from "./style.module.css"; // Assurez-vous que le chemin du fichier de styles est correct
 
-function Card({ card, recto }) {
-  const speakWord = () => {
+function Card({ card, recto, toggleRecto }) {
+  const speakWord = (event) => {
     const synth = window.speechSynthesis;
     const utterance = new SpeechSynthesisUtterance(card.wordEnglish);
 
@@ -12,9 +12,14 @@ function Card({ card, recto }) {
     utterance.lang = 'en-GB';
     
     synth.speak(utterance);
+
+    event.stopPropagation();
   };
   return (
-    <div className={`${s.container} ${recto ? s.recto : s.verso}`}>
+    <div 
+      className={`${s.container} ${recto ? s.recto : s.verso}`}
+      onClick={toggleRecto}
+    >
       <img src={icon} alt="" className={s.icon} />
       {recto ?
         (<div className={`${s.centeredContent} ${s.text}`}>

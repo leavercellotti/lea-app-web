@@ -10,5 +10,6 @@ router.put('/update-liked-podcasts', controllers.updateLikedPodcasts);
 router.put('/update-listened-podcasts', controllers.updateListenedPodcasts);
 router.put('/add-card', controllers.addCard);
 router.put('/update-level', controllers.updateLevel)
+router.put('/update-number-downloaded-podcasts', controllers.updateNbDownloadedPodcastsToday)
 
 module.exports = router;

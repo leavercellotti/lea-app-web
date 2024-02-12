@@ -1,5 +1,5 @@
 import axios from "axios"
-const BASE_URL ="http://localhost:3000/api/user" //"https://lea-english.onrender.com/api/user"
+const BASE_URL ="https://lea-english.onrender.com/api/user" //"http://localhost:3000/api/user" 
 
 
 export class UserAPI{
@@ -55,6 +55,16 @@ export class UserAPI{
           throw error;
         }
     }
+
+    static async updateNbDownloadedPodcastsToday(userId) {
+      try {
+        const response = await axios.put(`${BASE_URL}/update-number-downloaded-podcasts`, { userId });
+        return response.data;
+      } catch (error) {
+        console.error('Error nb listened podcasts:', error);
+        throw error;
+      }
+  }
     static async addCard(userId, cardId, knowledge) {
         try {
           const response = await axios.put(`${BASE_URL}/add-card`, { userId, cardId, knowledge });

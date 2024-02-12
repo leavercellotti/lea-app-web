@@ -36,12 +36,12 @@ export function NavASmall() {
 
     return(
         <nav className={s.nav}>
-            <NavLink to="/"><img src={logo} alt="Léa English" className={s.logo} /></NavLink>
+            <NavLink to="/" onClick={() => {window.speechSynthesis.cancel();}}><img src={logo} alt="Léa English" className={s.logo} /></NavLink>
 
             <AiOutlineMenu  
                 className={s.menuIcon} 
                 size={40}
-                onClick={(event)=> {event.stopPropagation(); setIsMenuShown(true)}}
+                onClick={(event)=> {event.stopPropagation(); setIsMenuShown(true); window.speechSynthesis.cancel();}}
             />
             
             {isMenuShown &&

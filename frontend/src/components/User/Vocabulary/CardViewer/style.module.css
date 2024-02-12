@@ -9,7 +9,7 @@
     min-height: 400px;
 }
 
-/* .loaderContainer {
+.loaderContainer {
     height: 400px;
     position: relative;
     width: 100%;
@@ -18,8 +18,9 @@
 
 .center {
     top:35%;
+    left: 48%;
     position: absolute;
-} */
+}
 
 .box {
     background-color: #F7F7F9;

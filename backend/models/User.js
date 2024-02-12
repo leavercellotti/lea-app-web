@@ -9,9 +9,10 @@ const userSchema = mongoose.Schema({
         type: String, 
         required: true 
     },
-    subscription:{
+    subscription:{//free ou paid
         type:String,
         maxlength:100,
+        default: "free",
     },
     level: {
         type: String,
@@ -29,6 +30,10 @@ const userSchema = mongoose.Schema({
             ref: 'Podcast',
         },
     ],
+    nbDownloadedPodcastsToday: {
+        type:Number,
+        default: 0,
+    },
     nbLearnedCards: {
         type:Number,
         default: 0,

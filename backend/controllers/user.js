@@ -41,10 +41,12 @@ exports.login = (req, res, next) => {
                         JWT_SECRET_USER,
                         { expiresIn: '24h' },
                     ),
+                    subscription: user.subscription,
                     podcastsLikedArray:user.podcastsLikedArray,
                     podcastsListenedArray:user.podcastsListenedArray,
                     nbLearnedCards:user.nbLearnedCards,
-                    level: user.level
+                    level: user.level,
+                    nbDownloadedPodcastsToday: user.nbDownloadedPodcastsToday,
                 });
             })
             .catch(error => res.status(500).json({ error }));
@@ -115,6 +117,37 @@ exports.updateListenedPodcasts = async (req, res) => {
     res.status(500).json({ error });
   }
 };
+
+exports.updateNbDownloadedPodcastsToday = async (req, res) => {
+  const userId = req.body.userId
+
+  try {
+    const user = await Object.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found.' });
+    }
+    // Update the liked podcasts array
+      user.nbDownloadedPodcastsToday++; // Assuming you have a podcastId in the request params
+      // Save the updated user object
+      await user.save();
+      res.status(200).json({ message: 'User number listened podcasts today updated successfully.' });
+  } catch (error) {
+    console.error('Error updating number listened podcasts today:', error);
+    res.status(500).json({ error });
+  }
+};
+
+//0 3 * * * A 3h du matin tous les jours '0 3 * * *'
+// Tâche planifiée pour réinitialiser nbDownloadedPodcastsToday à minuit chaque jour
+cron.schedule('0 0 * * *', async () => {
+  try {
+    // Réinitialiser nbDownloadedPodcastsToday pour tous les utilisateurs
+    await Object.updateMany({}, { nbDownloadedPodcastsToday: 0 });
+    console.log('Le compteur nbDownloadedPodcastsToday a été réinitialisé pour tous les utilisateurs.');
+  } catch (error) {
+    console.error('Erreur lors de la réinitialisation du compteur nbDownloadedPodcastsToday :', error);
+  }
+});
 
 //VOCABULARY
 exports.addCard = async (req, res) => {

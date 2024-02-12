@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaArrowCircleDown } from "react-icons/fa";
 import WhatToDo from '../WhatToDo/WhatToDo';
 import Loader from '../../Loader/Loader';
+import { useSelector } from 'react-redux';
 
 const CardViewer = ({ cardArray, setRevise, revise }) => {
   const [recto, setRecto] = useState(true);
@@ -16,12 +17,14 @@ const CardViewer = ({ cardArray, setRevise, revise }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showRevise, setShowRevise] = useState(false)
   const navigate = useNavigate()
+  const nbLearnedCards = useSelector(store => store.USER.nbLearnedCards)
 
   const handleNextCard = () => {
     setIsVisible(false);
     setTimeout(() => {
         setRecto(true);
       setCurrentCardIndex(prevIndex => (prevIndex < cardArray.length - 1 ? prevIndex + 1 : prevIndex));
+      console.log(nbLearnedCards, cardArray.length)
       if(currentCardIndex === cardArray.length - 1){
         if(revise) {
           setRevise(false)
@@ -30,11 +33,11 @@ const CardViewer = ({ cardArray, setRevise, revise }) => {
         else {
           setRevise(true)
           setShowRevise(true)
-          // setIsLoading(true);
+          setIsLoading(true);
 
-          // setTimeout(() => {
-          //   setIsLoading(false);
-          // }, 5500);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 6800);
         }
         setCurrentCardIndex(0)
         }
@@ -57,20 +60,12 @@ const CardViewer = ({ cardArray, setRevise, revise }) => {
     });
   };
 
-  if(end || cardArray?.length===0) {
+  if(end || cardArray?.length===0 ) {
     return(
       <WhatToDo/>
     )
   }
-  if (isLoading) {
-    return (
-      <div className={s.loaderContainer}>
-        <div className={s.center}>
-          <Loader/> {/* Remplacez par le composant de loader réel */}
-        </div>
-      </div>
-    );
-  }
+  
   if (showRevise) {
     return (
       <div className={s.container}>
@@ -82,12 +77,22 @@ const CardViewer = ({ cardArray, setRevise, revise }) => {
       </div>
     );
   }
+
+  if (isLoading) {
+    return (
+      <div className={s.loaderContainer}>
+        <div className={s.center}>
+          <Loader/> {/* Remplacez par le composant de loader réel */}
+        </div>
+      </div>
+    );
+  }
   return (
     <div className={s.container}>
       {cardArray && cardArray.length > 0 && (
         <>
           <div className={s.revise}>
-            <button className='btn' onClick={() => navigate('/revise')}>Réviser</button>
+            <button className='btn' onClick={() => navigate('/revise')}>Réviser le vocabulaire</button>
           </div>
           <div className={s.container}>
             {revise &&
@@ -96,7 +101,7 @@ const CardViewer = ({ cardArray, setRevise, revise }) => {
             {currentCardIndex + 1} / {cardArray.length}
             <div className={isVisible ? s.visibleCard : s.hiddenCard}>
               
-                <Card card={cardArray[currentCardIndex]} recto={recto} />
+                <Card toggleRecto={toggleRecto} card={cardArray[currentCardIndex]} recto={recto} />
                 <div className={s.buttons}>
                   <button className="btn" onClick={toggleRecto}>Retourner</button>
                   {!recto && 

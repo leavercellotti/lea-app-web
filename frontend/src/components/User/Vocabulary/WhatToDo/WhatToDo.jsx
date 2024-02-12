@@ -12,7 +12,7 @@ function WhatToDo() {
                 Écouter un podcast
             </button>
             <button className='btn btnSpace' onClick={() => navigate("/revise")}>
-              Réviser
+              Réviser le vocabulaire
             </button>
           </div>
         </div>

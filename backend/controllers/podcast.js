@@ -1,5 +1,6 @@
 const Object = require('../models/Podcast')
 
+// Définition des fonctions de gestion des podcasts
 exports.getAll = (req, res) => {
   Object.find()
     .then(objects => {
@@ -48,4 +49,3 @@ exports.create = (req, res) => {
       })
       .catch(error => res.status(400).json({ error }));
   };
-  

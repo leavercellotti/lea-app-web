@@ -10,6 +10,7 @@
     margin: 20px 0;
     padding: 10px 20px;
     transition: transform 0.5s; /* Ajoutez une transition pour une animation fluide */
+    cursor: pointer;
     }
 .recto {
     transform: perspective(1000px) rotateY(0deg); /* Position initiale pour le recto */

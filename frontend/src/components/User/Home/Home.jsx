@@ -16,7 +16,7 @@ function Home() {
             <div className={s.empty}></div>
             <div className={s.title}>
                 <h1>Léa English</h1>
-                <p>Lorem ipsum dolor sit amet</p>
+                <p>Progressez en anglais en 15 minutes par jour ! Choisissez une des 3 compétences à travailler aujourd'hui.</p>
             </div>
             <div className={s.progressContainer}>
                 <div className={s.progressBox}>
@@ -37,7 +37,7 @@ function Home() {
                     </p>
                     <p>
                         <span className={s.pink}>
-                            16 
+                            0 
                         </span>
                         pratiques réalisées
                     </p>
@@ -48,7 +48,7 @@ function Home() {
             <div className={s.box}>
                 <h2 className='h2'>Vocabulaire</h2>
                 <img className={s.img} src={vocabularyImage} alt=""/>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+                <p>Apprenez rapidement les 20% du vocabulaire vraiment utile en anglais.</p>
                 <button 
                     className='btn'
                     onClick={() => navigate('/vocabulary')}
@@ -59,7 +59,7 @@ function Home() {
             <div className={s.box}>
                 <h2 className='h2'>Podcast</h2>
                 <img className={s.img} src={podcastImage} alt=""/>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+                <p>Améliorez votre compréhension orale grâce à des épisodes de podcast stimulants et intéressants.</p>
                 <button 
                     className='btn'
                     onClick={() => navigate('/podcasts')}
@@ -70,7 +70,7 @@ function Home() {
             <div className={s.box}>
                 <h2 className='h2'>Pratique</h2>
                 <img className={s.img} src={chatImage} alt=""/>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+                <p>Progressez à l'oral en pratiquant avec un tuteur virtuel 7 jours sur 7.</p>
                 <button 
                     className='btn'
                     onClick={() => navigate('/ai')}

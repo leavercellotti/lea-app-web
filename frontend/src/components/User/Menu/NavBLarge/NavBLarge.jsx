@@ -28,6 +28,7 @@ export function NavBLarge() {
           className={s.li}
           onMouseEnter={setIsShownTrue}
           onMouseLeave={setIsShownFalse}
+          onClick={() => {window.speechSynthesis.cancel();}}
         >
           <NavLink
             to="/vocabulary"
@@ -41,7 +42,7 @@ export function NavBLarge() {
             </span>
           </NavLink>
         </li>
-        <li className={s.li}>
+        <li className={s.li} onClick={() => {window.speechSynthesis.cancel();}}>
           <NavLink
             to="/podcasts"
             className={s.link}
@@ -54,7 +55,7 @@ export function NavBLarge() {
             </span>
           </NavLink>
         </li>
-        <li className={s.li}>
+        <li className={s.li} onClick={() => {window.speechSynthesis.cancel();}}>
           <NavLink
             to="/ai"
             className={s.link}
@@ -67,7 +68,7 @@ export function NavBLarge() {
             </span>
           </NavLink>
         </li>
-        <li className={s.li}>
+        <li className={s.li} onClick={() => {window.speechSynthesis.cancel();}}>
           <NavLink
             to="/test"
             className={s.link}

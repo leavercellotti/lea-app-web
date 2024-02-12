@@ -31,7 +31,7 @@ export function NavALarge() {
     <nav className={s.nav}>
       <ul className={s.ul}>
         <div className={s.logoContainer}>
-          <li className={s.li}>
+          <li className={s.li} onClick={() => {window.speechSynthesis.cancel();}}>
             <NavLink 
               to="/"
             >
@@ -40,7 +40,7 @@ export function NavALarge() {
           </li>
         </div>
         <div className={s.centralItems}>
-          <li className={s.li}>
+          <li className={s.li} onClick={() => {window.speechSynthesis.cancel();}}>
             <NavLink
               to="/profile"
               className={s.link}
@@ -55,7 +55,8 @@ export function NavALarge() {
           </li>
           <li 
             style={{color: "#9BB5D8"}} 
-            onClick={logoutHandler} 
+            // onClick={logoutHandler} 
+            onClick={() => {logoutHandler(); window.speechSynthesis.cancel();}}
             className={s.li}
           >
               Logout

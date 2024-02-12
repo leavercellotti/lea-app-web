@@ -1,60 +1,65 @@
-import React from 'react'
-
+import React from 'react';
 import html2pdf from 'html2pdf.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { addNbDownloadedPodcastsToday } from '../../../../store/user-slice';
+import { UserAPI } from '../../../../api/user-api';
 
-function getDriveFileId(link) {
-    // Vérifier si link est défini avant d'essayer de faire correspondre l'expression régulière
-    if (link && typeof link === 'string') {
-        const fileIdMatch = link.match(/\/file\/d\/(.+?)\/(?:view|\?usp=sharing|$)/);
-        if (fileIdMatch) {
-        return fileIdMatch[1];
-        }
+function DownloadButton({ title, link, transcription, translation, downloadItems, btnText }) {
+  const subscription = useSelector(store => store.USER.subscription);
+  const nbDownloadedPodcastsToday = useSelector(store => store.USER.nbDownloadedPodcastsToday);
+  const userId = useSelector(store => store.USER._id);
+  const dispatch = useDispatch();
+
+  const updateNbDownloadedPodcastsToday = async () => {
+    try {
+      await UserAPI.updateNbDownloadedPodcastsToday(userId);
+      dispatch(addNbDownloadedPodcastsToday());
+    } catch (error) {
+      console.error("Error fetching podcasts:", error);
     }
-    return null;
-}
-function constructDriveDownloadLink(fileId) {//on modifie le lien partagé de google drive pour qu'il ait le bon format
-    return `https://drive.google.com/uc?export=download&id=${fileId}`;
-}
+  };
 
-function DownloadButton({title, link, transcription, translation, downloadItems, btnText}) {
-  const fileId = getDriveFileId(link);
-  const downloadLink = fileId ? constructDriveDownloadLink(fileId) : '';
   const downloadFiles = async () => {
     // Trigger download for audio
-    try {
-      // Télécharger la transcription
-      if(downloadItems === "all" || downloadItems === "pdf") {
-        generatePdf()
+    if (subscription === "free" && nbDownloadedPodcastsToday >= 1) {
+      alert("Le nombre de téléchargements est limité à un par jour dans la version gratuite.");
+    } else if (subscription === "paid" && nbDownloadedPodcastsToday >= 5) {
+      alert("Le nombre de téléchargements est limité à trois par jour.");
+    } else {
+      try {
+        // Télécharger la transcription
+        if (downloadItems === "all" || downloadItems === "pdf") {
+          generatePdf();
         }
 
-      // Simuler le clic du lien de téléchargement
-      if(downloadItems === "all" || downloadItems === "audio") {
-        const downloadLinkElement = document.getElementById('downloadLink');
-        if (downloadLinkElement) {
-            downloadLinkElement.click();
+        // Télécharger le fichier audio
+        if (downloadItems === "all" || downloadItems === "audio") {
+          downloadAudio();
         }
-        }
-    } 
-    catch (error) {
-    console.error('Erreur lors du téléchargement du fichier :', error);
-    }  
-  };
-    function htmlToPdf(html) {
-        return new Promise((resolve) => {
-            html2pdf(html, {
-            autoPaging: 'text',
-            margin: 20,
-            filename: `${title}.pdf`,
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-            callback: (pdf) => {
-                resolve(pdf.output('blob'));
-            },
-            });
-        });
+
+        updateNbDownloadedPodcastsToday();
+      } catch (error) {
+        console.error('Erreur lors du téléchargement du fichier :', error);
+      }
     }
-    // Fonction pour convertir le HTML en PDF
+  };
+
+  function htmlToPdf(html) {
+    return new Promise((resolve) => {
+      html2pdf(html, {
+        autoPaging: 'text',
+        margin: 20,
+        filename: `${title}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        callback: (pdf) => {
+          resolve(pdf.output('blob'));
+        },
+      });
+    });
+  }
+
   async function generatePdf() {
     const content = `
       <html>
@@ -81,26 +86,38 @@ function DownloadButton({title, link, transcription, translation, downloadItems,
 
     const transcriptionPdf = await htmlToPdf(content);
     const transcriptionBlob = new Blob([transcriptionPdf], { type: 'text/plain' });
-        const transcriptionDownloadLink = document.createElement('a');
-        transcriptionDownloadLink.href = URL.createObjectURL(transcriptionBlob);
-        transcriptionDownloadLink.download = 't.pdf';
-        transcriptionDownloadLink.click();
+    const transcriptionDownloadLink = document.createElement('a');
+    transcriptionDownloadLink.href = URL.createObjectURL(transcriptionBlob);
+    transcriptionDownloadLink.download = 't.pdf';
+    transcriptionDownloadLink.click();
   }
+
+  const downloadAudio = async () => {
+    try {
+      // Récupérer le contenu du fichier audio à partir du lien
+      const response = await fetch(link);
+      const audioBlob = await response.blob();
+  
+      // Créer un objet URL pour le blob audio
+      const audioUrl = URL.createObjectURL(audioBlob);
+  
+      // Créer un lien de téléchargement et déclencher le téléchargement
+      const audioDownloadLink = document.createElement('a');
+      audioDownloadLink.href = audioUrl;
+      audioDownloadLink.download = `${title}.mp3`;
+      audioDownloadLink.click();
+    } catch (error) {
+      console.error('Erreur lors du téléchargement du fichier audio :', error);
+    }
+  };  
+
   return (
     <>
-        <a 
-            id="downloadLink" 
-            href={downloadLink} 
-            download="audio.mp3" 
-            style={{ display: 'none' }}
-            >
-            Télécharger le fichier audio
-        </a>
-        <button className='btn btnSpace' onClick={downloadFiles}>
-            {btnText}
-        </button>
+      <button className='btn btnSpace' onClick={downloadFiles}>
+        {btnText}
+      </button>
     </>
-  )
+  );
 }
 
-export default DownloadButton
+export default DownloadButton;
