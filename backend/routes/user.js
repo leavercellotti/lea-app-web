@@ -2,14 +2,15 @@ const express = require('express');
 const router = express.Router();
 
 const controllers = require('../controllers/user'); 
+const authUser = require('../middleware/authUser');
 
 router.post('/signup', controllers.signup);
 router.post('/login', controllers.login);
-router.get('/:email', controllers.get);
-router.put('/update-liked-podcasts', controllers.updateLikedPodcasts);
-router.put('/update-listened-podcasts', controllers.updateListenedPodcasts);
-router.put('/add-card', controllers.addCard);
-router.put('/update-level', controllers.updateLevel)
-router.put('/update-number-downloaded-podcasts', controllers.updateNbDownloadedPodcastsToday)
+router.get('/:email',authUser, controllers.get);
+router.put('/update-liked-podcasts',authUser, controllers.updateLikedPodcasts);
+router.put('/update-listened-podcasts',authUser, controllers.updateListenedPodcasts);
+router.put('/add-card',authUser, controllers.addCard);
+router.put('/update-level',authUser, controllers.updateLevel)
+router.put('/update-number-downloaded-podcasts',authUser, controllers.updateNbDownloadedPodcastsToday)
 
 module.exports = router;

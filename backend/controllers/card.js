@@ -104,13 +104,14 @@ exports.getRecentlyViewedCards = async (req, res) => {
 
         // Populer les objets de cartes en fonction des cardIds
         const cards = await Card.find({ _id: { $in: cardIds } });
-
         res.status(200).json(cards);
     } catch (error) {
         console.error('Error in getRecentlyViewedCards:', error);
         res.status(500).json({ error });
     }
 };
+
+
 
 exports.getAll = (req, res) => {
   Object.find()

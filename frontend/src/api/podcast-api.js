@@ -1,5 +1,6 @@
 import axios from "axios"
-const BASE_URL ="https://lea-english.onrender.com/api/podcast"   //"http://localhost:3000/api/podcast"
+//const BASE_URL ="http://localhost:3000/api/podcast"
+const BASE_URL ="https://lea-english.onrender.com/api/podcast"   
 
 export class PodcastAPI {
     static async getAll(token) {

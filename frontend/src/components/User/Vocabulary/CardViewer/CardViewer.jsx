@@ -92,18 +92,19 @@ const CardViewer = ({ cardArray, setRevise, revise }) => {
       {cardArray && cardArray.length > 0 && (
         <>
           <div className={s.revise}>
-            <button className='btn' onClick={() => navigate('/revise')}>Réviser le vocabulaire</button>
+            <button className='btn' onClick={() => navigate('/revise')}>Réviser tout le vocabulaire</button>
           </div>
           <div className={s.container}>
             {revise &&
             <p>Révisons</p>
             }
             {currentCardIndex + 1} / {cardArray.length}
+            <p>Cliquez sur la carte pour la retourner</p>
             <div className={isVisible ? s.visibleCard : s.hiddenCard}>
               
                 <Card toggleRecto={toggleRecto} card={cardArray[currentCardIndex]} recto={recto} />
                 <div className={s.buttons}>
-                  <button className="btn" onClick={toggleRecto}>Retourner</button>
+                  {/* <button className="btn" onClick={toggleRecto}>Retourner</button> */}
                   {!recto && 
                   <FaArrowCircleDown 
                     className={s.arrowIcon} 

@@ -23,11 +23,21 @@ function Card({ card, recto, toggleRecto }) {
       <img src={icon} alt="" className={s.icon} />
       {recto ?
         (<div className={`${s.centeredContent} ${s.text}`}>
-          <p>{card && card.wordFrench}</p>
+          <p>{card &&
+            // <span style={{ color: card.knowledge === true ? 'green' : card.knowledge === false ? 'red' : '#28356B' }}>
+            card.wordFrench
+          // </span>
+          }</p>
         </div>)
         :
         (<div className={`${s.centeredContent} ${s.text}`}>
-          <p>{card && card.wordEnglish}</p>
+          <p>
+            {card && 
+            // <span style={{ color: card.knowledge === true ? 'green' : card.knowledge === false ? 'red' : '#28356B' }}>
+              card.wordEnglish
+            // </span>
+            }
+          </p>
           <AiFillSound 
             className={s.soundIcon} 
             size={30} 

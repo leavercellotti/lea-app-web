@@ -29,7 +29,7 @@ function VocabularyRevise() {
         Réviser
       </h1>
       <h2 className='h2'>
-        Il est temps de réviser ! <FaBrain />
+        Révisez le vocabulaire des 7 derniers jours. <FaBrain />
       </h2>
       <div className='container'>
         <ReviseBox cardArray={cardArray}/>
