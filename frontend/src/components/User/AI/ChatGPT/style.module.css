@@ -27,16 +27,26 @@
 .user {
     color:#28356B;
     display: flex;
-    justify-content: flex-end;
+    align-items: flex-end;
     margin: 5px;
+    flex-direction: column;
 }
 
 .userBox { 
+    max-width: 80%;
+    background-color: #ffffff;
+    border: 1px solid #28356B;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.correctionBox {
     max-width: 80%;
     background-color: #fef4f3;
     border: 1px solid #F27066;
     border-radius: 5px;
     padding: 5px;
+    margin-top:5px;
 }
 
 /* .person {
@@ -68,6 +78,7 @@
 
   @media screen and (max-width: 600px) {
     .container {
-        width: 90%;
+        width: 92%;
+        padding: 12px;
     }
   }

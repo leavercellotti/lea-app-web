@@ -35,17 +35,17 @@ exports.create = (req, res) => {
       .catch((error) => res.status(400).json({ error }));
   };
 
-  exports.update = (req, res) => {
-    console.log('update')
-    const { _id } = req.params;
-    const updateData = { ...req.body };
-  
-    Object.findByIdAndUpdate(_id, updateData, { new: true })
-      .then(updatedObject => {
-        if (!updatedObject) {
-          return res.status(404).json({ error: '... non trouvée' });
-        }
-        res.status(200).json(updatedObject);
-      })
-      .catch(error => res.status(400).json({ error }));
-  };
+exports.update = (req, res) => {
+  console.log('update')
+  const { _id } = req.params;
+  const updateData = { ...req.body };
+
+  Object.findByIdAndUpdate(_id, updateData, { new: true })
+    .then(updatedObject => {
+      if (!updatedObject) {
+        return res.status(404).json({ error: '... non trouvée' });
+      }
+      res.status(200).json(updatedObject);
+    })
+    .catch(error => res.status(400).json({ error }));
+};

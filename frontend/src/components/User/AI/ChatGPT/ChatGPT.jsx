@@ -1,42 +1,111 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import s from "./style.module.css";
 import SpeechToText from '../SpeechToText/SpeechToText';
-import { FaUserTie } from 'react-icons/fa';
-import { PiStudent } from "react-icons/pi";
 import { BsArrowUpSquareFill } from "react-icons/bs";
 import icon from '../../../../assets/icon.png'
+import { ChatgptAPI } from '../../../../api/chatgpt-api';
+import { useSelector } from 'react-redux';
+
 const ChatGPT = () => {
+  const prompt = "Have you ever traveled to another country? If so, where?"
+  const [message, setMessage] = useState('');
+  const [response, setResponse] = useState('');
+  const [messageHistoryUser, setMessageHistoryUser] = useState([]);
+  const [correctionHistory, setCorrectionHistory] = useState([]);
+  const [messageHistoryAssistant, setMessageHistoryAssistant] = useState([prompt]);
+  const [messageHistory, setMessageHistory] = useState([]);
+  const userId = useSelector(store => store.USER._id);
+
+  const chatEndRef = useRef(null); // Référence vers le dernier élément du chat
+  const handleSendMessage = async () => {
+    try {
+      const correctionMessage = { 
+        role: 'user', 
+        content: `You are an English teacher. If this sentence : '${message}' contains errors, provide the correct sentence. Otherwise, say 'Ok.'.`
+      };
+      //You are an English teacher. 
+      //The student says: ${message}. If this contains significant errors, provide the correct sentence. Otherwise, say 'Ok.'.`
+
+      const correctionGPT = await ChatgptAPI.connect({ userId, messages:[correctionMessage] });
+      setMessageHistoryUser([...messageHistoryUser, message]);
+      setCorrectionHistory([...correctionHistory, correctionGPT.data.choices[0].message.content]);
+    } catch (error) {
+      console.error("erreur correction",error);
+    }
+
+    try {
+      const newMessage = { 
+        role: 'user', 
+        content: `Provide a short response to the last question and ask a related question different than the previous ones : ${messageHistoryUser.map((userMessage, index) => `question ${index}: ${messageHistoryAssistant[index]}, response : ${userMessage}.`).join('\n')} last question : ${messageHistoryAssistant[messageHistoryAssistant.length - 1]}, response : ${message}`
+      };
+      //You are an English teacher. The initial question you have asked to the user was 'Have you ever traveled to another country? If so, where?'
+      //Provide a short response and ask a related question but not a question that you already have the answer here : ${message} \n ${messageHistoryUser.map((userMessage, index) => `${userMessage}.`).join('\n')}
+
+      // const res = await ChatgptAPI.connect({ userId, messages:[...messageHistory, newMessage] });
+      const res = await ChatgptAPI.connect({ userId, messages:[newMessage] });
+      setResponse(res.data.choices[0].message.content);
+      setMessageHistoryAssistant([...messageHistoryAssistant, res.data.choices[0].message.content]);
+      setMessageHistory([...messageHistory, newMessage]);
+      setMessage("")
+    } catch (error) {
+      console.error("erreur reponse", error);
+    }
+  };
+
+  useEffect(() => {
+    // Fait défiler vers le bas lorsque messageHistoryAssistant est modifié
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messageHistoryAssistant]);
   return (
     <div className={s.container}>
       <div className="right">
         <img src={icon} alt="" className='favicon'/>
       </div>
       <div className={s.chat}>
-        <div className={s.assistant}>
-          {/* <p className={s.person}>
-            <FaUserTie size={22} className={s.icon}/>
-          </p> */}
-          <div className={s.assistantBox}>How do you typically spend your leisure time ? hhhhhhhhhhhhhh hhhhhhhh hhhhhhhhhhhhhh hhhhhhhhhhh hhhhhh hhhhhhhhhhh hhhhhhhhhhh hhhhhhhhhhhh hhhhhhhhhhhh hhhhhh</div>
-        </div>
-        <div className={s.user}>
-          {/* <p className={s.person}>
-            <PiStudent size={22} className={s.icon}/>
-          </p> */}
-          <div className={s.userBox}>I do crossfit and I play tennis hhhhhhhh hhhhhhhhhhhhhh hhhhhhhhhhh hhhhhhhhhhhhhh hhhhhh hhhhhhhhh hhhhhhhhhhhhh hhhhhhhhhhhh hhhhhhhhhhhhh hhhhhh</div>
-        </div>
+        {messageHistoryAssistant.map((msg, index) => (
+          <div key={index}>
+            <div className={s.assistant}>
+              <div className={s.assistantBox}>
+                {(msg && `${msg}`) || `${response}`}
+              </div>
+            </div>
+            
+            <div className={s.user}>
+              {messageHistoryUser[index] &&
+              <>
+                <div className={s.userBox}>
+                  {messageHistoryUser[index]}
+                </div> 
+                {correctionHistory[index] !== "Ok." &&
+                  <div className={s.correctionBox}>
+                    {correctionHistory[index]}
+                  </div>
+                }
+              </>
+              }
+            </div>
+          </div>
+        ))}
+        <div ref={chatEndRef} />
       </div>
       <div className={s.writeContainer}>
         <textarea
           className={s.largeInput}
           type="text"
-          // value={message}
-          // onChange={(e) => setMessage(e.target.value)}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
         />
-        <BsArrowUpSquareFill size={40} className={s.sendIcon}/>
-        <SpeechToText/>{/* <SpeechToText setMessage={setMessage}/> */}
+        <BsArrowUpSquareFill 
+          size={40} 
+          className={s.sendIcon} 
+          onClick={handleSendMessage} 
+        />
+        <SpeechToText 
+          setMessage={setMessage}
+        />
       </div>
     </div>
-  )
+  );
 }
 
-export default ChatGPT
+export default ChatGPT;

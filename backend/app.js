@@ -7,6 +7,8 @@ const podcastRoutes = require('./routes/podcast')
 const adminRoutes = require('./routes/admin')
 const userRoutes = require('./routes/user')
 const cardRoutes = require('./routes/card')
+const chatgptRoutes = require('./routes/chatgpt')
+const promptiaRoutes = require('./routes/promptia')
 
 require('dotenv').config();
 
@@ -36,5 +38,7 @@ app.use('/api/podcast', podcastRoutes)
 app.use('/api/admin', adminRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/card', cardRoutes)
+app.use('/api/chatgpt', chatgptRoutes)
+app.use('/api/promptia', promptiaRoutes)
 
 module.exports = app
