@@ -1,6 +1,6 @@
 import axios from "axios"
-//const BASE_URL ="http://localhost:3000/api/chatgpt"  
-const BASE_URL ="https://lea-english.onrender.com/api/chatgpt"
+const BASE_URL ="http://localhost:3000/api/chatgpt"  
+//const BASE_URL ="https://lea-english.onrender.com/api/chatgpt"
 
 export class ChatgptAPI{
     static async connect(data) {        

@@ -10,10 +10,7 @@ exports.connect = async (req, res, next) => {
             data,
             {
                 headers: {
-                    //testa.webdev : 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
-                    //coral dev : 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
-                    //Lea : 'Bearer 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'${CHATGPTAUTORIZATION}
-                    'Authorization': `Bearer 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`,
+                    'Authorization': `Bearer ${CHATGPTAUTORIZATION}`,
                     'Content-Type': 'application/json',
                 },
             }
@@ -21,7 +18,7 @@ exports.connect = async (req, res, next) => {
         res.json(response.data);
     } catch (error) {
         //console.error(error);
-        console.log(error, data)
+        console.log(data)
         res.status(500).send('Erreur serveur');
     }
 };
