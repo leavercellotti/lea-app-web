@@ -6,8 +6,8 @@ import icon from '../../../../assets/icon.png'
 import { ChatgptAPI } from '../../../../api/chatgpt-api';
 import { useSelector } from 'react-redux';
 
-const ChatGPT = () => {
-  const prompt = "Have you ever traveled to another country? If so, where?"
+const ChatGPT = ({prompt}) => {
+  console.log(prompt)
   const [message, setMessage] = useState('');
   const [response, setResponse] = useState('');
   const [messageHistoryUser, setMessageHistoryUser] = useState([]);
@@ -53,6 +53,11 @@ const ChatGPT = () => {
   };
 
   useEffect(() => {
+    console.log("effect")
+    setMessageHistoryAssistant([prompt]);
+  }, [prompt]);
+
+  useEffect(() => {
     // Fait défiler vers le bas lorsque messageHistoryAssistant est modifié
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messageHistoryAssistant]);
@@ -61,6 +66,7 @@ const ChatGPT = () => {
       <div className="right">
         <img src={icon} alt="" className='favicon'/>
       </div>
+      {prompt &&
       <div className={s.chat}>
         {messageHistoryAssistant.map((msg, index) => (
           <div key={index}>
@@ -88,6 +94,7 @@ const ChatGPT = () => {
         ))}
         <div ref={chatEndRef} />
       </div>
+      }
       <div className={s.writeContainer}>
         <textarea
           className={s.largeInput}

@@ -5,12 +5,13 @@ import { addLearnedCard } from '../../../../store/user-slice';
 
 function DoYouKnow({ cardId, handleNextCard }) {
   const user_id = useSelector(store => store.USER._id);
+  const token = useSelector(store => store.USER.token);
   const dispatch = useDispatch()
 
   const addCardBackend = async (knowledge) => {
    // Effectuer l'appel API pour mettre à jour les cartes de l'utilisateur
     try {
-      const response = await UserAPI.addCard(user_id, cardId, knowledge);
+      const response = await UserAPI.addCard(token, user_id, cardId, knowledge);
       if (response) {
         console.log('Cartes de l\'utilisateur mises à jour avec succès.');
       } else {

@@ -7,13 +7,14 @@ import { UserAPI } from "../../../../api/user-api";
 const AudioPlayer = ({ audioSrc, audioTitle, _id }) => {
     const dispatch =useDispatch()
     const user_id = useSelector(store => store.USER._id)
+    const token = useSelector(store => store.USER.token)
     const audioRef = useRef(null);
     const [isAudioPlayed, setIsAudioPlayed] = useState(false);
     const [isAudioCompleted, setIsAudioCompleted] = useState(false);
     const listenedBackend = async () => {    
         // Make API call to update user's liked podcasts
         try {
-          const response = await UserAPI.updateListenedPodcasts(user_id, _id);
+          const response = await UserAPI.updateListenedPodcasts(token, user_id, _id);
           if (response) {
             console.log('User listened podcasts updated successfully.');
           } else {

@@ -8,11 +8,12 @@ function DownloadButton({ title, link, transcription, translation, downloadItems
   const subscription = useSelector(store => store.USER.subscription);
   const nbDownloadedPodcastsToday = useSelector(store => store.USER.nbDownloadedPodcastsToday);
   const userId = useSelector(store => store.USER._id);
+  const token = useSelector(store => store.USER.token);
   const dispatch = useDispatch();
 
   const updateNbDownloadedPodcastsToday = async () => {
     try {
-      await UserAPI.updateNbDownloadedPodcastsToday(userId);
+      await UserAPI.updateNbDownloadedPodcastsToday(token, userId);
       dispatch(addNbDownloadedPodcastsToday());
     } catch (error) {
       console.error("Error fetching podcasts:", error);

@@ -218,7 +218,8 @@ cron.schedule('0 12 * * *', async () => {//'*/20 * * * *' - toutes les 20min, '*
 exports.updateLevel = async (req, res) => {
   const userId = req.body.userId
   const level = req.body.level
-
+  console.log("level", level)
+  
   try {
     const user = await Object.findById(userId);
     if (!user) {

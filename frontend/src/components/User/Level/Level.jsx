@@ -10,11 +10,12 @@ function Level() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user_id = useSelector(store => store.USER._id);
+  const token = useSelector(store => store.USER.token);
 
   const modifyLevelBackend = async () => {
     // Effectuer l'appel API pour mettre à jour les cartes de l'utilisateur
     try {
-      const response = await UserAPI.updateLevel(user_id, level);
+      const response = await UserAPI.updateLevel(token, user_id, level);
       if (response) {
         console.log('Niveau de l\'utilisateur mis à jour avec succès.');
       } else {

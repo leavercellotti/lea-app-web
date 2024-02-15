@@ -10,13 +10,14 @@ function Like({_id, size, style}) {
     const [liked, setLiked] = useState(podcastsLikedArray.includes(_id)); // Initialize liked state
     const dispatch = useDispatch()
     const user_id = useSelector(store => store.USER._id)
+    const token = useSelector(store => store.USER.token)
     const likeToggleBackend = async () => {
         // Update liked status in the component state
         setLiked(!liked);
     
         // Make API call to update user's liked podcasts
         try {
-          const response = await UserAPI.updateLikedPodcasts(user_id, !liked, _id);
+          const response = await UserAPI.updateLikedPodcasts(token, user_id, !liked, _id);
           if (response) {
             console.log('User liked podcasts updated successfully.');
           } else {

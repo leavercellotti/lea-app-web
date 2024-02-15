@@ -16,7 +16,6 @@ export class UserAPI{
     }
 
     static async connect(user) {
-        console.log("api", user)
         return (
             await axios.post(`${BASE_URL}/login`, user)
             .catch(function(error) {
@@ -36,7 +35,8 @@ export class UserAPI{
         )
     }
 
-    static async updateLikedPodcasts(userId, liked, podcastId) {
+    static async updateLikedPodcasts(token, userId, liked, podcastId) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         try {
             console.log(userId, liked)
           const response = await axios.put(`${BASE_URL}/update-liked-podcasts`, { userId,liked, podcastId });
@@ -46,8 +46,9 @@ export class UserAPI{
           throw error;
         }
     }
-    static async updateListenedPodcasts(userId, podcastId) {
-        try {
+    static async updateListenedPodcasts(token, userId, podcastId) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      try {
           const response = await axios.put(`${BASE_URL}/update-listened-podcasts`, { userId, podcastId });
           return response.data;
         } catch (error) {
@@ -56,7 +57,8 @@ export class UserAPI{
         }
     }
 
-    static async updateNbDownloadedPodcastsToday(userId) {
+    static async updateNbDownloadedPodcastsToday(token, userId) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       try {
         const response = await axios.put(`${BASE_URL}/update-number-downloaded-podcasts`, { userId });
         return response.data;
@@ -65,7 +67,8 @@ export class UserAPI{
         throw error;
       }
   }
-    static async addCard(userId, cardId, knowledge) {
+    static async addCard(token, userId, cardId, knowledge) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         try {
           const response = await axios.put(`${BASE_URL}/add-card`, { userId, cardId, knowledge });
           return response.data;
@@ -74,7 +77,8 @@ export class UserAPI{
           throw error;
         }
     }
-    static async updateLevel(userId, level) {
+    static async updateLevel(token, userId, level) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         try {
             console.log("api", userId,level)
           const response = await axios.put(`${BASE_URL}/update-level`, { userId, level });

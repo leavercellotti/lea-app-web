@@ -5,6 +5,7 @@ const authUser = require('../middleware/authUser');
 const controllers = require('../controllers/promptia'); 
 const authAdmin = require('../middleware/authAdmin');
 
+router.get('/daily/:level', authUser, controllers.getDailyPrompt)
 router.get('/all', authUser, controllers.getAll)//l'utilisateur doit être connecté pour accéder
 //router.get('/all', controllers.getAll)//l'utilisateur doit être connecté pour accéder
 router.get('/:_id', authUser, controllers.getById)
