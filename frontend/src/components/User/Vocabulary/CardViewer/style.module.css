@@ -73,3 +73,21 @@
 .arrowIcon:hover {
     color:#93221e;
 }
+
+@keyframes fadeInDown {
+    0% {
+      scale: 100%;
+    }
+    50% {
+      scale: 120%;
+      color: #93221e;
+    }
+    100% {
+        scale: 100%;
+    }
+}
+
+.fadeInDown {
+    animation: fadeInDown 2s ease-in-out 1.5s;
+    font-weight: 750;
+  }

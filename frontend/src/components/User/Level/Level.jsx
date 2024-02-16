@@ -15,12 +15,7 @@ function Level() {
   const modifyLevelBackend = async () => {
     // Effectuer l'appel API pour mettre à jour les cartes de l'utilisateur
     try {
-      const response = await UserAPI.updateLevel(token, user_id, level);
-      if (response) {
-        console.log('Niveau de l\'utilisateur mis à jour avec succès.');
-      } else {
-        console.error('Échec de la mise à jour du niveau de l\'utilisateur.');
-      }
+      await UserAPI.updateLevel(token, user_id, level);
     } catch (error) {
       console.error('Erreur lors de la mise à jour du niveau de l\'utilisateur :', error);
     }

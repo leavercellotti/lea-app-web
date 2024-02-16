@@ -5,7 +5,6 @@ const BASE_URL ="https://lea-english.onrender.com/api/chatgpt"
 export class ChatgptAPI{
     static async connect(data) {        
         const {userId, messages} = data
-        console.log(data, userId, messages)
         return (
             await axios.post(`${BASE_URL}/connect`, {
                 userId:userId,

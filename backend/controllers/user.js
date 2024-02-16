@@ -47,6 +47,7 @@ exports.login = (req, res, next) => {
                     nbLearnedCards:user.nbLearnedCards,
                     level: user.level,
                     nbDownloadedPodcastsToday: user.nbDownloadedPodcastsToday,
+                    nbChatsMade : user.nbChatsMade,
                 });
             })
             .catch(error => res.status(500).json({ error }));
@@ -137,6 +138,24 @@ exports.updateNbDownloadedPodcastsToday = async (req, res) => {
   }
 };
 
+exports.updateNbChatsMade = async (req, res) => {
+  const userId = req.body.userId
+  try {
+    const user = await Object.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found.' });
+    }
+    // Update the liked podcasts array
+      user.nbChatsMade++; // Assuming you have a podcastId in the request params
+      // Save the updated user object
+      await user.save();
+      res.status(200).json({ message: 'User number listened podcasts today updated successfully.' });
+  } catch (error) {
+    console.error('Error updating number listened podcasts today:', error);
+    res.status(500).json({ error });
+  }
+};
+
 //0 3 * * * A 3h du matin tous les jours '0 3 * * *'
 // Tâche planifiée pour réinitialiser nbDownloadedPodcastsToday à minuit chaque jour
 cron.schedule('0 0 * * *', async () => {
@@ -218,7 +237,6 @@ cron.schedule('0 12 * * *', async () => {//'*/20 * * * *' - toutes les 20min, '*
 exports.updateLevel = async (req, res) => {
   const userId = req.body.userId
   const level = req.body.level
-  console.log("level", level)
   
   try {
     const user = await Object.findById(userId);

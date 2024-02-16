@@ -13,16 +13,12 @@ function AI() {
   const [level, setLevel] = useState()
 
   useEffect(() => {
-    console.log(levelSpecific)
     if (levelSpecific === "A1" || levelSpecific === "A2") {
       setLevel(1);
-      console.log(level)
     } else if (levelSpecific === "B1" || levelSpecific === "B2") {
       setLevel(2);
-      console.log(level)
     } else if(levelSpecific === "C"){
       setLevel(3);
-      console.log(level)
     }
   }, [levelSpecific, level]);
   
@@ -30,7 +26,6 @@ function AI() {
     const fetchData = async () => {
       try {
         const dailyPrompt = await PromptiaAPI.getDailyPrompt(level, token);
-        console.log(dailyPrompt)
         setPrompt(dailyPrompt);
       } catch (error) {
         console.error("Error fetching podcasts:", error);

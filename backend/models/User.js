@@ -53,6 +53,10 @@ const userSchema = mongoose.Schema({
             }
         },
     ],
+    nbChatsMade: {
+        type:Number,
+        default: 0,
+    },
 },
 {timestamps: true})
 

@@ -50,6 +50,7 @@ function Login({setToken}) {
             level: response.data.level,
             subscription: response.data.subscription,
             nbDownloadedPodcastsToday: response.data.nbDownloadedPodcastsToday,
+            nbChatsMade: response.data.nbChatsMade,
         };
         console.log(response.data)
         localStorage.setItem('user-info', JSON.stringify(dataUserToStore));

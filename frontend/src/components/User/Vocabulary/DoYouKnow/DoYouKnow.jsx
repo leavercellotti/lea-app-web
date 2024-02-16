@@ -11,12 +11,7 @@ function DoYouKnow({ cardId, handleNextCard }) {
   const addCardBackend = async (knowledge) => {
    // Effectuer l'appel API pour mettre à jour les cartes de l'utilisateur
     try {
-      const response = await UserAPI.addCard(token, user_id, cardId, knowledge);
-      if (response) {
-        console.log('Cartes de l\'utilisateur mises à jour avec succès.');
-      } else {
-        console.error('Échec de la mise à jour des cartes de l\'utilisateur.');
-      }
+      await UserAPI.addCard(token, user_id, cardId, knowledge);
     } catch (error) {
       console.error('Erreur lors de la mise à jour des cartes de l\'utilisateur :', error);
     }

@@ -10,6 +10,7 @@ const initialState = {
   level:'',
   subscription: '',
   nbDownloadedPodcastsToday: 0,
+  nbChatsMade: 0,
 };
 
 export const userSlice = createSlice({
@@ -28,6 +29,7 @@ export const userSlice = createSlice({
             }
             currentState.subscription = action.payload.subscription
             currentState.nbDownloadedPodcastsToday = action.payload.nbDownloadedPodcastsToday
+            currentState.nbChatsMade = action.payload.nbChatsMade
         },
         setEmail: (currentState, action) => {
             currentState.email = action.payload.email
@@ -71,6 +73,11 @@ export const userSlice = createSlice({
             currentState.nbDownloadedPodcastsToday = modified
             localStorage.setItem('user-info', JSON.stringify(currentState))
         },
+        addNbChatsMade: (currentState, action) => {
+            const modified = currentState.nbChatsMade+1;
+            currentState.nbChatsMade = modified
+            localStorage.setItem('user-info', JSON.stringify(currentState))
+        },
     }
 })
 
@@ -80,6 +87,6 @@ export const {
     removePodcastLikedArray, setPodcastsListenedArray,
     addPodcastListenedArray, removePodcastListenedArray,
     addLearnedCard, modifyLevel,
-    addNbDownloadedPodcastsToday
+    addNbDownloadedPodcastsToday, addNbChatsMade
 } = userSlice.actions
 export const userReducer = userSlice.reducer

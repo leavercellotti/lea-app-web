@@ -1,7 +1,6 @@
 const Object = require('../models/Test')
 
 exports.getAll = (req, res) => {
-  console.log("getall ..")
     Object.find()
     .then(objects => {
       return(res.status(200).json(objects))

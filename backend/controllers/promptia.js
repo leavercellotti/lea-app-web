@@ -13,7 +13,6 @@ cron.schedule('0 0 * * *', async () => {
     if (index1Doc) {
       // Augmenter l'index du promptia choisi
       nextIndex1 = (index1Doc.index + 1) % prompts1.length;
-      console.log(nextIndex1, prompts1.length)
       // Mettre à jour l'index de niveau 1 dans la base de données
       await Index.findOneAndUpdate({ level: 1 }, { index: nextIndex1 });
     } else {
@@ -26,7 +25,6 @@ cron.schedule('0 0 * * *', async () => {
     if (index2Doc) {
       // Augmenter l'index du promptia choisi
       nextIndex2 = (index2Doc.index + 1) % prompts2.length;
-      console.log(nextIndex2, prompts2.length)
       // Mettre à jour l'index de niveau 2 dans la base de données
       await Index.findOneAndUpdate({ level: 2 }, { index: nextIndex2 });
     } else {
@@ -39,7 +37,6 @@ cron.schedule('0 0 * * *', async () => {
     if (index3Doc) {
       // Augmenter l'index du promptia choisi
       nextIndex3 = (index3Doc.index + 1) % prompts3.length;
-      console.log(nextIndex3, prompts3.length)
       // Mettre à jour l'index de niveau 3 dans la base de données
       await Index.findOneAndUpdate({ level: 3 }, { index: nextIndex3 });
     } else {
@@ -54,10 +51,8 @@ exports.getDailyPrompt = (req, res) => {
   Index.findOne({ level: req.params.level })
     .orFail()
     .then(index => {
-      console.log(index)
       Object.find({level: req.params.level})
         .then(objects => {
-          console.log(objects[index.index].sentence)
           // Vérifier si l'index est valide
           if (index < 0 || index >= objects.length) {
             return res.status(404).json({ error: "Index invalide" });
@@ -99,7 +94,6 @@ exports.delete = (req, res) => {
 
 exports.create = (req, res) => {
     const object = new Object({ ...req.body });
-    console.log(req.body)
     object
       .save()
       .then((savedObject) => res.status(201).json(savedObject._id))
@@ -107,7 +101,6 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-console.log('update')
 const { _id } = req.params;
 const updateData = { ...req.body };
 

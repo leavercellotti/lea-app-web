@@ -10,6 +10,7 @@ function Home() {
     const navigate = useNavigate()
     const podcastsListenedArray = useSelector(store => store.USER.podcastsListenedArray)
     const nbLearnedCards = useSelector(store => store.USER.nbLearnedCards)
+    const nbChatsMade = useSelector(store => store.USER.nbChatsMade)
   return (
     <div>
         <div className={s.top}>
@@ -37,7 +38,7 @@ function Home() {
                     </p>
                     <p>
                         <span className={s.pink}>
-                            0 
+                            {nbChatsMade}
                         </span>
                         pratiques réalisées
                     </p>

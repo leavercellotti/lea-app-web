@@ -4,10 +4,11 @@ import SpeechToText from '../SpeechToText/SpeechToText';
 import { BsArrowUpSquareFill } from "react-icons/bs";
 import icon from '../../../../assets/icon.png'
 import { ChatgptAPI } from '../../../../api/chatgpt-api';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { addNbChatsMade } from '../../../../store/user-slice';
+import { UserAPI } from '../../../../api/user-api';
 
 const ChatGPT = ({prompt}) => {
-  console.log(prompt)
   const [message, setMessage] = useState('');
   const [response, setResponse] = useState('');
   const [messageHistoryUser, setMessageHistoryUser] = useState([]);
@@ -15,9 +16,26 @@ const ChatGPT = ({prompt}) => {
   const [messageHistoryAssistant, setMessageHistoryAssistant] = useState([prompt]);
   const [messageHistory, setMessageHistory] = useState([]);
   const userId = useSelector(store => store.USER._id);
+  const [isFirstUserMessageSent, setIsFirstUserMessageSent] = useState(false)
+  const dispatch = useDispatch()
+  const token = useSelector(store => store.USER.token)
 
   const chatEndRef = useRef(null); // Référence vers le dernier élément du chat
+
+  const updateNbChatsMade = async (knowledge) => {
+    // Effectuer l'appel API pour mettre à jour les cartes de l'utilisateur
+     try {
+       await UserAPI.updateNbChatsMade(token, userId);
+     } catch (error) {
+       console.error('Erreur lors de la mise à jour des cartes de l\'utilisateur :', error);
+     }
+   };
   const handleSendMessage = async () => {
+    if(!isFirstUserMessageSent) {
+      setIsFirstUserMessageSent(true)
+      dispatch(addNbChatsMade())
+      updateNbChatsMade()
+    }
     try {
       const correctionMessage = { 
         role: 'user', 
@@ -53,7 +71,6 @@ const ChatGPT = ({prompt}) => {
   };
 
   useEffect(() => {
-    console.log("effect")
     setMessageHistoryAssistant([prompt]);
   }, [prompt]);
 

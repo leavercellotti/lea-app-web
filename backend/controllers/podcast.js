@@ -36,7 +36,6 @@ exports.create = (req, res) => {
   };
 
 exports.update = (req, res) => {
-  console.log('update')
   const { _id } = req.params;
   const updateData = { ...req.body };
 

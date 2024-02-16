@@ -4,10 +4,8 @@ const BASE_URL ="https://lea-english.onrender.com/api/promptia"
 
 export class PromptiaAPI {
     static async getDailyPrompt(level, token) {
-        console.log(level)
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         const response = await axios.get(`${BASE_URL}/daily/${level}`);
-        console.log(response.data)
         return response.data;
     }
 

@@ -24,7 +24,6 @@ const CardViewer = ({ cardArray, setRevise, revise }) => {
     setTimeout(() => {
         setRecto(true);
       setCurrentCardIndex(prevIndex => (prevIndex < cardArray.length - 1 ? prevIndex + 1 : prevIndex));
-      console.log(nbLearnedCards, cardArray.length)
       if(currentCardIndex === cardArray.length - 1){
         if(revise) {
           setRevise(false)
@@ -99,7 +98,7 @@ const CardViewer = ({ cardArray, setRevise, revise }) => {
             <p>Révisons</p>
             }
             {currentCardIndex + 1} / {cardArray.length}
-            <p>Cliquez sur la carte pour la retourner</p>
+            <p className={s.fadeInDown}>Cliquez sur la carte pour la retourner</p>
             <div className={isVisible ? s.visibleCard : s.hiddenCard}>
               
                 <Card toggleRecto={toggleRecto} card={cardArray[currentCardIndex]} recto={recto} />

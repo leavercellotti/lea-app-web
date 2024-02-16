@@ -1,6 +1,6 @@
 import axios from "axios"
-//const BASE_URL ="http://localhost:3000/api/user"  
-const BASE_URL ="https://lea-english.onrender.com/api/user"
+const BASE_URL ="http://localhost:3000/api/user"  
+//const BASE_URL ="https://lea-english.onrender.com/api/user"
 
 export class UserAPI{
     static async create(user) {
@@ -38,7 +38,6 @@ export class UserAPI{
     static async updateLikedPodcasts(token, userId, liked, podcastId) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         try {
-            console.log(userId, liked)
           const response = await axios.put(`${BASE_URL}/update-liked-podcasts`, { userId,liked, podcastId });
           return response.data;
         } catch (error) {
@@ -66,7 +65,7 @@ export class UserAPI{
         console.error('Error nb listened podcasts:', error);
         throw error;
       }
-  }
+    }
     static async addCard(token, userId, cardId, knowledge) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         try {
@@ -88,4 +87,14 @@ export class UserAPI{
           throw error;
         }
     }
+    static async updateNbChatsMade(token, userId) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      try {
+        const response = await axios.put(`${BASE_URL}/update-nbChatsMade`, { userId });
+        return response.data;
+      } catch (error) {
+        console.error('Error nb chats:', error);
+        throw error;
+      }
+  }
 }
