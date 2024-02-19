@@ -85,6 +85,13 @@ const ChatGPT = ({prompt}) => {
       </div>
       {prompt &&
       <div className={s.chat}>
+        <div className={s.assistant}>
+              <div className={s.assistantBox}>
+                Hello !
+                I hope you're having a great day. Thanks for taking the time to have a conversation with me.
+                Let's begin with this question :
+              </div>
+            </div>
         {messageHistoryAssistant.map((msg, index) => (
           <div key={index}>
             <div className={s.assistant}>
@@ -118,11 +125,17 @@ const ChatGPT = ({prompt}) => {
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
+          // quand on clique sur enter, ça envoie la réponse
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && message !== "") {
+              handleSendMessage();
+            }
+          }}
         />
         <BsArrowUpSquareFill 
           size={40} 
           className={s.sendIcon} 
-          onClick={handleSendMessage} 
+          onClick={message!=="" ? handleSendMessage : null} 
         />
         <SpeechToText 
           setMessage={setMessage}

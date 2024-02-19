@@ -56,3 +56,8 @@
     right: 0;
     bottom: 0;
 }
+
+.y {
+    padding: 10px 25px;
+    /* background-color: yellow; */
+}

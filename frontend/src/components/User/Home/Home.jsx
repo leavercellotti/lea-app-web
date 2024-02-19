@@ -17,7 +17,7 @@ function Home() {
             <div className={s.empty}></div>
             <div className={s.title}>
                 <h1>Léa English</h1>
-                <p>Progressez en anglais en 15 minutes par jour ! Choisissez une des 3 compétences à travailler aujourd'hui.</p>
+                <p>Progressez en anglais en 15 minutes par <span style={{whiteSpace:"nowrap"}}>jour !</span> Choisissez une des 3 compétences à travailler aujourd'hui.</p>
             </div>
             <div className={s.progressContainer}>
                 <div className={s.progressBox}>

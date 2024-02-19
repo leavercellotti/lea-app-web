@@ -5,6 +5,7 @@
 }
 
 .checkboxLabel {
+    cursor: pointer;
     font-weight: 550;
     margin-top: 12px;
     margin-left: 10px;
@@ -14,6 +15,7 @@
 }
 
 .checkboxInput {
+    cursor: pointer;
     width: 20px; /* Ajustez la largeur selon vos besoins */
     height: 20px; /* Ajustez la hauteur selon vos besoins */
     vertical-align: middle;

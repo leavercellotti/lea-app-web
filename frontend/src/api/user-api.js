@@ -1,6 +1,6 @@
 import axios from "axios"
-const BASE_URL ="http://localhost:3000/api/user"  
-//const BASE_URL ="https://lea-english.onrender.com/api/user"
+//const BASE_URL ="http://localhost:3000/api/user"  
+const BASE_URL ="https://lea-english.onrender.com/api/user"
 
 export class UserAPI{
     static async create(user) {

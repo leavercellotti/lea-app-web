@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom'
 import { PromptiaAPI } from '../../../api/promptia-api';
 import Level from '../../../components/User/Level/Level';
+import { MdOutlineSchool } from "react-icons/md";
 
 function AI() {
   const [prompt, setPrompt] = useState(null);
@@ -29,7 +30,7 @@ function AI() {
         setPrompt(dailyPrompt);
       } catch (error) {
         console.error("Error fetching podcasts:", error);
-        //navigate('/login')
+        navigate('/login')
       }
     };
     if(level) {
@@ -41,6 +42,10 @@ function AI() {
       <h1>
         Pratique
       </h1>
+      <h2 style={{display:"flex", justifyContent:"center"}}>
+        <div>Tuteur virtuel </div>
+        <MdOutlineSchool style={{paddingLeft:"10px"}} size={34} />
+      </h2>
       <div className='container'>
         
         {levelSpecific && levelSpecific !== ""?

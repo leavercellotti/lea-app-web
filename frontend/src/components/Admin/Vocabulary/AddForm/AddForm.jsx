@@ -383,7 +383,7 @@ function AddForm({list, setList, setShowForm}) {
         </label>
         <br />
 
-        <label htmlFor="translation" className="form-label">
+        <label htmlFor="sentence1" className="form-label">
           <div className={s.title}>
             Phrase 1:
           </div>
@@ -397,7 +397,7 @@ function AddForm({list, setList, setShowForm}) {
             />
           </div>
         </label>
-        <label htmlFor="translation" className="form-label">
+        <label htmlFor="sentence2" className="form-label">
           <div className={s.title}>
             Phrase 2:
           </div>
@@ -411,7 +411,7 @@ function AddForm({list, setList, setShowForm}) {
             />
           </div>
         </label>
-        <label htmlFor="translation" className="form-label">
+        <label htmlFor="sentence3" className="form-label">
           <div className={s.title}>
             Phrase 3:
           </div>

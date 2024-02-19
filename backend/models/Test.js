@@ -1,36 +1,20 @@
 const mongoose = require('mongoose')
-const testSchema = mongoose.Schema({
-    title:{
-        type:String,
-        required:true,
-        maxlength:60,
-    },
-    desc:{
-        type:String,
-        required:true,
-        maxlength:200,
-    },
-    image:{
+const schema = mongoose.Schema({
+    sentence:{
         type:String,
         required:true,
     },
-    prices:{
-        type:[Number], //array that only includes numbers
-        require:true,
+    answer: {
+        type: String,
+        required: true,
+        enum: ["a", "b", "c", "d"],
     },
-    ingredients:{
-        type:[String],
-        required:true,
-    },
-    extras:{
-        type:[
-            {
-                text:{type:String, required:true}, 
-                price:{type:Number, required:true}
-            },
-        ],
+    optionArray: {
+        type: [String],
+        required: true,
+        default: [],
     },
 },
 {timestamps: true})
 
-module.exports = mongoose.model('Test', testSchema)
+module.exports = mongoose.model('Test', schema)

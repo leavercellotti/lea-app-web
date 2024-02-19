@@ -1,0 +1,11 @@
+
+.formContainer {
+    background-color: rgba(226, 224, 222, 0.847);
+    padding: 10px;
+    margin-bottom: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 10px;
+    box-shadow: 3px 3xp grey;
+}
+

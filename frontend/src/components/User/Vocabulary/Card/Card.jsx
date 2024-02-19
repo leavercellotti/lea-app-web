@@ -38,10 +38,14 @@ function Card({ card, recto, toggleRecto }) {
             // </span>
             }
           </p>
-          <AiFillSound 
-            className={s.soundIcon} 
-            size={30} 
-            onClick={speakWord} />
+          <div 
+            onClick={speakWord}
+            className={s.y}>
+            <AiFillSound 
+              className={s.soundIcon} 
+              size={30} 
+               />
+          </div>
         </div>)
       }
       <img src={icon} alt="" className={s.icon2} />
