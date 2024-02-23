@@ -34,7 +34,7 @@ function AddForm({list, setList, setShowForm}) {
       <div className="mb-3">
         <h2>Création</h2>
         <label htmlFor="sentence" className="form-label">
-          <div className={s.sentence}>
+          <div className={s.title}>
             Phrase: 
           </div>
           <div className={s.textareaContainer}>

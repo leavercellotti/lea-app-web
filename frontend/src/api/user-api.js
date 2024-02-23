@@ -97,4 +97,31 @@ export class UserAPI{
         throw error;
       }
   }
+
+  static async sendPasswordResetEmail(email) {
+    console.log(email)
+    return (
+        await axios.post(`${BASE_URL}/reset-password`, email)
+        .catch(function(error) {
+            if (error.response) {
+                console.log("error status",error.response.status);
+                return false
+            }
+        }
+    ))
+  }
+
+  static async verifyUser(email,enteredOTP) {
+    console.log(email)
+    return (
+        await axios.post(`${BASE_URL}/verify-user`, {email, enteredOTP})
+        .catch(function(error) {
+            if (error.response) {
+                console.log("error status",error.response.status);
+                return false
+            }
+        }
+    ))
+  }
+
 }

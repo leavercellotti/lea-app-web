@@ -42,10 +42,6 @@ function AI() {
       <h1>
         Pratique
       </h1>
-      <h2 style={{display:"flex", justifyContent:"center"}}>
-        <div>Tuteur virtuel </div>
-        <MdOutlineSchool style={{paddingLeft:"10px"}} size={34} />
-      </h2>
       <div className='container'>
         
         {levelSpecific && levelSpecific !== ""?

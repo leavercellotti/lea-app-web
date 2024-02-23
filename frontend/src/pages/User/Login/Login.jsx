@@ -63,7 +63,7 @@ function Login({setToken}) {
   }
   return (
     <div style={{marginTop: '150px', display:'flex', justifyContent:'center'}}>
-        <div style={{backgroundColor: '#9BB5D8', padding: '20px 5px', width: '700px', maxWidth:'90%'}}>
+        <div style={{backgroundColor: '#9BB5D8', padding: '20px 5px', width: '700px', maxWidth:'90%', maxHeight:"380px"}}>
         <h1 className='h1'>
             Login
         </h1>

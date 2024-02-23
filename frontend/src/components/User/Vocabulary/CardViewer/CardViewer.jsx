@@ -49,6 +49,7 @@ const CardViewer = ({ cardArray, setRevise, revise }) => {
 //   };
 
   function toggleRecto() {
+    //setRecto(false)
     setRecto(prevRecto => !prevRecto);
   }
   const scrollToSection = () => {

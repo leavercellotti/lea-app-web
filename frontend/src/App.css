@@ -55,6 +55,7 @@ h1,h2 {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  min-height: 70vh;
 }
 
 .light {
@@ -89,6 +90,10 @@ h1,h2 {
 }
 
 .option.selected {
+  background-color: #ab4a43;
+}
+
+.option-selected {
   background-color: #ab4a43;
 }
 

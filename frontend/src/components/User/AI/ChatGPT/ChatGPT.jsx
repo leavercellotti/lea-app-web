@@ -7,6 +7,7 @@ import { ChatgptAPI } from '../../../../api/chatgpt-api';
 import { useDispatch, useSelector } from 'react-redux';
 import { addNbChatsMade } from '../../../../store/user-slice';
 import { UserAPI } from '../../../../api/user-api';
+import { MdOutlineSchool } from 'react-icons/md';
 
 const ChatGPT = ({prompt}) => {
   const [message, setMessage] = useState('');
@@ -56,6 +57,7 @@ const ChatGPT = ({prompt}) => {
         role: 'user', 
         content: `Provide a short response to the last question and ask a related question different than the previous ones : ${messageHistoryUser.map((userMessage, index) => `question ${index}: ${messageHistoryAssistant[index]}, response : ${userMessage}.`).join('\n')} last question : ${messageHistoryAssistant[messageHistoryAssistant.length - 1]}, response : ${message}`
       };
+      console.log(messageHistoryUser)
       //You are an English teacher. The initial question you have asked to the user was 'Have you ever traveled to another country? If so, where?'
       //Provide a short response and ask a related question but not a question that you already have the answer here : ${message} \n ${messageHistoryUser.map((userMessage, index) => `${userMessage}.`).join('\n')}
 
@@ -83,6 +85,10 @@ const ChatGPT = ({prompt}) => {
       <div className="right">
         <img src={icon} alt="" className='favicon'/>
       </div>
+      <h2 style={{display:"flex", justifyContent:"center"}}>
+        <div>Tuteur virtuel </div>
+        <MdOutlineSchool style={{paddingLeft:"10px"}} size={34} />
+      </h2>
       {prompt &&
       <div className={s.chat}>
         <div className={s.assistant}>

@@ -3,6 +3,8 @@ const Object = require('../models/User')
 const jwt = require('jsonwebtoken');
 const JWT_SECRET_USER = process.env.JWT_SECRET_USER;
 const cron = require('node-cron');
+const otpGenerator = require('otp-generator');
+const nodemailer = require('nodemailer');
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
       .then(hash => {
@@ -300,3 +302,79 @@ exports.create = (req, res) => {
       .catch(error => res.status(400).json({ error }));
   };
   
+
+
+  exports.sendPasswordResetEmail = async (req, res) => {
+    console.log(req.body);
+    const otp = otpGenerator.generate(6, { digits: true, alphabets: false, upperCase: false, specialChars: false });
+  
+    try {
+      // Générez le hachage de l'OTP
+      const otpHashed = await bcrypt.hash(otp, 10);
+  
+      // Enregistrez le hachage de l'OTP dans la base de données ou tout autre endroit approprié
+      // Si vous utilisez un modèle User, vous pouvez le faire comme ceci :
+      const user = await Object.findOneAndUpdate({ email: req.body.email }, { otp: otpHashed });
+  
+      // Créez un transporteur nodemailer pour envoyer l'e-mail
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: 'testa.webdeveloper@gmail.com',
+          pass: 'yysm qlyf kjae vads'
+        },
+        tls: {
+          rejectUnauthorized: false
+        }
+      });
+  
+      // Définissez les options de l'e-mail
+      const mailOptions = {
+        from: 'Léa English <testa.webdeveloper@gmail.com>',
+        to: `${req.body.email}`,
+        subject: 'Demande de réinitialisation de mot de passe - Léa English',
+        text: `Votre code de réinitialisation de mot de passe est : ${otp}`,
+        html: `<p>Bonjour,</p>
+        <p>Vous avez demandé à réinitialiser votre mot de passe.</p>
+        <p>Votre code de réinitialisation de mot de passe est :</p>
+        <h1>${otp}</h1>
+        <p>Copiez ce code et utilisez-le pour réinitialiser votre mot de passe.</p>
+        <p>Si vous n'avez pas demandé cette réinitialisation, veuillez ignorer cet e-mail.</p>
+        <p>Cordialement,</p>
+        <p>Léa English</p>`
+      };
+  
+      // Envoyez l'e-mail
+      const info = await transporter.sendMail(mailOptions);
+      console.log('Email envoyé : ' + info.response);
+  
+      // Répondez avec succès et renvoyez l'OTP haché
+      res.status(200).json({ message: 'Email envoyé avec succès' });
+    } catch (error) {
+      console.error("Erreur lors de l'envoi du mail :", error);
+      res.status(500).json({ error });
+    }
+  };
+
+exports.verifyUser = (req, res) => {
+  console.log(req.body);
+  Object.findOne({ email: req.body.email })
+    .then(user => {
+      if (!user) {
+        return res.status(401).json({ error: 'Utilisateur non trouvé !' });
+      }
+      
+      bcrypt.compare(req.body.enteredOTP, user.otp)
+        .then(valid => {
+          console.log("bcrypt", req.body.enteredOTP, user.otp);
+          if (!valid) {
+            console.log("pas ok");
+            return res.status(401).json({ error: 'Mot de passe incorrect !' });
+          }
+          console.log("ok");
+          res.status(200).json("ok");
+        })
+        .catch(error => res.status(500).json({ error }));
+    })
+    .catch(error => res.status(500).json({ error }));
+};

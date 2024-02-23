@@ -13,5 +13,7 @@ router.put('/add-card',authUser, controllers.addCard);
 router.put('/update-level',authUser, controllers.updateLevel)
 router.put('/update-number-downloaded-podcasts',authUser, controllers.updateNbDownloadedPodcastsToday)
 router.put('/update-nbChatsMade',authUser, controllers.updateNbChatsMade)
+router.post('/reset-password', controllers.sendPasswordResetEmail);
+router.post('/verify-user', controllers.verifyUser);
 
 module.exports = router;
