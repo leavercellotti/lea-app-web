@@ -4,11 +4,12 @@
     position: relative;
     background-color: white;
     border-radius: 10px;
-    width: 220px;
+    width: 240px;
     height: 320px;
     /* height: 150px; */
     margin: 20px 0;
-    padding: 10px 20px;
+    padding: 10px 0px;
+    /* 10 20 */
     transition: transform 0.5s; /* Ajoutez une transition pour une animation fluide */
     cursor: pointer;
     }
@@ -20,25 +21,36 @@
     transform: perspective(1000px) rotateY(180deg); /* Rotation à 180 degrés pour le verso */
 }
 
+.coloredBox {
+    height: 50px;
+}
+.coloredBoxRecto{
+    background-color:#6D8CBF;
+}
+.coloredBoxVerso {
+    background-color:#AF2B26;
+    transform: rotateY(180deg);
+}
 .verso .text {
     transform: rotateY(180deg); /* Rotation inverse pour le texte du verso */
     /* Ajoutez d'autres styles spécifiques au verso si nécessaire */
   }
 .centeredContent {
     text-align: center;
-    /* height: 250px; */
-    height: 100%;
+    height: 220px; 
+    /* height: 100%; */
     display: flex;
     flex-direction: column;
     justify-content: center; /* Centre horizontalement */
     align-items: center; /* Centre verticalement */
+    padding: 0 20px;
 }
 
 .icon {
     width: 45px;
     position:absolute;
     left: 0;
-    top: 0;
+    top: 10px;
 }
 
 .soundIcon {
@@ -61,3 +73,18 @@
     padding: 10px 25px;
     /* background-color: yellow; */
 }
+
+.flagRecto {
+    width: 50px;
+    position:absolute;
+    right: 5px;
+    top:17px;
+}
+
+.flagVerso {
+    width: 50px;
+    position:absolute;
+    right: 5px;
+    top:8px;
+}
+

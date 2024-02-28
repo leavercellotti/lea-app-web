@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import s from "./style.module.css";
 import { CardAPI } from '../../../../api/card-api';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function ModifyItem({
   setShowOverlay, list, setList, item, modifyItem, setShowModifyBtn
@@ -19,12 +20,11 @@ function ModifyItem({
   const [newSentence3, setNewSentence3] = useState(sentence3);
   const modifySentenceArray = [newSentence1, newSentence2, newSentence3];
 
+  const navigate = useNavigate()
   const adminToken = useSelector(store => store.ADMIN.token);
 
   function onEditHandler() {
     const filteredSentenceArray = modifySentenceArray.filter(chaine => chaine !== "");
-    console.log(filteredSentenceArray)
-    
     const updatedItem = {
       ...item,
       wordEnglish: newWordEnglish,
@@ -44,6 +44,7 @@ function ModifyItem({
       })
       .catch((error) => {
         console.error(error);
+        navigate('/jgieojoergj0replj')
       });
   }  
 

@@ -7,6 +7,7 @@ function EmailPw({login, connectHandler, addHandler}) {
     const passwordInputRef = useRef()
     const [isPwShown, setIsPwShown] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
+    const [validatePW,setValidatePW] = useState(false)
 
     function togglePwShown() {
         isPwShown? setIsPwShown(false) : setIsPwShown(true)
@@ -14,16 +15,24 @@ function EmailPw({login, connectHandler, addHandler}) {
     function submitHandler(e) {
         e.preventDefault()
         const enteredEmail = emailInputRef.current.value.toLowerCase()
-        const enteredPassword = passwordInputRef.current.value
-        const user = {
-            email: enteredEmail,
-            password: enteredPassword
+        if(isValidEmail(enteredEmail) && validatePW){
+            const enteredPassword = passwordInputRef.current.value
+            const user = {
+                email: enteredEmail,
+                password: enteredPassword
+            }
+            if(login) {
+                connectHandler(user)
+            }
+            else{
+                addHandler(user)
+            }
         }
-        if(login) {
-            connectHandler(user)
+        else if(!isValidEmail(enteredEmail)){
+            alert("Adresse mail non valide")
         }
-        else{
-            addHandler(user)
+        else {
+            alert("Mot de passe non valide")
         }
     }
 
@@ -34,10 +43,18 @@ function EmailPw({login, connectHandler, addHandler}) {
             minUppercase: 1, minNumbers: 1, minSymbols: 0
         })) {
             setErrorMessage('Mot de passe sécurisé')
+            setValidatePW(true)
         } 
         else {
             setErrorMessage('Mot de passe faible')
+            setValidatePW(false)
         }  
+    }
+
+    function isValidEmail(email) {
+        // Expression régulière pour vérifier l'adresse e-mail
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email); // Retourne true si l'adresse e-mail est valide, sinon false
     }
   return (
     <div className={s.innerContainer}>
@@ -80,6 +97,20 @@ function EmailPw({login, connectHandler, addHandler}) {
                     </span>
                     </div>
                 </div>
+                {!login &&
+                <>
+                    <div style={{textAlign:"center"}}>
+                        <span style={{
+                            fontWeight: 'bold',
+                            color: validatePW? 'green' : 'red',
+                        }}>
+                            {errorMessage}
+                        </span>
+                    </div>
+                    <div style={{marginTop: "15px"}}>
+                        Le mot de passe doit être de taille supérieur à 8, contenir une majuscule et un chiffre.
+                    </div>
+                </>}
                 <div className={s.btnValidateContainer}>
                     <button 
                         className='btn'

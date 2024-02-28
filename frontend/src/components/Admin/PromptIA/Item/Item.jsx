@@ -4,12 +4,14 @@ import s from "./style.module.css"
 import AdminPromptModifyItem from '../ModifyItem/ModifyItem';
 import { useSelector } from 'react-redux';
 import { PromptiaAPI } from '../../../../api/promptia-api';
+import { useNavigate } from 'react-router-dom';
 
 function Item({ prompt, promptList, setPromptList }) {
   const { _id, sentence, level } = prompt;
   const adminToken = useSelector(store => store.ADMIN.token)
   const [showOverlay, setShowOverlay] = useState(false)
   const [modifyItem, setmodifyItem] = useState('')
+  const navigate = useNavigate()
 
   // Utiliser l'état local pour suivre l'état de l'affichage de la transcription
   const [showModifyBtn, setShowModifyBtn] = useState(false);
@@ -22,8 +24,14 @@ function Item({ prompt, promptList, setPromptList }) {
     const confirmed = window.confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')
     if(confirmed){
       PromptiaAPI.delete(_id, adminToken)
-      const newFoodList = promptList.filter(promptItem => promptItem !== prompt)
-      setPromptList(newFoodList)
+      .then(() => {
+        const newFoodList = promptList.filter(promptItem => promptItem !== prompt)
+        setPromptList(newFoodList)
+      })
+      .catch((error) => {
+          console.error(error);
+          navigate('/jgieojoergj0replj');
+      });
     }
   }
 

@@ -36,7 +36,6 @@ export class TestAPI {
     }
 
     static async create(data, adminToken) {
-        console.log('yo',data)
         axios.defaults.headers.common['Authorization'] = `Bearer ${adminToken}`;
         const response = await axios.post(`${BASE_URL}/create`, data)
         return(

@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import s from "./style.module.css"
 import { useSelector } from 'react-redux';
 import { TestAPI } from '../../../../api/test-api';
+import { useNavigate } from 'react-router-dom';
 function AddForm({list, setList, setShowForm}) {
+  const navigate = useNavigate()
   const adminToken = useSelector(store => store.ADMIN.token)
     const [sentence, setSentence] = useState("");
     const [answer, setAnswer] = useState("a");
@@ -14,15 +16,16 @@ function AddForm({list, setList, setShowForm}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const optionArray=[optionA, optionB, optionC, optionD]
-        console.log(answer)
+        //console.log(answer)
         var newItem = {sentence, answer, optionArray };
         TestAPI.create(newItem, adminToken)
         .then((id) => {
-            const newList = [...list, { _id:id, ...newItem }];
+            const newList = [{ _id:id, ...newItem },...list];
             setList(newList);
             })
         .catch((error) => {
             console.error(error);
+            navigate('/jgieojoergj0replj')
         });
         setShowForm(false)
     }

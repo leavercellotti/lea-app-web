@@ -4,12 +4,14 @@ import s from "./style.module.css"
 import AdminModifyItem from '../ModifyItem/ModifyItem';
 import { useSelector } from 'react-redux';
 import { TestAPI } from '../../../../api/test-api';
+import { useNavigate } from 'react-router-dom';
 
 function Item({ item, list, setList }) {
   const { _id, sentence, answer, optionArray } = item;
   const adminToken = useSelector(store => store.ADMIN.token)
   const [showOverlay, setShowOverlay] = useState(false)
   const [modifyItem, setmodifyItem] = useState('')
+  const navigate = useNavigate()
 
   // Utiliser l'état local pour suivre l'état de l'affichage de la transcription
   const [showModifyBtn, setShowModifyBtn] = useState(false);
@@ -22,8 +24,14 @@ function Item({ item, list, setList }) {
     const confirmed = window.confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')
     if(confirmed){
       TestAPI.delete(_id, adminToken)
-      const newFoodList = list.filter(listItem => listItem !== item)
-      setList(newFoodList)
+      .then(() => {
+        const newFoodList = list.filter(listItem => listItem !== item)
+        setList(newFoodList)
+      })
+      .catch((error) => {
+          console.error(error);
+          navigate('/jgieojoergj0replj');
+      });
     }
   }
 

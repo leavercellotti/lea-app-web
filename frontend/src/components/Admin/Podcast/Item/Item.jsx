@@ -4,12 +4,14 @@ import s from "./style.module.css"
 import { PodcastAPI } from '../../../../api/podcast-api';
 import AdminPodcastModifyItem from '../ModifyItem/ModifyItem';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function Item({ podcast, podcastList, setPodcastList }) {
   const { _id, link, title, transcription, translation, image, level } = podcast;
   const adminToken = useSelector(store => store.ADMIN.token)
   const [showOverlay, setShowOverlay] = useState(false)
   const [modifyItem, setmodifyItem] = useState('')
+  const navigate = useNavigate()
 
   // Utiliser l'état local pour suivre l'état de l'affichage de la transcription
   const [showModifyBtn, setShowModifyBtn] = useState(false);
@@ -22,8 +24,14 @@ function Item({ podcast, podcastList, setPodcastList }) {
     const confirmed = window.confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')
     if(confirmed){
       PodcastAPI.delete(_id, adminToken)
-      const newFoodList = podcastList.filter(podcastItem => podcastItem !== podcast)
-      setPodcastList(newFoodList)
+      .then(() => {
+        const newFoodList = podcastList.filter(podcastItem => podcastItem !== podcast)
+        setPodcastList(newFoodList)
+      })
+      .catch((error) => {
+          console.error(error);
+          navigate('/jgieojoergj0replj');
+      });
     }
   }
 

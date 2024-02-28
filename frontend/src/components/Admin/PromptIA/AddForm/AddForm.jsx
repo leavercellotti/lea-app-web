@@ -3,21 +3,24 @@ import s from "./style.module.css"
 import { PodcastAPI } from '../../../../api/podcast-api';
 import { useSelector } from 'react-redux';
 import { PromptiaAPI } from '../../../../api/promptia-api';
+import { useNavigate } from 'react-router-dom';
 function AddForm({list, setList, setShowForm}) {
   const adminToken = useSelector(store => store.ADMIN.token)
     const [sentence, setSentence] = useState("");
     const [level, setLevel] = useState(1);
+    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         var newItem = {sentence, level};
         PromptiaAPI.create(newItem, adminToken)
         .then((id) => {
-            const newList = [...list, { _id:id, ...newItem }];
+            const newList = [{ _id:id, ...newItem }, ...list];
             setList(newList);
             })
         .catch((error) => {
             console.error(error);
+            navigate('/jgieojoergj0replj')
         });
         setShowForm(false)
     }

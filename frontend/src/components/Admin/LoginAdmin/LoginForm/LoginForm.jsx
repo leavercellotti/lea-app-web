@@ -16,22 +16,17 @@ export function LoginForm({setAdminToken}) {
     
 
     async function connectHandler(data) {
-        console.log(data)
         const response = await AdminAPI.connect(data)
                             .then(function(response) { 
                                 return response
                               })
         if(response) {
-            console.log("setAdminToken", setAdminToken)
             if(setAdminToken){
-                console.log('yo')
                 setAdminToken(response.data.token)
                 localStorage.setItem('admin-token', JSON.stringify(response.data.token));
             }
-            console.log(response.data)
             
             const token= response.data.token
-            console.log(response, token)
             dispatch(setTokenAdmin({token:token}))
             navigate('/jgieojoergj0replj-vocabulary')
         }

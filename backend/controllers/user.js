@@ -302,59 +302,61 @@ exports.create = (req, res) => {
       .catch(error => res.status(400).json({ error }));
   };
   
-
-
   exports.sendPasswordResetEmail = async (req, res) => {
     console.log(req.body);
     const otp = otpGenerator.generate(6, { digits: true, alphabets: false, upperCase: false, specialChars: false });
-  
+
     try {
-      // Générez le hachage de l'OTP
-      const otpHashed = await bcrypt.hash(otp, 10);
-  
-      // Enregistrez le hachage de l'OTP dans la base de données ou tout autre endroit approprié
-      // Si vous utilisez un modèle User, vous pouvez le faire comme ceci :
-      const user = await Object.findOneAndUpdate({ email: req.body.email }, { otp: otpHashed });
-  
-      // Créez un transporteur nodemailer pour envoyer l'e-mail
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: 'testa.webdeveloper@gmail.com',
-          pass: 'yysm qlyf kjae vads'
-        },
-        tls: {
-          rejectUnauthorized: false
-        }
-      });
-  
-      // Définissez les options de l'e-mail
-      const mailOptions = {
-        from: 'Léa English <testa.webdeveloper@gmail.com>',
-        to: `${req.body.email}`,
-        subject: 'Demande de réinitialisation de mot de passe - Léa English',
-        text: `Votre code de réinitialisation de mot de passe est : ${otp}`,
-        html: `<p>Bonjour,</p>
-        <p>Vous avez demandé à réinitialiser votre mot de passe.</p>
-        <p>Votre code de réinitialisation de mot de passe est :</p>
-        <h1>${otp}</h1>
-        <p>Copiez ce code et utilisez-le pour réinitialiser votre mot de passe.</p>
-        <p>Si vous n'avez pas demandé cette réinitialisation, veuillez ignorer cet e-mail.</p>
-        <p>Cordialement,</p>
-        <p>Léa English</p>`
-      };
-  
-      // Envoyez l'e-mail
-      const info = await transporter.sendMail(mailOptions);
-      console.log('Email envoyé : ' + info.response);
-  
-      // Répondez avec succès et renvoyez l'OTP haché
-      res.status(200).json({ message: 'Email envoyé avec succès' });
+        // Générez le hachage de l'OTP
+        const otpHashed = await bcrypt.hash(otp, 10);
+
+        // Enregistrez le hachage de l'OTP dans la base de données
+        await Object.updateOne({ email: req.body.email }, { otp: otpHashed, otpExpiration: Date.now() + 120000 });
+
+        // Créez un transporteur nodemailer pour envoyer l'e-mail
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: 'testa.webdeveloper@gmail.com',
+                pass: 'yysm qlyf kjae vads'
+            },
+            tls: {
+                rejectUnauthorized: false
+            }
+        });
+
+        // Définissez les options de l'e-mail
+        const mailOptions = {
+            from: 'Léa English <testa.webdeveloper@gmail.com>',
+            to: `${req.body.email}`,
+            subject: 'Demande de réinitialisation de mot de passe - Léa English',
+            text: `Votre code de réinitialisation de mot de passe est : ${otp}`,
+            html: `<p>Bonjour,</p>
+            <p>Vous avez demandé à réinitialiser votre mot de passe.</p>
+            <p>Votre code de réinitialisation de mot de passe est :</p>
+            <h1>${otp}</h1>
+            <p>Copiez ce code et utilisez-le pour réinitialiser votre mot de passe.</p>
+            <p>Si vous n'avez pas demandé cette réinitialisation, veuillez ignorer cet e-mail.</p>
+            <p>Cordialement,</p>
+            <p>Léa English</p>`
+        };
+
+        // Envoyez l'e-mail
+        const info = await transporter.sendMail(mailOptions);
+        console.log('Email envoyé : ' + info.response);
+
+        // Répondez avec succès et renvoyez l'OTP haché
+        res.status(200).json({ message: 'Email envoyé avec succès' });
+        // Planifiez une tâche de nettoyage pour supprimer l'OTP après 2 minutes
+        setTimeout(async () => {
+          await Object.updateOne({ email: req.body.email }, { $unset: { otp: "", otpExpiration: "" } });
+          console.log('OTP supprimé après expiration.');
+      }, 120000); // 120000 ms = 2 minutes
     } catch (error) {
-      console.error("Erreur lors de l'envoi du mail :", error);
-      res.status(500).json({ error });
+        console.error("Erreur lors de l'envoi du mail :", error);
+        res.status(500).json({ error });
     }
-  };
+};
 
 exports.verifyUser = (req, res) => {
   console.log(req.body);
@@ -372,9 +374,37 @@ exports.verifyUser = (req, res) => {
             return res.status(401).json({ error: 'Mot de passe incorrect !' });
           }
           console.log("ok");
-          res.status(200).json("ok");
+          res.status(200).json({
+            userId: user._id});
         })
         .catch(error => res.status(500).json({ error }));
     })
     .catch(error => res.status(500).json({ error }));
+};
+
+exports.updatePW = async (req, res) => {
+  console.log("update");
+  const userId = req.body.userId;
+  const newPassword = req.body.password; // Renommer la variable pour plus de clarté
+  console.log(userId, newPassword);
+  try {
+    const user = await Object.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found.' });
+    }
+    
+    // Hacher le nouveau mot de passe
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    
+    // Mettre à jour le mot de passe de l'utilisateur
+    user.password = hashedPassword;
+    
+    // Enregistrer l'objet utilisateur mis à jour dans la base de données
+    await user.save();
+    
+    res.status(200).json({ message: 'User password updated successfully.' });
+  } catch (error) {
+    console.error('Error updating user password:', error);
+    res.status(500).json({ error: 'Error updating user password.' });
+  }
 };

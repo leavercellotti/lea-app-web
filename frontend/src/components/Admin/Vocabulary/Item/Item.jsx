@@ -5,6 +5,7 @@ import { PodcastAPI } from '../../../../api/podcast-api';
 import AdminModifyItem from '../ModifyItem/ModifyItem';
 import { useSelector } from 'react-redux';
 import { CardAPI } from '../../../../api/card-api';
+import { useNavigate } from 'react-router-dom';
 
 function Item({ item, list, setList }) {
   const { _id, wordEnglish, wordFrench, level, sentenceArray} = item;
@@ -15,18 +16,27 @@ function Item({ item, list, setList }) {
   // Utiliser l'état local pour suivre l'état de l'affichage de la transcription
   const [showModifyBtn, setShowModifyBtn] = useState(false);
 
+  const navigate = useNavigate()
+  
   function toggleShowModifyBtn() {
     showModifyBtn? setShowModifyBtn(false) : setShowModifyBtn(true)
   }
 
   function onDeleteHandler() {
-    const confirmed = window.confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')
-    if(confirmed){
-      CardAPI.delete(_id, adminToken)
-      const newList = list.filter(newItem => newItem !== item)
-      setList(newList)
+    const confirmed = window.confirm('Êtes-vous sûr de vouloir supprimer cet élément ?');
+    if (confirmed) {
+        CardAPI.delete(_id, adminToken)
+            .then(() => {
+                const newList = list.filter(newItem => newItem !== item);
+                setList(newList);
+            })
+            .catch((error) => {
+                console.error(error);
+                navigate('/jgieojoergj0replj');
+            });
     }
-  }
+}
+
 
   return (
     <>

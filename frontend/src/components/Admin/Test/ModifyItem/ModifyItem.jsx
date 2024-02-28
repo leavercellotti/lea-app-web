@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import s from "./style.module.css"
 import { useSelector } from 'react-redux';
 import { TestAPI } from '../../../../api/test-api';
+import { useNavigate } from 'react-router-dom';
 function ModifyItem({
         setShowOverlay, list, setList, item, modifyItem, setShowModifyBtn
     }) {
@@ -11,7 +12,6 @@ function ModifyItem({
   const optionB = optionArray[1] || "";
   const optionC = optionArray[2] || "";
   const optionD = optionArray[3] || "";
-  console.log(modifyItem)
 
     const [newSentence, setNewSentence] = useState(sentence);
     const [newAnswer, setNewAnswer] = useState(answer);
@@ -21,37 +21,13 @@ function ModifyItem({
     const [newOptionD, setNewOptionD] = useState(optionD);
     const modifyOptionArray = [newOptionA, newOptionB, newOptionC, newOptionD];
     const adminToken = useSelector(store => store.ADMIN.token)
-    // function onEditHandler(modifiedItem) {
-    //     const newList = list
-    //     const isSelectedOption = (item) => _id === item._id
-    //     const index = newList.findIndex(isSelectedOption)
-    //     console.log(modifyItem, index)
-    //     switch(modifyItem) {
-    //       case 'sentence':
-    //           TestAPI.update(item._id, {...item, sentence: newSentence}, adminToken)
-    //           newList[index].sentence=newSentence
-    //           setList(newList)
-    //           setShowOverlay(false)
-    //           setShowModifyBtn(false)
-    //           break;
-            
-    //         case 'answer':
-    //             TestAPI.update(item._id, {...item, answer: newAnswer}, adminToken)
-    //             newList[index].answer=newAnswer
-    //             setList(newList)
-    //             setShowOverlay(false)
-    //             setShowModifyBtn(false)
-    //             break;
-    //       default:
-    //         console.log("error")
-    //     }
-    // }
+    const navigate = useNavigate()
+    
     function onEditHandler() {
-      console.log(item, sentence,answer, optionArray)
       const updatedItem = {
         ...item,
-        sentence: sentence,
-        answer: answer,
+        sentence: newSentence,
+        answer: newAnswer,
         optionArray: modifyOptionArray,
       };
     
@@ -66,6 +42,7 @@ function ModifyItem({
         })
         .catch((error) => {
           console.error(error);
+          navigate('/jgieojoergj0replj')
         });
     }  
   return (

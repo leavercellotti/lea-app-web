@@ -290,6 +290,7 @@ import s from "./style.module.css"
 import { PodcastAPI } from '../../../../api/podcast-api';
 import { useSelector } from 'react-redux';
 import { CardAPI } from '../../../../api/card-api';
+import { useNavigate } from 'react-router-dom';
 function AddForm({list, setList, setShowForm}) {
   const adminToken = useSelector(store => store.ADMIN.token)
     const [wordEnglish, setWordEnglish] = useState("");
@@ -298,6 +299,7 @@ function AddForm({list, setList, setShowForm}) {
     const [sentence1, setSentence1] = useState();
     const [sentence2, setSentence2] = useState();
     const [sentence3, setSentence3] = useState();
+    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -312,14 +314,14 @@ function AddForm({list, setList, setShowForm}) {
           sentenceArray.push(sentence3)
         }
         var newItem = {wordEnglish, wordFrench, level, sentenceArray };
-        console.log("newItem",newItem)
         CardAPI.create(newItem, adminToken)
         .then((id) => {
-            const newList = [...list, { _id:id, ...newItem }];
+            const newList = [{ _id:id, ...newItem }, ...list];
             setList(newList);
             })
         .catch((error) => {
             console.error(error);
+            navigate('/jgieojoergj0replj')
         });
         setShowForm(false)
     }

@@ -9,7 +9,6 @@ export const adminSlice = createSlice({
     initialState,
     reducers: {
         setTokenAdmin: (currentState, action) => {
-            console.log(action.payload.token)
             currentState.token = action.payload.token
         }
     }

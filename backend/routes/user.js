@@ -15,5 +15,6 @@ router.put('/update-number-downloaded-podcasts',authUser, controllers.updateNbDo
 router.put('/update-nbChatsMade',authUser, controllers.updateNbChatsMade)
 router.post('/reset-password', controllers.sendPasswordResetEmail);
 router.post('/verify-user', controllers.verifyUser);
+router.put('/update-password', controllers.updatePW)
 
 module.exports = router;

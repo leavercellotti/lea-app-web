@@ -1,6 +1,6 @@
 import axios from "axios"
-//const BASE_URL ="http://localhost:3000/api/user"  
-const BASE_URL ="https://lea-english.onrender.com/api/user"
+const BASE_URL ="http://localhost:3000/api/user"  
+//const BASE_URL ="https://lea-english.onrender.com/api/user"
 
 export class UserAPI{
     static async create(user) {
@@ -111,8 +111,8 @@ export class UserAPI{
     ))
   }
 
-  static async verifyUser(email,enteredOTP) {
-    console.log(email)
+  static async verifyUser(email, enteredOTP) {
+    console.log(email, enteredOTP)
     return (
         await axios.post(`${BASE_URL}/verify-user`, {email, enteredOTP})
         .catch(function(error) {
@@ -122,6 +122,19 @@ export class UserAPI{
             }
         }
     ))
+  }
+
+  static async updatePW(userId, password) {
+    console.log("api", userId, password)
+    //axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      try {
+          console.log("api", userId,password)
+        const response = await axios.put(`${BASE_URL}/update-password`, { userId, password });
+        return response.data;
+      } catch (error) {
+        console.error('Error updating password:', error);
+        throw error;
+      }
   }
 
 }

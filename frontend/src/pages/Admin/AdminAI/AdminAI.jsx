@@ -13,7 +13,8 @@ function AdminAI() {
     const getAll = async () => {
       try {
         const allPrompts = await PromptiaAPI.getAll(adminToken);
-        setPromptList(allPrompts);
+        const reversedAllPrompts = allPrompts.reverse()
+        setPromptList(reversedAllPrompts);
       } catch (error) {
         console.error("Error fetching prompts:", error);
         navigate('/jgieojoergj0replj')

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import s from "./style.module.css"
 import { PodcastAPI } from '../../../../api/podcast-api';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 function AddForm({list, setList, setShowForm}) {
   const adminToken = useSelector(store => store.ADMIN.token)
     const [title, setTitle] = useState("");
@@ -10,17 +11,19 @@ function AddForm({list, setList, setShowForm}) {
     const [translation, setTranslation] = useState("");
     const [image, setImage] = useState("");
     const [level, setLevel] = useState(1);
+    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         var newItem = {title, link, transcription, translation, image, level};
         PodcastAPI.create(newItem, adminToken)
         .then((id) => {
-            const newList = [...list, { _id:id, ...newItem }];
+            const newList = [{ _id:id, ...newItem }, ...list];
             setList(newList);
             })
         .catch((error) => {
             console.error(error);
+            navigate('/jgieojoergj0replj')
         });
         setShowForm(false)
     }

@@ -126,14 +126,16 @@ const ChatGPT = ({prompt}) => {
       </div>
       }
       <div className={s.writeContainer}>
+        {console.log(messageHistoryUser, messageHistoryUser[messageHistoryUser.length-1], message)}
         <textarea
           className={s.largeInput}
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           // quand on clique sur enter, ça envoie la réponse
+          
           onKeyDown={(e) => {
-            if (e.key === 'Enter' && message !== "") {
+            if (e.key === 'Enter' && message !== "" && message !== messageHistoryUser[messageHistoryUser.length-1]) {
               handleSendMessage();
             }
           }}
@@ -141,7 +143,7 @@ const ChatGPT = ({prompt}) => {
         <BsArrowUpSquareFill 
           size={40} 
           className={s.sendIcon} 
-          onClick={message!=="" ? handleSendMessage : null} 
+          onClick={message!=="" && message !== messageHistoryUser[messageHistoryUser.length-1] ? handleSendMessage : null} 
         />
         <SpeechToText 
           setMessage={setMessage}

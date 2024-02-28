@@ -13,8 +13,8 @@ function AdminVocabulary() {
     const getAllVocabulary = async () => {
       try {
         const allCards = await CardAPI.getAll(adminToken);
-        setVocabularyList(allCards);
-        console.log("cards", allCards)
+        const reversedCards = allCards.reverse();
+        setVocabularyList(reversedCards);
       } catch (error) {
         console.error("Error fetching cards:", error);
         navigate('/jgieojoergj0replj')

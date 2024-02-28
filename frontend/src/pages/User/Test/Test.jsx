@@ -7,34 +7,16 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import QuestionViewer from '../../../components/User/Test/QuestionViewer/QuestionViewer';
 import { UserAPI } from '../../../api/user-api';
+import PDF from '../../../components/User/Test/PDF/PDF';
 
 
 function Test() {
   const [array, setArray] = useState([])
-  const [enteredOTP, setEnteredOTP] = useState("")
+  // const [enteredOTP, setEnteredOTP] = useState("")
   const navigate = useNavigate()
   const token = useSelector((store) => store.USER.token)
   const userId = useSelector(store => store.USER._id)
 
-  async function sendEmail() {
-    try{
-      const resetEmailData =await UserAPI.sendPasswordResetEmail({email:"contact@coral-dev.be"})
-      console.log(resetEmailData.data)
-    }
-    catch(error){
-      console.error("Erreur lors de l'envoie du mail :", error);
-    }
-  }
-
-  async function verifyUser() {
-    try{
-      const verifyUserData =await UserAPI.verifyUser("contact@coral-dev.be",enteredOTP)
-      console.log(verifyUserData)
-    }
-    catch(error){
-      console.error("Erreur lors de l'envoie du mail :", error);
-    }
-  }
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -54,18 +36,8 @@ function Test() {
       </h1>
       <div className='container'>
         <QuestionViewer questionArray={array}/>
+        <PDF/>
       </div>
-      {/* <div>
-        <button onClick={sendEmail}>Envoyer</button>
-      </div>
-      <div>
-        <input 
-          value={enteredOTP} 
-          onChange={(event) => setEnteredOTP(event.target.value)}
-        />
-        <button onClick={verifyUser}>ok</button>
-      </div> */}
-
     </div>
   )
 }

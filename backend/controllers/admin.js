@@ -27,7 +27,7 @@ exports.login = (req, res) => {
                                 token: jwt.sign(
                                     { login: ADMINLOGIN },
                                     JWT_SECRET,
-                                    { expiresIn: '1h' }//à changer
+                                    { expiresIn: '24h' }//à changer
                                 )
                             });
                         })

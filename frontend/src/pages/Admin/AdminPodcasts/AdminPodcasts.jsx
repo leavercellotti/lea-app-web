@@ -13,7 +13,8 @@ function AdminPodcasts() {
     const getAllPodcasts = async () => {
       try {
         const allPodcasts = await PodcastAPI.getAll(adminToken);
-        setPodcastList(allPodcasts);
+        const reversedPodcasts = allPodcasts.reverse()
+        setPodcastList(reversedPodcasts);
       } catch (error) {
         console.error("Error fetching podcasts:", error);
         navigate('/jgieojoergj0replj')

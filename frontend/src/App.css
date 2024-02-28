@@ -42,6 +42,16 @@ h1,h2 {
   font-weight: 530;
 }
 
+.descreet {
+  color :#28356B;
+  background-color: white;
+  border: 1px solid #28356B;
+}
+
+.descreet:hover {
+  background-color: white;
+}
+
 .noUnderline {
   text-decoration: none;
 }
@@ -93,9 +103,53 @@ h1,h2 {
   background-color: #ab4a43;
 }
 
-.option-selected {
-  background-color: #ab4a43;
+.optionBlue.chosen {
+  background-color: #28356B;
+  border: #28356B;
 }
+
+
+.optionBlue {
+  color:white;
+  background-color: #F27066;
+  padding:10px 10px;
+  border: 1px solid #F27066;
+  cursor: pointer;
+  font-family: 'Lato', sans-serif;
+  text-align: center;
+  margin: 5px 15px;
+  min-width: 60px;
+}
+
+.optionBlue:hover{
+  background-color: #28356B;
+  border: #28356B;
+}
+
+
+.optionGreen.chosen {
+  background-color: #1f7e43;
+  border: #28804a;
+}
+
+
+.optionGreen {
+  color:white;
+  background-color: #F27066;
+  padding:10px 10px;
+  border: 1px solid #F27066;
+  cursor: pointer;
+  font-family: 'Lato', sans-serif;
+  text-align: center;
+  margin: 5px 15px;
+  min-width: 60px;
+}
+
+.optionGreen:hover{
+  background-color: #1f7e43;
+  border: #28804a;
+}
+
 
 
 .option:hover {

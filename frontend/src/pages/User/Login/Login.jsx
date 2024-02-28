@@ -4,6 +4,7 @@ import { UserAPI } from '../../../api/user-api'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { setConnect, setPodcastsLikedArray, setUser, setUserId } from '../../../store/user-slice'
+import PWForgotten from '../../../components/User/Login/PWForgotten/PWForgotten'
 function Login({setToken}) {
     const dispatch = useDispatch()
   const navigate = useNavigate()

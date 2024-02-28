@@ -13,7 +13,8 @@ function AdminTest() {
     const getAll = async () => {
       try {
         const all = await TestAPI.getAll(adminToken);
-        setList(all);
+        const reversedAll =all.reverse()
+        setList(reversedAll);
       } catch (error) {
         console.error("Error fetching questions:", error);
         navigate('/jgieojoergj0replj')

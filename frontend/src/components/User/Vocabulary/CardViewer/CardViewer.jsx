@@ -44,10 +44,6 @@ const CardViewer = ({ cardArray, setRevise, revise }) => {
       }, 500); // La durée doit correspondre à la durée de transition dans le CSS
   };
 
-//   const handlePreviousCard = () => {
-//     setCurrentCardIndex(prevIndex => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
-//   };
-
   function toggleRecto() {
     //setRecto(false)
     setRecto(prevRecto => !prevRecto);

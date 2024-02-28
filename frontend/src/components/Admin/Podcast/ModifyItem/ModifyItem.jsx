@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import s from "./style.module.css"
 import { PodcastAPI } from '../../../../api/podcast-api'
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 function ModifyItem({
         setShowOverlay, podcastList, setPodcastList, podcast, modifyItem, setShowModifyBtn
     }) {
@@ -13,54 +14,91 @@ function ModifyItem({
     const [newImage, setNewImage] = useState(image);
     const [newLevel, setNewLevel] = useState(level);
     const adminToken = useSelector(store => store.ADMIN.token)
+
+    const navigate = useNavigate()
     function onEditHandler(modifiedItem) {
         const newPodcastList = podcastList
         const isSelectedOption = (podcast) => _id === podcast._id
         const index = newPodcastList.findIndex(isSelectedOption)
-        console.log(modifyItem, index)
         switch(modifyItem) {
           case 'title':
               PodcastAPI.update(podcast._id, {...podcast, title: newTitle}, adminToken)
-              newPodcastList[index].title=newTitle
+              .then(() => {
+                newPodcastList[index].title=newTitle
+                setPodcastList(newPodcastList)
+                setShowOverlay(false)
+                setShowModifyBtn(false)
+              })
+              .catch((error) => {
+                console.error(error);
+                navigate('/jgieojoergj0replj');
+              });
+              break;
+          case 'link':
+            PodcastAPI.update(podcast._id, {...podcast, link: newLink}, adminToken)
+            .then(() => {
+              newPodcastList[index].link=newLink
               setPodcastList(newPodcastList)
               setShowOverlay(false)
               setShowModifyBtn(false)
-              break;
-            case 'link':
-            PodcastAPI.update(podcast._id, {...podcast, link: newLink}, adminToken)
-            newPodcastList[index].link=newLink
-            setPodcastList(newPodcastList)
-            setShowOverlay(false)
-            setShowModifyBtn(false)
+            })
+            .catch((error) => {
+                console.error(error);
+                navigate('/jgieojoergj0replj');
+            });
+          break;
+          case 'transcription':
+            PodcastAPI.update(podcast._id, {...podcast, transcription: newTranscription}, adminToken)
+            .then(() => {
+              newPodcastList[index].transcription=newTranscription
+              setPodcastList(newPodcastList)
+              setShowOverlay(false)
+              setShowModifyBtn(false)
+            })
+            .catch((error) => {
+                console.error(error);
+                navigate('/jgieojoergj0replj');
+            });
             break;
-            case 'transcription':
-                PodcastAPI.update(podcast._id, {...podcast, transcription: newTranscription}, adminToken)
-                newPodcastList[index].transcription=newTranscription
-                setPodcastList(newPodcastList)
-                setShowOverlay(false)
-                setShowModifyBtn(false)
-                break;
-            case 'translation':
-                PodcastAPI.update(podcast._id, {...podcast, translation: newTranslation}, adminToken)
-                newPodcastList[index].translation=newTranslation
-                setPodcastList(newPodcastList)
-                setShowOverlay(false)
-                setShowModifyBtn(false)
-                break;
-            case 'image':
-                PodcastAPI.update(podcast._id, {...podcast, image: newImage}, adminToken)
-                newPodcastList[index].image=newImage
-                setPodcastList(newPodcastList)
-                setShowOverlay(false)
-                setShowModifyBtn(false)
-                break;
-            case 'level':
-                PodcastAPI.update(podcast._id, {...podcast, level: newLevel}, adminToken)
-                newPodcastList[index].level=newLevel
-                setPodcastList(newPodcastList)
-                setShowOverlay(false)
-                setShowModifyBtn(false)
-                break;
+          case 'translation':
+            PodcastAPI.update(podcast._id, {...podcast, translation: newTranslation}, adminToken)
+            .then(() => {
+              newPodcastList[index].translation=newTranslation
+              setPodcastList(newPodcastList)
+              setShowOverlay(false)
+              setShowModifyBtn(false)
+            })
+            .catch((error) => {
+                console.error(error);
+                navigate('/jgieojoergj0replj');
+            });
+            break;
+          case 'image':
+            PodcastAPI.update(podcast._id, {...podcast, image: newImage}, adminToken)
+            .then(() => {
+              newPodcastList[index].image=newImage
+              setPodcastList(newPodcastList)
+              setShowOverlay(false)
+              setShowModifyBtn(false)
+            })
+            .catch((error) => {
+                console.error(error);
+                navigate('/jgieojoergj0replj');
+            });
+            break;
+          case 'level':
+            PodcastAPI.update(podcast._id, {...podcast, level: newLevel}, adminToken)
+            .then(() => {
+              newPodcastList[index].level=newLevel
+              setPodcastList(newPodcastList)
+              setShowOverlay(false)
+              setShowModifyBtn(false)
+            })
+            .catch((error) => {
+                console.error(error);
+                navigate('/jgieojoergj0replj');
+            });
+            break;
           default:
             console.log("error")
         }
