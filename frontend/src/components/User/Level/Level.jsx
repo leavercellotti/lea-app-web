@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { UserAPI } from '../../../api/user-api';
 import { modifyLevel } from '../../../store/user-slice';
 
-function Level() {
+function Level({setEditLevel, editLevel}) {
   const [level, setLevel] = useState("A2");
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -36,10 +36,18 @@ function Level() {
     console.log("here")
     dispatch(modifyLevel(level));
     modifyLevelBackend();
+    setEditLevel(false)
   };
 
   return (
     <div className='box' style={boxStyle}>
+      {editLevel &&
+        <div className={s.closeContainer}>
+          <span onClick={() => setEditLevel(false)} className={s.close}>
+          x
+          </span>
+        </div>
+      }
       <h2>Quel est votre niveau ?</h2>
       <div className='options'>
         {["A1", "A2", "B1", "B2", "C"].map((option) => (

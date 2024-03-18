@@ -2,40 +2,56 @@ import React, { useRef, useState } from 'react'
 import s from "./style.module.css"
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-function EmailPw({login, connectHandler, addHandler}) {
+import SubscriptionOptions from '../../Subscription/SubscriptionOptions/SubscriptionOptions';
+import { StripeAPI } from '../../../../api/stripe-api';
+function EmailPw({connectHandler, addHandler,stripeId,userId, isAdded}) {
     const emailInputRef = useRef()
     const passwordInputRef = useRef()
+    const nameInputRef = useRef('')
     const [isPwShown, setIsPwShown] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
     const [validatePW,setValidatePW] = useState(false)
+    
 
     function togglePwShown() {
         isPwShown? setIsPwShown(false) : setIsPwShown(true)
     }
+
     function submitHandler(e) {
-        e.preventDefault()
-        const enteredEmail = emailInputRef.current.value.toLowerCase()
-        if(isValidEmail(enteredEmail) && validatePW){
-            const enteredPassword = passwordInputRef.current.value
-            const user = {
+        e.preventDefault();
+        const enteredEmail = emailInputRef.current.value.toLowerCase();
+        console.log(isValidEmail(enteredEmail))
+        if (isValidEmail(enteredEmail)) {
+            const enteredPassword = passwordInputRef.current.value;
+            let user;
+            // if (login) {
+            user = {
                 email: enteredEmail,
                 password: enteredPassword
-            }
-            if(login) {
-                connectHandler(user)
-            }
-            else{
-                addHandler(user)
-            }
-        }
-        else if(!isValidEmail(enteredEmail)){
-            alert("Adresse mail non valide")
-        }
-        else {
-            alert("Mot de passe non valide")
+            };
+            connectHandler(user);
+            // } else {
+            //     user = {
+            //         name: nameInputRef.current.value,
+            //         email: enteredEmail,
+            //         password: enteredPassword
+            //     };
+            //     // Assuming addHandler returns a Promise
+            //     addHandler(user)
+            //         .then((res) => {
+            //             console.log(res)})
+            //         .catch(error => {
+            //             console.error("Error while adding user:", error);
+            //             // Handle the error, perhaps show an alert to the user
+            //         });
+            // }
+        } else if (!isValidEmail(enteredEmail)) {
+            alert("Adresse mail non valide");
+        } else {
+            alert("Mot de passe non valide");
         }
     }
-
+    
     var validator = require('validator')
     const validate = (value) => {
         if (validator.isStrongPassword(value, {
@@ -56,11 +72,46 @@ function EmailPw({login, connectHandler, addHandler}) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email); // Retourne true si l'adresse e-mail est valide, sinon false
     }
+
+
+    const checkoutHandler = async () => {
+        try {
+            const res = await StripeAPI.checkoutEveryDay(stripeId, userId); // Remarque : assurez-vous que stripeId est défini
+            // setSessionId(res.sessionId);
+            console.log(res);
+    
+            if(res.url) {
+                window.location.href = res.url;
+            }
+    
+        } catch (error) {
+            console.error('Erreur lors de la gestion du paiement :', error);
+        }
+    };
+    if(isAdded) {
+        return(
+            <SubscriptionOptions stripeId={stripeId} userId={userId}/>
+        )
+    }
   return (
     <div className={s.innerContainer}>
             <div className={s.inner}>
+                {/* {!login &&
+                    <div  className={s.pwContainer}>
+                        <label className={s.label} htmlFor="name">
+                            <b>Nom complet: </b>
+                        </label>
+                        <input 
+                            type="name" 
+                            id="name"
+                            name="name"
+                            ref={nameInputRef}
+                            autoFocus
+                            style={{width:'175px', marginBottom:"10px"}}
+                        />
+                    </div>
+                } */}
                 <div  className={s.pwContainer}>
-                    
                     <label className={s.label} htmlFor="email">
                         <b>Adresse email: </b>
                     </label>
@@ -70,7 +121,7 @@ function EmailPw({login, connectHandler, addHandler}) {
                         name="email"
                         ref={emailInputRef}
                         autoFocus
-                        style={{width:'175px'}}
+                        style={{width:'175px', marginBottom:"10px"}}
                     />
                 </div>
                 <div className={s.pwContainer}>
@@ -97,7 +148,7 @@ function EmailPw({login, connectHandler, addHandler}) {
                     </span>
                     </div>
                 </div>
-                {!login &&
+                {/* {!login &&
                 <>
                     <div style={{textAlign:"center"}}>
                         <span style={{
@@ -110,7 +161,7 @@ function EmailPw({login, connectHandler, addHandler}) {
                     <div style={{marginTop: "15px"}}>
                         Le mot de passe doit être de taille supérieur à 8, contenir une majuscule et un chiffre.
                     </div>
-                </>}
+                </>} */}
                 <div className={s.btnValidateContainer}>
                     <button 
                         className='btn'
@@ -118,6 +169,12 @@ function EmailPw({login, connectHandler, addHandler}) {
                     >
                         Valider
                     </button>
+                    {/* <button 
+                        className='btn'
+                        onClick = {checkoutHandler}
+                    >
+                        Go
+                    </button> */}
                 </div>
             </div>
         </div>

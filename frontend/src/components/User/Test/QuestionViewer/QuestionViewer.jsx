@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import TestQuestion from '../TestQuestion/TestQuestion'
 import TestIntro from '../TestIntro/TestIntro'
 import TestResult from '../TestResult/TestResult'
+import PDF from '../PDF/PDF'
 
 function QuestionViewer({questionArray}) {
     const [index, setIndex] = useState(0)
@@ -23,7 +24,10 @@ function QuestionViewer({questionArray}) {
     }
     else if(end) {
         return(
-            <TestResult nbCorrectAnswers={nbCorrectAnswers}/>
+            <>
+                <TestResult nbCorrectAnswers={nbCorrectAnswers}/>
+                <PDF/>
+            </>
         )
     }
     else {

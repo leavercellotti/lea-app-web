@@ -16,12 +16,13 @@ exports.getRandomCards = async (req, res) => {
 
       // Get all cards for the specified level
       const allCards = await Card.find({ level: req.params.level });
+      // console.log("all",allCards)
 
       // Filter out cards that are in the user's viewedCards array
       const filteredCards = allCards.filter((card) => {
           return !user.viewedCards.some((viewedCard) => viewedCard.cardId.equals(card._id));
       });
-
+      
       // Shuffle the filtered cards to get a random order
       const shuffledCards = shuffleArray(filteredCards);
 
@@ -114,6 +115,7 @@ exports.getRecentlyViewedCards = async (req, res) => {
 
 
 exports.getAll = (req, res) => {
+  console.log("all", req.body)
   Object.find()
     .then(objects => {
       return res.status(200).json(objects);

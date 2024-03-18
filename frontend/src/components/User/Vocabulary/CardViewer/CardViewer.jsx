@@ -48,13 +48,13 @@ const CardViewer = ({ cardArray, setRevise, revise }) => {
     //setRecto(false)
     setRecto(prevRecto => !prevRecto);
   }
-  const scrollToSection = () => {
-    // Ajustez la valeur 320 selon vos besoins
-    window.scrollTo({
-      top: window.scrollY + 320,
-      behavior: 'smooth',
-    });
-  };
+  // const scrollToSection = () => {
+  //   // Ajustez la valeur 320 selon vos besoins
+  //   window.scrollTo({
+  //     top: window.scrollY + 320,
+  //     behavior: 'smooth',
+  //   });
+  // };
 
   if(end || cardArray?.length===0 ) {
     return(
@@ -101,18 +101,17 @@ const CardViewer = ({ cardArray, setRevise, revise }) => {
                 <Card toggleRecto={toggleRecto} card={cardArray[currentCardIndex]} recto={recto} />
                 <div className={s.buttons}>
                   {/* <button className="btn" onClick={toggleRecto}>Retourner</button> */}
-                  {!recto && 
+                  {/* {!recto && 
                   <FaArrowCircleDown 
                     className={s.arrowIcon} 
                     size={32}
                     onClick={scrollToSection} 
                   />
-                  }
+                  } */}
                 </div>
               
               {!recto && (
                 <>
-                  <Sentences sentenceArray={cardArray[currentCardIndex].sentenceArray} />
                   {revise?
                     (<button className='btn' onClick={handleNextCard}>
                       Suivant
@@ -123,6 +122,7 @@ const CardViewer = ({ cardArray, setRevise, revise }) => {
                       handleNextCard={handleNextCard} />
                     )
                   }
+                  <Sentences sentenceArray={cardArray[currentCardIndex].sentenceArray} />
                 </>
               )}
             </div>

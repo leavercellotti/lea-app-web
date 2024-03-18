@@ -17,7 +17,7 @@ function TestQuestion({ sentence, optionArray, answer, index, size, handleNext, 
                 setIsCorrectAnswer(false);
                     handleNext();
                     setChoice("");
-            }, 1100);
+            }, 2100);
         } else {
             alert("Sélectionnez une réponse.");
         }

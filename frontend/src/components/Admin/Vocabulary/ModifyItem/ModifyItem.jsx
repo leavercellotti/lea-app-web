@@ -116,6 +116,40 @@ function ModifyItem({
           </>
         }
 
+        {modifyItem === "level" &&
+            <>
+              <label htmlFor="level" className="form-label">
+                <div>
+                    Niveau: 
+                </div>
+                <div className={s.textareaContainer}>
+                  <select
+                      className="form-control"
+                      id="level"
+                      value={newLevel}
+                      onChange={(e) => setNewLevel(e.target.value)}
+                      required
+                  >
+                    <option value={"A1"}>A1</option>
+                    <option value={"A2"}>A2</option>
+                    <option value={"B1"}>B1</option>
+                    <option value={"B2"}>B2</option>
+                    <option value={"C"}>C</option>
+                  </select>
+                </div>
+              </label>
+              <div>
+                <button
+                  className="btn"
+                  style={{marginTop:"10px"}}
+                  onClick={onEditHandler}
+                >
+                  Valider
+                </button>
+              </div>
+            </>
+        }
+
         {modifyItem === "sentence1" &&
           <>
             <label htmlFor="sentence1" className="form-label">

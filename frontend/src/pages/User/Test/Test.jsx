@@ -6,8 +6,6 @@ import { TestAPI } from '../../../api/test-api';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import QuestionViewer from '../../../components/User/Test/QuestionViewer/QuestionViewer';
-import { UserAPI } from '../../../api/user-api';
-import PDF from '../../../components/User/Test/PDF/PDF';
 
 
 function Test() {
@@ -36,7 +34,6 @@ function Test() {
       </h1>
       <div className='container'>
         <QuestionViewer questionArray={array}/>
-        <PDF/>
       </div>
     </div>
   )

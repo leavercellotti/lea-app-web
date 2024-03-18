@@ -1,11 +1,12 @@
 import axios from "axios"
-const BASE_URL ="http://localhost:3000/api/user"  
-//const BASE_URL ="https://lea-english.onrender.com/api/user"
+// const BASE_URL ="http://localhost:3000/api/user"  
+const BASE_URL ="https://lea-english.onrender.com/api/user"
 
 export class UserAPI{
-    static async create(user) {
+    static async create(user, stripeId) {
+      console.log(stripeId,user)
         return (
-            await axios.post(`${BASE_URL}/signup`, user)
+            await axios.post(`${BASE_URL}/signup`, {...user, stripeId})
             .catch(function(error) {
                 if (error.response) {
                     console.log("error status",error.response.status);
@@ -28,7 +29,7 @@ export class UserAPI{
     }
 
     static async get(email) {
-        const response = await axios.get(`${BASE_URL}/${email}`)
+        const response = await axios.get(`${BASE_URL}/byEmail/${email}`)
         console.log("user response", response.data)
         return (
             response.data
@@ -137,4 +138,52 @@ export class UserAPI{
       }
   }
 
+  static async updateSubscriptionId(userId, subscriptionId) {
+      try {
+          console.log("api", userId,subscriptionId)
+        const response = await axios.put(`${BASE_URL}/update-subscriptionId`, { userId, subscriptionId });
+        return response.data;
+      } catch (error) {
+        console.error('Error updating subscriptionId:', error);
+        throw error;
+      }
+  }
+
+  static async updateSessionId(userId, sessionId) {
+    try {
+        console.log("api", userId,sessionId)
+      const response = await axios.put(`${BASE_URL}/update-sessionId`, { userId, sessionId });
+      return response.data;
+    } catch (error) {
+      console.error('Error updating sessionId:', error);
+      throw error;
+    }
+  }
+  static async updateStripeId(userId, stripeId) {
+    try {
+        console.log("api", userId,stripeId)
+      const response = await axios.put(`${BASE_URL}/update-stripeId`, { userId, stripeId });
+      return response.data;
+    } catch (error) {
+      console.error('Error updating stripeId:', error);
+      throw error;
+    }
+  }
+
+  static async unsubscribe(userId, email) {
+    try {
+        console.log("api", userId)
+      const response = await axios.delete(`${BASE_URL}/unsubscribe/${userId}/${email}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error deleting user:', error);
+      throw error;
+    }
+  }
+  static async getAll(token) {
+    console.log("all")
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    const response = await axios.get(`${BASE_URL}/allUsers`);
+    return response.data;
+} 
 }

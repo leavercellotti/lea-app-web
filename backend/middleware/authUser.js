@@ -5,10 +5,10 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 module.exports = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
-    
     try {
         // Tentative de vérification avec la clé spécifiée pour l'utilisateur
         const decodedTokenUser = jwt.verify(token, JWT_SECRET_USER);
+        console.log("decoded", decodedTokenUser.userId)
         req.auth = {
             userId: decodedTokenUser.userId
         };
@@ -20,6 +20,7 @@ module.exports = (req, res, next) => {
             req.auth = {
                 userId: decodedToken.userId
             };
+            console.log(req.auth)
             return next();
         } catch (error) {
             // Aucune des clés n'a permis de vérifier le token

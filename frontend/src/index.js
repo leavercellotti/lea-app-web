@@ -21,6 +21,9 @@ import AdminLogin from './pages/Admin/AdminLogin/AdminLogin';
 import AdminVocabulary from './pages/Admin/AdminVocabulary/AdminVocabulary';
 import AdminAI from './pages/Admin/AdminAI/AdminAI';
 import AdminTest from './pages/Admin/AdminTest/AdminTest';
+import AdminUsers from './pages/Admin/AdminUsers/AdminUsers';
+import SuccessCheckout from './pages/User/SuccessCheckout/SuccessCheckout';
+import Subscription from './pages/User/Subscription/Subscription';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -38,11 +41,14 @@ root.render(
           <Route path='/ai' element={<AI/>}/>
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/login' element={<Login/>}/>
+          <Route path='/checkout-success/:sessionId' element={<SuccessCheckout/>}/>
+          <Route path='/subscription' element={<Subscription/>}/>
           <Route path='/jgieojoergj0replj-podcasts' element={<AdminPodcasts/>}/>
           <Route path='/jgieojoergj0replj' element={<AdminLogin/>}/>
           <Route path='/jgieojoergj0replj-vocabulary' element={<AdminVocabulary/>}/>
           <Route path='/jgieojoergj0replj-ai' element={<AdminAI/>}/>
           <Route path='/jgieojoergj0replj-test' element={<AdminTest/>}/>
+          <Route path='/jgieojoergj0replj-users' element={<AdminUsers/>}/>
         </Route>
         <Route path='*' element={<PageNotFound/>} />
       </Routes>

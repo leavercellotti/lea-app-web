@@ -9,6 +9,7 @@ const userRoutes = require('./routes/user')
 const cardRoutes = require('./routes/card')
 const chatgptRoutes = require('./routes/chatgpt')
 const promptiaRoutes = require('./routes/promptia')
+const stripeRoutes = require('./routes/stripe')
 
 require('dotenv').config();
 
@@ -40,5 +41,6 @@ app.use('/api/user', userRoutes)
 app.use('/api/card', cardRoutes)
 app.use('/api/chatgpt', chatgptRoutes)
 app.use('/api/promptia', promptiaRoutes)
+app.use('/api/stripe', stripeRoutes)
 
 module.exports = app

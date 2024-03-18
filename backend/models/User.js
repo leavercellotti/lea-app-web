@@ -7,12 +7,30 @@ const userSchema = mongoose.Schema({
     },
     password: { 
         type: String, 
-        required: true 
+        // required: true 
+    },
+    name: { 
+        type: String
+    },
+    stripeId: { //customer id
+        type: String
+    },
+    sessionId: {
+        type:String
+    },
+    subscriptionId: {
+        type: String
     },
     subscription:{//free ou paid
         type:String,
         maxlength:100,
         default: "free",
+    },
+    free: {
+        type: Boolean,
+    },
+    current_period_end: {
+        type: String,
     },
     level: {
         type: String,

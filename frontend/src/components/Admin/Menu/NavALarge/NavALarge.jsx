@@ -42,6 +42,21 @@ export function NavALarge() {
           </li>
         </div>
         <div className={s.centralItems}>
+        <li 
+          className={s.li}
+        >
+          <NavLink
+            to="/jgieojoergj0replj-users"
+            className={s.link}
+            isActive={() => location.pathname === "/jgieojoergj0replj-users"}
+            style={{ color: (location.pathname === "/jgieojoergj0replj-users") ? "#F27066" : "#28356B" }}
+          >
+            Utilisateurs
+            <span className={s.icon}>
+              <BsPerson/>
+            </span>
+          </NavLink>
+        </li>
           <li className={s.li}>
             <NavLink
               to="/jgieojoergj0replj"

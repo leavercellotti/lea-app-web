@@ -45,7 +45,7 @@ function AI() {
       <div className='container'>
         
         {levelSpecific && levelSpecific !== ""?
-        (<ChatGPT prompt={prompt} />)
+        (<ChatGPT prompt={prompt} level={level} />)
         :
         (<Level/>)
         }

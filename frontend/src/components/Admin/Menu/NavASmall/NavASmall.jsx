@@ -116,6 +116,18 @@ export function NavASmall() {
                                     Test
                                 </NavLink>
                             </li>
+                            <li className={s.li}>
+                                <NavLink 
+                                    to="/jgieojoergj0replj-users" 
+                                    className={s.link}
+                                    isActive={() => location.pathname === "/jgieojoergj0replj-users"}
+                                    style={{ color: location.pathname === "/jgieojoergj0replj-users" ? "#F27066" : "#9BB5D8" }}
+                                >
+                                     
+                                    <BsPerson className={s.logo}/>
+                                    Utilisateurs
+                                </NavLink>
+                            </li>
                             
                             <li className={s.li}>
                                 <NavLink 

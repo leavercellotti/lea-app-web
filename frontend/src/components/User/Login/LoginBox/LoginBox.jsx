@@ -3,9 +3,11 @@ import s from "./style.module.css";
 import EmailPw from '../EmailPw/EmailPw';
 import SubscriptionChoice from '../SubscriptionChoice/SubscriptionChoice';
 import PWForgotten from '../PWForgotten/PWForgotten';
+import { Link, useNavigate } from 'react-router-dom';
 
-function LoginBox({ connectHandler, addHandler, login, setLogin }) {
+function LoginBox({ connectHandler, addHandler, stripeId, userId, isAdded }) {
     const [isPWForgotten, setIsPWForgotten] = useState(false);
+    const navigate = useNavigate()
 
     if (isPWForgotten) {
         return (
@@ -16,7 +18,7 @@ function LoginBox({ connectHandler, addHandler, login, setLogin }) {
     } else {
         return (
             <div className={`box ${s.container}`}>
-                <div className={s.btnContainer}>
+                {/* <div className={s.btnContainer}>
                     <div
                         onClick={() => setLogin(true)}
                         className={`${s.btn} ${login ? s.pink : s.white}`}
@@ -29,21 +31,28 @@ function LoginBox({ connectHandler, addHandler, login, setLogin }) {
                     >
                         S'inscrire
                     </div>
-                </div>
-                <h3>{login ? 'Se connecter' : "S'inscrire"}</h3>
+                </div> */}
+                <h3>{'Se connecter'}</h3>
                 <EmailPw
-                    login={login}
                     connectHandler={connectHandler}
                     addHandler={addHandler}
+                    stripeId={stripeId}
+                    userId={userId}
+                    isAdded={isAdded}
                 />
-                {login &&
-                    <div 
-                        onClick={() => setIsPWForgotten(true)}
-                        className={s.link}
-                    >
-                        Mot de passe oublié
-                    </div>
-                }
+                <div 
+                    onClick={() => setIsPWForgotten(true)}
+                    className={s.link}
+                >
+                    Mot de passe oublié
+                </div>
+                <div 
+                    onClick={() => {navigate("/subscription"); window.location.reload();}} 
+                    // window.location.reload();
+                    className={s.link}
+                >
+                    S'inscrire
+                </div>
             </div>
         );
     }

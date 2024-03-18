@@ -11,6 +11,21 @@
     color: #F27066;
 }
 
+.link {
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: 700;
+    font-size: 11px;
+}
+
+.link:hover {
+    color: #F27066;
+}
+
+.small {
+    font-size: 11px;
+    margin-top: -10px;
+}
 @media screen and (max-width:900px) {
     .inner {
         width: 85%;

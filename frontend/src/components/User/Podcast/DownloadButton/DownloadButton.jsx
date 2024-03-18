@@ -6,6 +6,7 @@ import { UserAPI } from '../../../../api/user-api';
 
 function DownloadButton({ title, link, transcription, translation, downloadItems, btnText }) {
   const subscription = useSelector(store => store.USER.subscription);
+  const free = useSelector(store => store.USER.free);
   const nbDownloadedPodcastsToday = useSelector(store => store.USER.nbDownloadedPodcastsToday);
   const userId = useSelector(store => store.USER._id);
   const token = useSelector(store => store.USER.token);
@@ -22,9 +23,9 @@ function DownloadButton({ title, link, transcription, translation, downloadItems
 
   const downloadFiles = async () => {
     // Trigger download for audio
-    if (subscription === "free" && nbDownloadedPodcastsToday >= 1) {
+    if (subscription === "Mensuel" && free && nbDownloadedPodcastsToday >= 1) {
       alert("Le nombre de téléchargements est limité à un par jour dans la version gratuite.");
-    } else if (subscription === "paid" && nbDownloadedPodcastsToday >= 5) {
+    } else if (subscription !== "Forever Free" && !free && nbDownloadedPodcastsToday >= 3) {
       alert("Le nombre de téléchargements est limité à trois par jour.");
     } else {
       try {

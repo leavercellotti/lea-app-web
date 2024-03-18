@@ -10,7 +10,7 @@ function Profile() {
         Mon espace
       </h1>
       <div className='container'>
-        <ProfileUser email={email} level={level} subscription="Gratuit"/>
+        <ProfileUser email={email} level={level}/>
       </div>
     </div>
   )

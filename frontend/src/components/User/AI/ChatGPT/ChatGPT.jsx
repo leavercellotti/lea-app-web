@@ -9,7 +9,7 @@ import { addNbChatsMade } from '../../../../store/user-slice';
 import { UserAPI } from '../../../../api/user-api';
 import { MdOutlineSchool } from 'react-icons/md';
 
-const ChatGPT = ({prompt}) => {
+const ChatGPT = ({prompt, level}) => {
   const [message, setMessage] = useState('');
   const [response, setResponse] = useState('');
   const [messageHistoryUser, setMessageHistoryUser] = useState([]);
@@ -53,11 +53,15 @@ const ChatGPT = ({prompt}) => {
     }
 
     try {
+      let easy=""
+      if(level === 1) {
+        easy = "Use simple and easy-to-understand language, and keep the sentences simple."
+      }
       const newMessage = { 
         role: 'user', 
-        content: `Provide a short response to the last question and ask a related question different than the previous ones : ${messageHistoryUser.map((userMessage, index) => `question ${index}: ${messageHistoryAssistant[index]}, response : ${userMessage}.`).join('\n')} last question : ${messageHistoryAssistant[messageHistoryAssistant.length - 1]}, response : ${message}`
+        content: `Provide a short response to the last question and ask a related question different than the previous ones : ${messageHistoryUser.map((userMessage, index) => `question ${index}: ${messageHistoryAssistant[index]}, response : ${userMessage}.`).join('\n')} last question : ${messageHistoryAssistant[messageHistoryAssistant.length - 1]}, response : ${message}`+easy
       };
-      console.log(messageHistoryUser)
+      // console.log(newMessage)
       //You are an English teacher. The initial question you have asked to the user was 'Have you ever traveled to another country? If so, where?'
       //Provide a short response and ask a related question but not a question that you already have the answer here : ${message} \n ${messageHistoryUser.map((userMessage, index) => `${userMessage}.`).join('\n')}
 
@@ -126,7 +130,7 @@ const ChatGPT = ({prompt}) => {
       </div>
       }
       <div className={s.writeContainer}>
-        {console.log(messageHistoryUser, messageHistoryUser[messageHistoryUser.length-1], message)}
+        {/* {console.log(messageHistoryUser, messageHistoryUser[messageHistoryUser.length-1], message)} */}
         <textarea
           className={s.largeInput}
           type="text"

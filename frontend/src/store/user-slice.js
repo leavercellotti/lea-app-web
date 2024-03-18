@@ -11,6 +11,8 @@ const initialState = {
   subscription: '',
   nbDownloadedPodcastsToday: 0,
   nbChatsMade: 0,
+  free:true,
+  current_period_end:"",
 };
 
 export const userSlice = createSlice({
@@ -30,6 +32,9 @@ export const userSlice = createSlice({
             currentState.subscription = action.payload.subscription
             currentState.nbDownloadedPodcastsToday = action.payload.nbDownloadedPodcastsToday
             currentState.nbChatsMade = action.payload.nbChatsMade
+            currentState.subscription = action.payload.subscription
+            currentState.free = action.payload.free
+            currentState.current_period_end = action.payload.current_period_end
         },
         setEmail: (currentState, action) => {
             currentState.email = action.payload.email

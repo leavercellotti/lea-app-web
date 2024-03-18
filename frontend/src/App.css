@@ -204,6 +204,17 @@ h1,h2 {
   font-weight: 600;
 }
 
+
+.link {
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+.link:hover {
+  color: #F27066;
+}
+
 @media screen and (max-width: 600px) {
   .box {
     width: 100%;

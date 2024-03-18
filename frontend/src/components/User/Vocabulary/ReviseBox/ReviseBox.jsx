@@ -28,14 +28,37 @@ const ReviseBox = ({ cardArray }) => {
         utterance.lang = lang;
         synth.speak(utterance);
     };
+    
+    
+    
 
     function togglePlayback() {
         if (isPlaying) {
+            console.log("if")
+            setIsPlaying(false);
             window.speechSynthesis.cancel();
-        } else {
-            cardArray?.forEach((card) => {speakWord(card.wordFrench, 'fr-FR'); speakWord(card.wordEnglish, 'en-GB'); speakWord(card.wordEnglish, 'en-GB');});
+            window.location.reload()
+        } 
+        else {
+            console.log("else")
+            // cardArray?.forEach((card) => {speakWord(card.wordFrench, 'fr-FR'); speakWord(card.wordEnglish, 'en-GB'); speakWord(card.wordEnglish, 'en-GB');});
+            let delay = 0;
+
+        cardArray?.forEach((card, index) => {
+            setTimeout(() => {
+                speakWord(card.wordFrench, 'fr-FR');
+            }, delay * 1000);
+            setTimeout(() => {
+                speakWord(card.wordEnglish, 'en-GB');
+            }, (delay + 5) * 1000); // Pause de 5 secondes après chaque mot français
+            setTimeout(() => {
+                speakWord(card.wordEnglish, 'en-GB');
+            }, (delay + 8) * 1000); // Pause de 2 secondes après le premier mot anglais
+            delay += 8; // Total des délais pour un mot français et deux mots anglais
+            });
         }
-        setIsPlaying(!isPlaying);
+        setIsPlaying(true);
+            
     }
 
     return (
