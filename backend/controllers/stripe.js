@@ -7,7 +7,7 @@ const STRIPE_MENSUEL = process.env.STRIPE_MENSUEL
 const STRIPE_12MOIS = process.env.STRIPE_12MOIS
 
 const stripe = require("stripe")(STRIPE_SECRET_KEY)
-const YOUR_DOMAIN = 'http://localhost:4200';
+const YOUR_DOMAIN = 'https://lea-english.coral-dev.be';
 
 
 const User = require('../models/User')
