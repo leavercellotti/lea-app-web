@@ -83,7 +83,7 @@ function PWForgotten({setIsPWForgotten}) {
         return (
             <div className={s.innerContainer}>
                 <div className={s.inner}>
-                    <h3>Mot de passe oublié</h3>
+                    <h3>Modification du mot de passe</h3>
                         {isOTPValid?
                             (<>
                                 <Chronometer isOTPValid={isOTPValid} setIsOTPValid={setIsOTPValid}/>
@@ -150,7 +150,7 @@ function PWForgotten({setIsPWForgotten}) {
     else if(!isEmailSend && !isVerified) {
         return (
             <div className={s.inner}>
-                <h3>Mot de passe oublié</h3>
+                <h3>Modification du mot de passe</h3>
                 <div className={s.sentence}>
                     Veuillez saisir votre adresse e-mail de connexion pour recevoir un code vous permettant de réinitialiser votre mot de passe.
                 </div>

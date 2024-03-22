@@ -1,6 +1,6 @@
 import axios from "axios"
-// const BASE_URL = "http://localhost:3000/api/stripe"
-const BASE_URL ="https://lea-english.onrender.com/api/stripe"   
+const BASE_URL = "http://localhost:3000/api/stripe"
+// const BASE_URL ="https://lea-english.onrender.com/api/stripe"   
 
 
 export class StripeAPI {

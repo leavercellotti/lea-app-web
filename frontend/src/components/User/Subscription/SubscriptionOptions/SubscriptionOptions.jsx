@@ -9,7 +9,7 @@ function SubscriptionOptions({stripeId, userId}) {
     const navigate = useNavigate()
     // const [subscriptionId, setSubscriptionId] = useState()
     // const [sessionId, setSessionId] = useState()
-    const [subscription, setSubscription] = useState("12 mois")
+    const [subscription, setSubscription] = useState("6 mois")
     const [freeTrial, setFreeTrial] =useState(false)
     const token = useSelector(store => store.USER.token)
     const checkoutHandler = async (subscriptionVar, freeTrialVar) => {
@@ -134,7 +134,7 @@ function SubscriptionOptions({stripeId, userId}) {
         <div className={s.btnContainer}>
             <button className='btn' onClick={() => handleValidate(subscription, freeTrial)}>C'est parti !</button> 
             {/* checkoutHandler(); logoutHandler(); window.speechSynthesis.cancel(); */}
-            <p className={s.link} onClick={handleFree}>Profiter de 7 jours gratuits</p>
+            {/* <p className={s.link} onClick={handleFree}>Profiter de 7 jours gratuits</p> */}
             <p 
                 onClick={() => {navigate("/login"); window.location.reload();}} 
                 className={s.link}

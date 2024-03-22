@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { UserAPI } from '../../../api/user-api';
 import Level from '../Level/Level';
+import PWForgotten from '../Login/PWForgotten/PWForgotten';
 
 function ProfileUser({email, level}) {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ function ProfileUser({email, level}) {
   const userId = useSelector(store => store.USER._id);
   const current_period_end = useSelector(store => store.USER.current_period_end);
   const [modifyLevel, setModifyLevel] = useState(false)
+  const [isPWForgotten, setIsPWForgotten] = useState(false);
 
   async function unsubscribeHandler() {
     try {
@@ -40,8 +42,14 @@ function ProfileUser({email, level}) {
       <Level setEditLevel={setModifyLevel} editLevel={modifyLevel}/>
     )
   }
-  
-  else {
+  else if (isPWForgotten) {
+    return (
+        <div className={`box ${s.container}`}>
+            <PWForgotten setIsPWForgotten={setIsPWForgotten} />
+        </div>
+    );
+  } else {
+    
   return (
     <div className='box'>
       <div className={s.innerContainer}>
@@ -49,6 +57,13 @@ function ProfileUser({email, level}) {
             <p>
               <b>Email</b> : {email}
             </p>
+            <div 
+                    onClick={() => setIsPWForgotten(true)}
+                    className={s.link}
+                    style={{fontSize:"16px", marginTop:"10px"}}
+                >
+                    Modifier le mot de passe
+                </div>
             <p>
             <b>Niveau</b> : 
             {level === ""?

@@ -624,7 +624,7 @@ sendLoginInformationEmail = async (email,userId) => {
           <p>Voici vos informations de connexion :</p>
           <p>E-mail: ${email}</p>
           <p>Mot de passe: <b>${otp}</b></p>
-          <p>Vous pouvez vous connecter à <a href="https://lea-english.coral-dev.be/login">https:lea-english.coral-dev.be/login</a> et modifier votre mot de passe sur cette page.</p>
+          <p>Vous pouvez vous connecter à <a href="https://appli-lea-english.com/login">https:appli-lea-english.com/login</a> et modifier votre mot de passe sur cette page.</p>
           <p>Cordialement,</p>
           <p>Léa English</p>`
       };

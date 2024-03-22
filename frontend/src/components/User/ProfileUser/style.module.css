@@ -26,6 +26,16 @@
     font-size: 11px;
     margin-top: -10px;
 }
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    width: 90%;
+    height: 300px;
+}
 @media screen and (max-width:900px) {
     .inner {
         width: 85%;
