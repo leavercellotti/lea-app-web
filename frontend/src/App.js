@@ -42,7 +42,7 @@ function App() {
   if((currentPath === ADMIN_PATH || currentPath ===ADMIN_PODCASTS_PATH) && !adminToken) {
     return <AdminLogin setAdminToken={setAdminToken}/>
   }
-  else if (currentPath !== ADMIN_PATH && !token && !currentPath.startsWith("/checkout-success") && !currentPath.startsWith("/subscription") && !adminToken) {
+  else if (currentPath !== ADMIN_PATH && !token && !currentPath.startsWith("/checkout-success") && !currentPath.startsWith("/subscription") && !currentPath.startsWith("/free-trial") && !adminToken) {
     console.log("here",currentPath)
       return <Login setToken={setToken} />;
     }

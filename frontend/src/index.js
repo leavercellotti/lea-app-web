@@ -24,6 +24,7 @@ import AdminTest from './pages/Admin/AdminTest/AdminTest';
 import AdminUsers from './pages/Admin/AdminUsers/AdminUsers';
 import SuccessCheckout from './pages/User/SuccessCheckout/SuccessCheckout';
 import Subscription from './pages/User/Subscription/Subscription';
+import FreeTrial from './pages/User/FreeTrial/FreeTrial';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -41,6 +42,7 @@ root.render(
           <Route path='/ai' element={<AI/>}/>
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/login' element={<Login/>}/>
+          <Route path='/free-trial' element={<FreeTrial/>}/>
           <Route path='/checkout-success/:sessionId' element={<SuccessCheckout/>}/>
           <Route path='/subscription' element={<Subscription/>}/>
           <Route path='/jgieojoergj0replj-podcasts' element={<AdminPodcasts/>}/>

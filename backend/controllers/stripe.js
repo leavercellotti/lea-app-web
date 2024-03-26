@@ -51,6 +51,8 @@ exports.checkout = async (req, res) => {
     }
 
     const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card', 'bancontact', 'link', 'paypal'], // Ajoutez 'paypal' comme méthode de paiement
+    
         line_items: [
             {
                 price: price,//STRIPE_6MOIS, // Remplacez par votre clé de prix appropriée

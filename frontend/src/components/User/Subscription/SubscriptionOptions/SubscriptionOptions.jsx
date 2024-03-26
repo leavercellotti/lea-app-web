@@ -5,7 +5,7 @@ import { UserAPI } from '../../../../api/user-api'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-function SubscriptionOptions({stripeId, userId}) {
+function SubscriptionOptions({trial}) {
     const navigate = useNavigate()
     // const [subscriptionId, setSubscriptionId] = useState()
     // const [sessionId, setSessionId] = useState()
@@ -47,6 +47,21 @@ function SubscriptionOptions({stripeId, userId}) {
         // setSubscription("Lite");
         // setFreeTrial(true);
         handleValidate("Mensuel", true);
+    }
+
+    if(trial){
+        return(
+            <div className={s.btnContainer}>
+            <p className={s.link} style={{fontSize:"22px", marginBottom: "60px"}} onClick={handleFree}>Profiter de 7 jours gratuits</p>
+            <p 
+                onClick={() => {navigate("/login"); window.location.reload();}} 
+                className={s.link}
+            >
+                Se connecter
+            </p>
+        </div>
+            
+        )
     }
 
   return (
@@ -133,8 +148,7 @@ function SubscriptionOptions({stripeId, userId}) {
         </div>
         <div className={s.btnContainer}>
             <button className='btn' onClick={() => handleValidate(subscription, freeTrial)}>C'est parti !</button> 
-            {/* checkoutHandler(); logoutHandler(); window.speechSynthesis.cancel(); */}
-            {/* <p className={s.link} onClick={handleFree}>Profiter de 7 jours gratuits</p> */}
+            {/* checkoutHandler(); logoutHandler(); window.speechSynthesis.cancel();  */} 
             <p 
                 onClick={() => {navigate("/login"); window.location.reload();}} 
                 className={s.link}

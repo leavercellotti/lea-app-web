@@ -8,6 +8,8 @@ function QuestionViewer({questionArray}) {
     const [index, setIndex] = useState(0)
     const [start, setStart] = useState(true)
     const [end, setEnd] = useState(false)
+    // const [start, setStart] = useState(false)
+    // const [end, setEnd] = useState(true)
     const [nbCorrectAnswers, setNbCorrectAnswers] = useState(0)
     const handleNext = () => {
         if(index +1 < questionArray.length) {
