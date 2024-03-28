@@ -3,7 +3,8 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { MdAddCircleOutline } from 'react-icons/md'
 import s from "./style.module.css"
 import AddForm from '../AddForm/AddForm'
-function AddBtn({list, setList}) {
+import AddFormComplete from '../AddFormComplete/AddFormComplete'
+function AddBtn({list, setList, complete}) {
     const [showForm, setShowForm] = useState(false)
     function onClickHandler() {
         setShowForm(true)
@@ -26,11 +27,20 @@ function AddBtn({list, setList}) {
                     Fermer <AiOutlineClose/>
                 </button>
             </div>
-            <AddForm 
-                list={list} 
-                setList={setList}
-                setShowForm={setShowForm}
-            />
+            {complete?
+                (<AddFormComplete 
+                    list={list} 
+                    setList={setList}
+                    setShowForm={setShowForm}
+                />
+                )
+                :
+                (<AddForm 
+                    list={list} 
+                    setList={setList}
+                    setShowForm={setShowForm}
+                />)
+            }
             </div>
         )
         : 
@@ -40,7 +50,7 @@ function AddBtn({list, setList}) {
                 className='btn'
                 onClick={onClickHandler}
             >
-                Ajouter <MdAddCircleOutline />
+                Ajouter {complete ? "un abonnement payant" : "un abonnement gratuit"} <MdAddCircleOutline />
             </button>
         </div>)
         }

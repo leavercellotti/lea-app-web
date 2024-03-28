@@ -24,23 +24,13 @@ const User = require('../models/User')
 // }
 
 exports.checkout = async (req, res) => {
-    console.log("fct",req.body)
-    // try {
-    //     const coupons = await getCoupons(); // Attend la résolution de la promesse
-    //     const couponIds = coupons.map(coupon => coupon.id);
-    //     console.log("Coupon IDs:", couponIds);
-    //     // Faites quelque chose avec les IDs de coupon récupérés
-    //     // res.json({ coupons: couponIds }); // Envoyer les IDs de coupon dans la réponse
-    // } catch (error) {
-    //     console.error("Error fetching coupons:", error);
-    //     // res.status(500).json({ error: "Internal server error" });
-    // }
-
+    console.log("stripe - checkout", req.body)
+    
     const subscription = req.body.subscription
     const freeTrial = req.body.freeTrial
 
     const price = subscription === "Mensuel" ? STRIPE_MENSUEL : (subscription === "6 mois"? STRIPE_6MOIS : STRIPE_12MOIS)
-    console.log("price,", subscription, price)
+    // console.log("price,", subscription, price)
 
     let subscriptionData = {}; // Créez un objet pour stocker les données d'abonnement
 
@@ -74,7 +64,7 @@ exports.checkout = async (req, res) => {
         // discounts: [{coupon: '6zq54XdZ'}]
     });
 
-    console.log(session.id);
+    console.log("end checkout", session.id);
     res.json({url: session.url, sessionId: session.id });
 };
 
@@ -82,10 +72,10 @@ exports.checkout = async (req, res) => {
 
 exports.subscription =async (req, res) => {;//ajouter route et api
     try {
-        console.log("subsciption",req.params)
+        console.log("stripe - subsciption",req.params)
         // const session = await stripe.checkout.sessions.retrieve("cs_test_a11oGebPzdQm9NfPhHfqSVfLz11TT9ykazONRxCHm33pUCrvpCXBKibIFC")
         const session = await stripe.checkout.sessions.retrieve(req.params._sessionId)
-        // console.log("session", session)
+        //console.log("session", session)
         if(session.payment_status === "paid") {
             const subscriptionId = session.subscription
             console.log(subscriptionId,session.subscription)
@@ -100,7 +90,7 @@ exports.subscription =async (req, res) => {;//ajouter route et api
 
 exports.createSubscription =async (req, res) => {
     try {
-        console.log("sub")
+        console.log("createSubscription")
         const subscription = await stripe.subscriptions.create({
             customer: 'cus_PfzWXOdDJGgyvG',
             items: [
@@ -120,48 +110,30 @@ exports.createSubscription =async (req, res) => {
 
 exports.sessionInfo =async (req, res) => {;//ajouter route et api
     try {
-        console.log("sessionInfo",req.params)
+        console.log("sessionInfo", req.params)
         // const session = await stripe.checkout.sessions.retrieve("cs_test_a11oGebPzdQm9NfPhHfqSVfLz11TT9ykazONRxCHm33pUCrvpCXBKibIFC")
         const session = await stripe.checkout.sessions.retrieve(req.params._sessionId)
         console.log("session", session)
-    
         res.status(200).json({ session: session });
     } catch (error) {
         console.error('Erreur lors de la création de l\'abonnement :', error);
         res.status(500).json({ message: 'Erreur lors de la création de l\'abonnement' });
     }
 }
-// exports.createCustomer =async (req, res) => { //ajouter route et api + nom complet
-    
-//     console.log(req.body, "body")
-//     try {
-//         console.log("cust")
-//         const customer = await stripe.customers.create({
-//             name: req.body.name,
-//             email: req.body.email,
-//           });
-//           console.log("ok",customer.id)
-//         res.status(200).json({ customerId: customer.id });
-//     } catch (error) {
-//         console.error('Erreur lors de la création de l\'abonnement :', error);
-//         res.status(500).json({ message: 'Erreur lors de la création de l\'abonnement' });
-//     }
-// }
-
 exports.createCustomer = async (req, res) => { // Ajouter route et API + nom complet
     try {
+        console.log("createCustomer", req.body)
       const existingUser = await User.findOne({ email: req.body.email }); // Vérifier si l'e-mail existe déjà
       if (existingUser) { // Si l'e-mail existe déjà, renvoyer une erreur
-        console.log("faux");
+        console.log("customer already exists");
         return res.status(400).json({ error: 'Données incorrectes' });
       } else {
-        console.log(req.body, "body");
-        console.log("cust");
+        console.log("new customer");
         const customer = await stripe.customers.create({
           name: req.body.name,
           email: req.body.email,
         });
-        console.log("ok", customer.id);
+        console.log("id of the new customer : ", customer.id);
         res.status(200).json({ customerId: customer.id });
       }
     } catch (error) {
@@ -170,23 +142,23 @@ exports.createCustomer = async (req, res) => { // Ajouter route et API + nom com
     }
   };
   
-exports.deleteSubscription =async (req, res) => {
-    try {
-        console.log("del")
-        const subscription = await stripe.subscriptions.cancel(
-            'sub_1OqdXNCKZA5F4MLXa4ERbKoV'
-          );
-          console.log(subscription)
-        res.status(200).json({ subscription: subscription });
-    } catch (error) {
-        console.error('Erreur lors de la création de l\'abonnement :', error);
-        res.status(500).json({ message: 'Erreur lors de la création de l\'abonnement' });
-    }
-}
+// exports.deleteSubscription =async (req, res) => {
+//     try {
+//         console.log("del")
+//         const subscription = await stripe.subscriptions.cancel(
+//             'sub_1OqdXNCKZA5F4MLXa4ERbKoV'
+//           );
+//           console.log(subscription)
+//         res.status(200).json({ subscription: subscription });
+//     } catch (error) {
+//         console.error('Erreur lors de la création de l\'abonnement :', error);
+//         res.status(500).json({ message: 'Erreur lors de la création de l\'abonnement' });
+//     }
+// }
 
 
 exports.getProductFromSubscription = async (req, res) => {
-    console.log(req.params)
+    console.log(getProductFromSubscription, req.params)
     subscriptionId = req.params
     try {
         const subscription = await stripe.subscriptions.retrieve(subscriptionId);

@@ -15,8 +15,7 @@ const STRIPE_12MOIS = process.env.STRIPE_12MOIS//12 mois
 const stripe = require("stripe")(STRIPE_SECRET_KEY)
 
 exports.signup = async (req, res, next) => {
-  //add user
-  // console.log(req.body);
+  console.log("user - signup",req.body);
   try {      
     // Vérifier si l'e-mail existe déjà
     const existingUser = await Object.findOne({ email: req.body.email });
@@ -40,7 +39,7 @@ exports.signup = async (req, res, next) => {
     }
     let endDate
     if(req.body.subscriptionId){
-    endDate = new Date(subscription.current_period_end * 1000).toLocaleDateString('fr-FR');
+      endDate = new Date(subscription.current_period_end * 1000).toLocaleDateString('fr-FR');
     }
     // user.free = subscription.status === "trialing"
     // await user.save(); 
@@ -51,13 +50,13 @@ exports.signup = async (req, res, next) => {
     }
 
     if (existingUser) {
+      console.log("user - signup",req.body.email, "user already exists")
       // Si l'utilisateur existe déjà, arrêter l'abonnement existant
       if (existingUser.subscriptionId) {
-        // console.log("if",existingUser.subscriptionId)
         const canceledSubscription = await stripe.subscriptions.cancel(
           existingUser.subscriptionId
         );
-        console.log("Abonnement existant annulé :", canceledSubscription);
+        console.log("user - signup",req.body.email,"Abonnement existant annulé :", canceledSubscription);
       }
       // console.log("end if")
 
@@ -72,12 +71,13 @@ exports.signup = async (req, res, next) => {
 
       // Sauvegarder les modifications
       const updatedUser = await existingUser.save();
-      console.log("Utilisateur existant mis à jour :", updatedUser);
+      console.log("user - signup",req.body.email, "Utilisateur existant mis à jour :", updatedUser);
 
       sendLoginInformationEmail(req.body.email, updatedUser._id); // Envoyer les informations de connexion par e-mail
       return res.status(200).json({ userId: updatedUser._id, message: "Utilisateur existant mis à jour." });
     } else {
       // Créer un nouvel utilisateur
+      console.log("user - signup",req.body.email, "new user")
       const newUser = new Object({
         email: req.body.email,
         name: req.body.name,
@@ -88,6 +88,64 @@ exports.signup = async (req, res, next) => {
         current_period_end : endDate,
         subscription: sub,
       });
+
+      const savedUser = await newUser.save();
+      console.log("user - signup",req.body.email,"Nouvel utilisateur enregistré");
+
+      sendLoginInformationEmail(req.body.email, savedUser._id); // Envoyer les informations de connexion par e-mail
+      return res.status(201).json({ userId: savedUser._id, message: "Nouvel utilisateur créé." });
+    }
+    
+  } catch (error) {
+    console.error("Erreur lors de la création de l'utilisateur :", error);
+    return res.status(500).json({ error });
+  }
+};
+
+
+
+// add in admin 
+exports.add = async (req, res, next) => {
+  console.log("user - add",req.body);
+  try {      
+    // Vérifier si l'e-mail existe déjà
+    const existingUser = await Object.findOne({ email: req.body.email });
+    // if(req.body.subscriptionId){
+    // endDate = new Date(subscription.current_period_end * 1000).toLocaleDateString('fr-FR');
+    // }
+    // user.free = subscription.status === "trialing"
+    // await user.save(); 
+
+    // let isFree = true
+    // if(req.body.subscriptionId) {
+    //   isFree = subscription.status === "trialing"
+    // }
+
+    if (existingUser) {
+      console.log("user already exists")
+      // Si l'utilisateur existe déjà, arrêter l'abonnement existant
+      // if (existingUser.subscriptionId) {
+      //   const canceledSubscription = await stripe.subscriptions.cancel(
+      //     existingUser.subscriptionId
+      //   );
+      //   console.log("Abonnement existant annulé :", canceledSubscription);
+      // }
+      
+      return res.error.json({message: "Utilisateur existant." });
+    } else {
+      console.log("else")
+      // Créer un nouvel utilisateur
+      const newUser = new Object({
+        email: req.body.email,
+        name: req.body.name,
+        stripeId: req.body.stripeId,
+        sessionId: req.body.sessionId,
+        subscriptionId: req.body.subscriptionId,
+        // free: isFree,
+        // current_period_end : endDate,
+        subscription: req.body.subscription,
+      });
+      console.log("new user",newUser)
 
       const savedUser = await newUser.save();
       console.log("Nouvel utilisateur créé :", savedUser);
@@ -103,6 +161,7 @@ exports.signup = async (req, res, next) => {
 };
 
 
+
 exports.login = async (req, res) => {
   // console.log("login", req.body);
   try {
@@ -111,7 +170,8 @@ exports.login = async (req, res) => {
           return res.status(401).json({ error: 'Utilisateur non trouvé !' });
       }
 
-      const validPassword = await bcrypt.compare(req.body.password, user.password);
+      const validPassword = await bcrypt.compare(req.body.password.trim(), user.password);
+      console.log(validPassword)
       if (!validPassword) {
           return res.status(401).json({ error: 'Mot de passe incorrect !' });
       }
@@ -120,7 +180,7 @@ exports.login = async (req, res) => {
       let subscritpion
       let endDate
       if(user.subscription !== "Forever Free" && user.subscription !== "free"){
-        // console.log("if")
+        console.log("if")
         subscription = await stripe.subscriptions.retrieve(user.subscriptionId);
         
         user.free = subscription.status === "trialing"
@@ -585,6 +645,7 @@ exports.updateStripeId = async (req, res) => {
 };
 
 sendLoginInformationEmail = async (email,userId) => {
+  console.log("user - sendLoginInformationEmail", email)
   // const otp = otpGenerator.generate(12, { digits: true, alphabets: false, upperCase: false, specialChars: false });
   const otp = otpGenerator.generate(12, { digits: true, alphabets: true, upperCase: true, specialChars: false });
   // console.log("sendLoginInformationEmail",email,otp)
@@ -631,7 +692,7 @@ sendLoginInformationEmail = async (email,userId) => {
 
       // Envoyez l'e-mail
       const info = await transporter.sendMail(mailOptions);
-      console.log('Email envoyé : ' + info.response);
+      console.log('Email envoyé : ' + info.response, email);
 
       // res.status(200).json({ message: 'Email envoyé avec succès' });
       
@@ -680,7 +741,7 @@ exports.unsubscribe = async (req, res) => {
 // Unsubscribe function
 const deleteSubscription = async (subscriptionId) => {
   try {
-    console.log("Deleting subscription");
+    console.log("Deleting subscription", subscriptionId);
     await stripe.subscriptions.cancel(subscriptionId);
     console.log("Subscription deleted successfully");
     return true;
@@ -691,7 +752,7 @@ const deleteSubscription = async (subscriptionId) => {
 };
 
 sendUnsubscribeConfirmationEmail = async (email) => {
-  console.log("sendUnsubscribeConfirmationEmail",email)
+  console.log("sendUnsubscribeConfirmationEmail", email)
   try {
     // const user = await Object.findById(userId);
     // if (!user) {

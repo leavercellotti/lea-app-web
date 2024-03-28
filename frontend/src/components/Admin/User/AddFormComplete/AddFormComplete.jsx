@@ -5,35 +5,39 @@ import { useSelector } from 'react-redux';
 import { CardAPI } from '../../../../api/card-api';
 import { useNavigate } from 'react-router-dom';
 import { UserAPI } from '../../../../api/user-api';
-function AddForm({list, setList, setShowForm}) {
+function AddFormComplete({list, setList, setShowForm}) {
   // const adminToken = useSelector(store => store.ADMIN.token)
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const foreverFree = true
     // const sessionId =""
     // const subscriptionId = ""
-    // const [stripeId, setStripeId] = useState("");
-    // const [subscriptionId, setSubscriptionId] = useState();
-    // const [subscription, setSubscription] = useState();
+    const [stripeId, setStripeId] = useState("");
+    const [subscriptionId, setSubscriptionId] = useState();
+    const [subscription, setSubscription] = useState();
+    const [currentPeriodEnd, setCurrentPeriodEnd] = useState();
     // const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         
-        var newItem = {name, email, foreverFree};
-        console.log(newItem)
+        // var newItem = {name, email, foreverFree};
+        // console.log(newItem)
         // async function addUserHandler() {
           try {
               // if (sessionInfo && !executed) {
               //     setExecuted(true);
               //     console.log("add", sessionInfo);
-              //     const data = {
-              //         name: sessionInfo.customer_details.name,
-              //         email: sessionInfo.customer_details.email,
-              //         sessionId: sessionInfo.id,
-              //         subscriptionId: sessionInfo.subscription
-              //     };
-              //     console.log("data", data);
+                  const newItem = {
+                      name: name,
+                      email: email,
+                      // sessionId: sessionInfo.id,
+                      subscriptionId: subscriptionId,
+                      stripeId: stripeId,
+                      subscription: subscription,
+                      current_period_end: currentPeriodEnd
+                  };
+                  console.log("data", newItem);
                   const userResponse = await UserAPI.add(newItem)
                   console.log(userResponse)
                   if(userResponse){
@@ -79,7 +83,7 @@ function AddForm({list, setList, setShowForm}) {
         className={s.form}
     >
       <div className="mb-3">
-        <h2>Création d'un utilisateur "Forever Free"</h2>
+        <h2>Création d'un utilisateur ayant un abonnement Stripe</h2>
         <label htmlFor="name" className="form-label">
           <div className={s.title}>
             Nom: 
@@ -100,7 +104,7 @@ function AddForm({list, setList, setShowForm}) {
             Email:
           </div>
           <div className={s.textareaContainer}>
-            <input
+            <textarea
               className={s.textarea}
               type="email"
               id="email"
@@ -111,7 +115,7 @@ function AddForm({list, setList, setShowForm}) {
           </div>
         </label>
         <br />
-        {/* <label htmlFor="stripeId" className="form-label">
+        <label htmlFor="stripeId" className="form-label">
           <div className={s.title}>
             Id client Stripe:
           </div>
@@ -125,31 +129,8 @@ function AddForm({list, setList, setShowForm}) {
             />
           </div>
         </label>
-        <br /> */}
-
-        {/* <label htmlFor="level" className="form-label">
-          <div className={s.title}>
-            Niveau:
-          </div>
-          <div className={s.textareaContainer}>
-            <select
-                className="form-control"
-                id="level"
-                value={level}
-                onChange={(e) => setLevel(e.target.value)}
-                required
-            >
-                <option value={"A1"}>A1</option>
-                <option value={"A2"}>A2</option>
-                <option value={"B1"}>B1</option>
-                <option value={"B2"}>B2</option>
-                <option value={"C"}>C</option>
-            </select>
-          </div> 
-        </label>*/}
-        {/* <br /> */}
-
-        {/* <label htmlFor="subscriptionId" className="form-label">
+        <br />
+        <label htmlFor="subscriptionId" className="form-label">
           <div className={s.title}>
             Id Abonnement Stripe:
           </div>
@@ -159,24 +140,45 @@ function AddForm({list, setList, setShowForm}) {
               id="subscriptionId"
               value={subscriptionId}
               onChange={(e) => setSubscriptionId(e.target.value)}
-              rows={4}
+              required
             />
           </div>
         </label>
+        <br />
         <label htmlFor="subscription" className="form-label">
           <div className={s.title}>
             Abonnement:
           </div>
           <div className={s.textareaContainer}>
+            <select
+                className="form-control"
+                id="subscription"
+                value={subscription}
+                onChange={(e) => setSubscription(e.target.value)}
+                required
+            >
+                <option value={"Mensuel"}>Mensuel</option>
+                <option value={"6 mois"}>6 mois</option>
+                <option value={"12 mois"}>12 mois</option>
+            </select>
+          </div> 
+        </label>
+        {/* <br /> */}
+
+        <label htmlFor="currentPeriodEnd" className="form-label">
+          <div className={s.title}>
+            Renouvellement :
+          </div>
+          <div className={s.textareaContainer}>
             <textarea
               className={s.textarea}
-              id="subscription"
-              value={subscription}
-              onChange={(e) => setSubscription(e.target.value)}
-              rows={4}
+              id="current_period_end"
+              value={currentPeriodEnd}
+              onChange={(e) => setCurrentPeriodEnd(e.target.value)}
+              required
             />
           </div>
-        </label> */}
+        </label>
         
         <br />
         <div className={s.textareaContainer}>
@@ -189,4 +191,4 @@ function AddForm({list, setList, setShowForm}) {
   );
 }
 
-export default AddForm
+export default AddFormComplete

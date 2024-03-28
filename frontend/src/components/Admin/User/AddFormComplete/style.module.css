@@ -1,0 +1,21 @@
+.title {
+    text-align: center;
+    font-weight: 600;
+}
+
+.textareaContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.textarea{
+    width: 50%;
+    resize: vertical;
+}
+
+@media screen and (max-width:600px) {
+    .textarea{
+        width: 100%;
+    }
+}

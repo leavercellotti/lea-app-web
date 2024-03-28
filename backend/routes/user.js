@@ -7,6 +7,7 @@ const authUser = require('../middleware/authUser');
 // const authAdmin = require('../middleware/authAdmin');
 
 router.post('/signup', controllers.signup);
+router.post('/add', controllers.add);
 router.post('/login', controllers.login);
 router.get('/byEmail/:email',authUser, controllers.get);
 router.put('/update-liked-podcasts',authUser, controllers.updateLikedPodcasts);

@@ -137,6 +137,7 @@ function EmailPw({connectHandler, addHandler,stripeId,userId, isAdded}) {
                         onChange={(e) => validate(e.target.value)}
                         className={s.input}
                     />
+
                     <span 
                         className={s.eyeContainer}
                         onClick={togglePwShown}

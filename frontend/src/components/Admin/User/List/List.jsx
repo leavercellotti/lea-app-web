@@ -8,6 +8,9 @@ function List({ list, setList }) {
   return (
     <div>
       <AddBtn list={list} setList={setList}/>
+      <div style={{marginTop:"10px"}}/>
+      <AddBtn list={list} setList={setList} complete={true}/>
+      <div style={{marginTop:"10px"}}/>
       <Table className={s.table}>
         <Thead>
           <Tr>

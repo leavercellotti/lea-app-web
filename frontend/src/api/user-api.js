@@ -16,6 +16,19 @@ export class UserAPI{
         ))
     }
 
+    static async add(user) {
+      console.log(user)
+        return (
+            await axios.post(`${BASE_URL}/add`, user)
+            .catch(function(error) {
+                if (error.response) {
+                    console.log("error status",error.response.status);
+                    return false
+                }
+            }
+        ))
+    }
+
     static async connect(user) {
         return (
             await axios.post(`${BASE_URL}/login`, user)

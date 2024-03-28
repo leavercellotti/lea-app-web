@@ -99,8 +99,10 @@ function PWForgotten({setIsPWForgotten}) {
                                     <input
                                         id="code"
                                         value={enteredOTP}
-                                        onChange={(event) => setEnteredOTP(event.target.value)}
+                                        onChange={(event) => setEnteredOTP(event.target.value.replace(/\s/g, ''))}
+                                        // onChange={(event) => setEnteredOTP(event.target.value)}
                                     />
+                                    {console.log(enteredOTP)}
                                 </div>
                                 <div className={s.btnValidateContainer}>
                                     <button 
